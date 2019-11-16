@@ -13,7 +13,6 @@ class Post extends Component {
     const { slug, apiRoute } = context.query;
 
     let apiMethod = wp.posts();
-
     switch (apiRoute) {
       case 'category':
         apiMethod = wp.categories();
@@ -31,7 +30,6 @@ class Post extends Component {
       .then(data => {
         return data[0];
       });
-
     return { post };
   }
 
