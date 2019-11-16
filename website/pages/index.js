@@ -17,7 +17,7 @@ const Home = () => (
         Boomers not allowed.
       </p>
         <h2 className="title"> Stay tuned. Cooming soon </h2>         
-    </div>
+    </div> 
 
     <style jsx>{`
       .hero {
