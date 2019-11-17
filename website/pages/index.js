@@ -1,24 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import Nav from '../components/nav'
-
+import Nav from '../components/nav/'
+import BlogCards from '../components/blogcards'
 const Home = () => (
   <div>
-    <Head>
-      <title>Home</title>
-      <link rel='icon' href='/favicon.ico' />
-    </Head>
-
-    <Nav />
-
-    <div className='hero'>
-      <h1 className='title'>Next Generation Travel Blog for Millenials</h1>
-      <p className='description'>
-        Boomers not allowed.
-      </p>
-        <h2 className="title"> Stay tuned. Cooming soon </h2>         
-    </div> 
-
+    <Nav/>
+      <BlogCards/>
     <style jsx>{`
       .hero {
         width: 100%;
