@@ -2,9 +2,11 @@ import React from 'react'
 import Head from 'next/head'
 import Nav from '../components/nav/'
 import BlogCards from '../components/blogcards'
+import Carousel from '../components/carousel'
 const Home = () => (
   <div>
     <Nav/>
+      <Carousel/>
       <BlogCards/>
     <style jsx>{`
       .hero {
