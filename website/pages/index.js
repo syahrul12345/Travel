@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 
 const Index = (props) => {
   const classes = useStyles()
-  console.log(props)
   return (
     <HomeLayout data={props.carouselData}>
       <h1 style={{textAlign:"center"}}>FEATURED POSTS</h1>
