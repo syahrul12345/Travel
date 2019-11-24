@@ -31,3 +31,4 @@ require_once 'inc/acf-options.php';
 
 // Add GraphQL resolvers.
 require_once 'inc/graphql/resolvers.php';
+add_theme_support('post-thumbnails');
