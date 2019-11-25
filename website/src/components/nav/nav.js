@@ -1,7 +1,9 @@
 import React from 'react';
+import Link from 'next/link'
 import {Grid,AppBar} from '@material-ui/core'
+import { fontFamily, fontWeight } from '@material-ui/system';
 const links = [
-  { href:'/locations',label:'DESTINATIONS'},
+  { href:'/destinations',label:'DESTINATIONS'},
   { href:'/activites',label:'ACTIVITIES'},
   { href:'/places',label:'ATTRACTIONS'},
   { href: '/food', label: 'FOOD' },
@@ -14,7 +16,15 @@ const links = [
 const Nav = () => (
   <div>
     <div className="logo" style={{margin:'0 auto',display:'block',textAlign:'center'}}>
-        <h1> AIRWAITRESS</h1>
+        
+        <a href= "/" 
+        style={{
+          textDecoration:'none',
+          fontSize:'30px',
+          color:"black",
+          fontFamily:"sans-serif",
+          fontWeight:"bold"}}> AIRWAITRESS</a>
+        
     </div>
     <nav>
       <ul>

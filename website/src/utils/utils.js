@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
-// const baseurl = 'http://52.220.139.249:8080/'
-const baseurl = 'http://localhost:8080/'
+//const baseurl = 'http://52.220.139.249:8080/'
+const baseurl = 'http://127.0.0.1:8080/'
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()

@@ -7,9 +7,9 @@ export default function CountryPage() {
         <div>
             <CountryLayout>
                 <Head>
-                    <title>{router.query.country}</title>
+                    <title>{router.query.id}</title>
                 </Head>
-                <h1>{router.query.country}</h1>
+                <h1>{router.query.id}</h1>
             </CountryLayout>
         </div>
     )
