@@ -1,9 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
-import {Box,Grid} from '@material-ui/core'
+import {Grid} from '@material-ui/core'
 import HomeLayout from '../src/layouts/home'
 import BlogCards from '../src/components/blogcards'
-import fetch from 'isomorphic-unfetch';
+import {populateCarousel,populatePosts} from '../src/utils/utils'
 const useStyles = makeStyles({
   container: {
     display: 'flex',
@@ -34,44 +34,15 @@ const Index = (props) => {
   )
 }
 
-const populateCarousel = async() => {
-  const res = await fetch('http://localhost:8080/wp-json/wp/v2/carousel')
-  const data = await res.json()
 
-  const carouselData = data.map((carousel) => ({
-    text: carousel.title.rendered,
-    textBlurb:(carousel.acf.excerpt).replace(/<[^>]*>?/gm, ''),
-    image:carousel.acf.image.url,
-    url:carousel.acf.url,
-  }))
-  return {
-    data:carouselData
-  }
-}
-
-const populatePosts = async() => {
-  const res = await fetch('http://localhost:8080/wp-json/wp/v2/posts')
-  const data = await res.json()
-  const postData = data.map((post) => ({
-    slug:post.slug,
-    title:post.title.rendered,
-    excerpt:post.acf.excerpt,
-    image:post.acf.featured_image.sizes.medium_large
-  }))
-  return {
-    data:postData
-  }
-}
 Index.getInitialProps = async() => {
   const carouselData = populateCarousel()
   const postData = populatePosts()
   //populate the information to be setn tothe front end
   const res = await Promise.all([carouselData,postData])
-  
   const returnedJson = {}
   returnedJson['carouselData'] = res[0].data
   returnedJson['postData'] = res[1].data
-  
   return returnedJson
 }
 
