@@ -29,7 +29,9 @@ services:
             - ./docker/plugins:/var/www/plugins
     website:
         command: bash -c 'yarn && yarn start'
-        container_name: website       
+        container_name: website
+        environment:
+            -   WORDPRESS_URL=${WORDPRESS_URL}
         expose:
             - '3000'
         image: node

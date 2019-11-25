@@ -1,0 +1,148 @@
+{
+    "key": "group_5ddbb03cb997c",
+    "title": "Destination information",
+    "fields": [
+        {
+            "key": "field_5ddbb04f14532",
+            "label": "Blurb",
+            "name": "blurb",
+            "type": "textarea",
+            "instructions": "A short description of the destination.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_5ddbb0c614533",
+            "label": "Country Code",
+            "name": "country_code",
+            "type": "text",
+            "instructions": "Country code of the nation",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5ddbb11914534",
+            "label": "Time Zone",
+            "name": "time_zone",
+            "type": "text",
+            "instructions": "Time Zone of the area",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5ddbb20017749",
+            "label": "Background Image",
+            "name": "background_image",
+            "type": "image",
+            "instructions": "This image will be rendered in the thumbnail and also the background of the page",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5ddbb3555278f",
+            "label": "Continent",
+            "name": "continent",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "Asia,": "Asia,",
+                "Southeast Asia,": "Southeast Asia,",
+                "Europe,": "Europe,",
+                "Oceania,": "Oceania,",
+                "Africa & Middle East,": "Africa & Middle East,",
+                "America": "America"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "destinations"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "permalink",
+        "the_content",
+        "excerpt",
+        "discussion",
+        "comments",
+        "revisions",
+        "slug",
+        "author",
+        "format",
+        "page_attributes",
+        "featured_image",
+        "categories",
+        "tags",
+        "send-trackbacks"
+    ],
+    "active": 1,
+    "description": "",
+    "modified": 1574679484
+}

@@ -1,6 +1,6 @@
 {
     "key": "group_5dda11433fb3b",
-    "title": "Compulsory information",
+    "title": "Blogpost compulsory information",
     "fields": [
         {
             "key": "field_5dda116d52fac",
@@ -66,5 +66,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1574575678
+    "modified": 1574678465
 }

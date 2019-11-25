@@ -10,9 +10,9 @@ app
   .then(() => {
     const server = express();
 
-    server.get('/post/:slug', (req, res) => {
-      const actualPage = '/post';
-      const queryParams = { slug: req.params.slug, apiRoute: 'post' };
+    server.get('/posts/:slug', (req, res) => {
+      const actualPage = '/posts';
+      const queryParams = { slug: req.params.slug, apiRoute: 'posts' };
       app.render(req, res, actualPage, queryParams);
     });
 
@@ -39,9 +39,9 @@ app
       return handle(req, res);
     });
 
-    server.listen(3001, err => {
+    server.listen(3000, err => {
       if (err) throw err;
-      console.log('> Ready on http://localhost:3001');
+      console.log('> Ready on http://localhost:3000');
     });
   })
   .catch(ex => {
