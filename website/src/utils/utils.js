@@ -54,7 +54,7 @@ const populateDestinations = async () => {
         const destinationData = data.map((post) => ({
             slug:post.slug,
             title:post.title.rendered,
-            image:post.acf.background_image.sizes.thumbnail,
+            image:post.acf.background_image.sizes.medium_large,
             continent:post.acf.continent
         }))
         return{
@@ -69,4 +69,12 @@ const populateDestinations = async () => {
         }
     }
 }
-module.exports = {populateCarousel,populatePosts,populateDestinations}
+
+//@function Get the data of the requested page
+const getCountryInfo = async(destination) => {
+    const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
+    const data = await res.json()
+    
+    return data
+}
+module.exports = {populateCarousel,populatePosts,populateDestinations,getCountryInfo}

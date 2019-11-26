@@ -1,6 +1,7 @@
 import React from 'react'
 import Nav from '../src/components/nav'
 import Head from 'next/head'
+import Link from 'next/link'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Grid,Tabs,Tab,Typography,Box,Card,CardContent,CardMedia, CardActionArea} from '@material-ui/core'
@@ -9,46 +10,66 @@ import {populateDestinations} from '../src/utils/utils'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    display: 'flex',
   },
   tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
+    borderRight: `0px solid ${theme.palette.divider}`,
+    
   },
   media: {
-    height: '10vh',
+    height: '20vh',
   }
 }));
 
-function CountryCards(props){
+function CountryCard(props){
   const classes = useStyles()
   return(
-    <Card>
-        <CardContent>
+    <Card style={{position:"relative"}}>
+        <Link href={`/country/${props.title}`}>
+        <CardActionArea>
           <CardMedia 
           className={classes.media}
           image={props.image}/>
-          <Typography variant="body2" color="textSecondary" component="p">
-          {props.title}
-          </Typography>
-        </CardContent>
+          <h1 
+          style={{
+            position:"absolute",
+            top:'40%',
+            width:'100%',
+            height:'100%',
+            textAlign:"center",
+            zIndex:"100",
+            fontFamily:"Arial",
+            color:"white",
+          }}
+          variant="body2" 
+          component="p">
+            <span style={{backgroundColor:"rgba(255, 0, 0, 0.4)"}}>{props.title}</span>
+          </h1>
+        </CardActionArea>
+        </Link>
     </Card>
   )
 }
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const classes = useStyles()
+    const countries = props.destination
     return (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
-        {...other}
-      >
-        <Box p={1}>{children}</Box>
-      </Typography>
+      <div 
+      className={classes.root}
+      hidden= {props.value !== props.index}>
+        <Grid 
+        container
+        direction="row"
+        spacing={1}
+        style={{marginLeft:'20px',paddingRight:'21%'}}
+        >
+          {countries.map(({title,image}) => (
+            <Grid item md={4}>
+                <CountryCard title={title} image={image}/>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
     );
   }
   
@@ -65,67 +86,12 @@ function TabPanel(props) {
     };
   }
   
-  
-
-function VerticalTabs(props) {
+export default function Destinations(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const destinations = props.destinations
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-  
-    return (
-      <div className={classes.root}>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
-          <Tab label="Asia" {...a11yProps(0)} />
-          <Tab label="Southeast Asia" {...a11yProps(1)} />
-          <Tab label="Oceania" {...a11yProps(2)} />
-          <Tab label="Europe" {...a11yProps(3)} />
-          <Tab label="America" {...a11yProps(4)} />
-          <Tab label="Middle East & Africa" {...a11yProps(5)} />
-        </Tabs>
-        <TabPanel value={value} index={0}>
-          {destinations.asia.map(({slug,title,image,continent}) => (
-              <CountryCards image={image} title={title}/>
-          ))}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {destinations.se.map(({slug,title,image,continent}) => (
-              <CountryCards image={image} title={title}/>
-          ))}
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          {destinations.oceania.map(({slug,title,image,continent}) => (
-              <CountryCards image={image} title={title}/>
-          ))}
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          {destinations.europe.map(({slug,title,image,continent}) => (
-              <CountryCards image={image} title={title}/>
-          ))}
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          {destinations.america.map(({slug,title,image,continent}) => (
-              <CountryCards image={image} title={title}/>
-          ))}
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          {destinations.africa.map(({slug,title,image,continent}) => (
-             <CountryCards image={image} title={title}/>
-          ))}
-        </TabPanel>
-      </div>
-    );
-}
-export default function Destinations(props) {
     return(
         <div>
             <Head>
@@ -133,16 +99,46 @@ export default function Destinations(props) {
             </Head>
             <Nav/>
             <Grid
-            direction="column"
-            style={{paddingTop:'1vh'}}
-            container>
-                <Grid item align="center"xs={12} style={{marginBottom:"5vh"}}>
+            container
+            justify="center"
+            style={{paddingTop:'1vh'}}>
+                <Grid item align="center" md={12} style={{marginBottom:"5vh"}}>
                     <img
                     style={{maxWidth:'100vh'}}
                     src="http://localhost:8080/wp-content/uploads/2019/11/woman-and-man-riding-on-motorcycle-2174656.jpg"/>
                 </Grid>
-                <Grid item xs={12} style={{marginRight:'50px',marginLeft:'50px'}}>
-                    <VerticalTabs destinations={props}/>
+                <Grid item md={12} style={{marginRight:'50px',marginLeft:'50px'}}>
+                    <Grid container direction="row">
+                      <Grid item md={2}>
+                        <Tabs
+                          orientation="vertical"
+                          variant="scrollable"
+                          value={value}
+                          onChange={handleChange}
+                          aria-label="Vertical tabs example"
+                          className={classes.tabs}
+                          indicatorColor="primary"
+                        >
+                          <Tab label="Asia" {...a11yProps(0)} />
+                          <Tab label="Southeast Asia" {...a11yProps(1)} />
+                          <Tab label="Oceania" {...a11yProps(2)} />
+                          <Tab label="Europe" {...a11yProps(3)} />
+                          <Tab label="America" {...a11yProps(4)} />
+                          <Tab label="Middle East & Africa" {...a11yProps(5)} />
+                        </Tabs>
+                      </Grid>
+                      <Grid 
+                      
+                      item 
+                      xs={10}>
+                          <TabPanel value={value} index={0} destination={props.asia}/>
+                          <TabPanel value={value} index={1} destination={props.se}/>
+                          <TabPanel value={value} index={2} destination={props.oceania}/>
+                          <TabPanel value={value} index={3} destination={props.europe}/>
+                          <TabPanel value={value} index={4} destination={props.america}/>
+                          <TabPanel value={value} index={5} destination={props.africa}/>
+                      </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </div>
