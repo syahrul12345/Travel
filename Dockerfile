@@ -30,7 +30,6 @@ RUN sudo -u www-data composer global require \
 
 #nsure wordpress has permissions
 RUN chown -R www-data:www-data /var/www/html
-RUN chown -R www-data:www-data ./wordpress
 # include composer-installed executables in $PATH
 ENV PATH="/var/www/.composer/vendor/bin:${PATH}"
 

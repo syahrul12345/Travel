@@ -3,7 +3,38 @@ import Nav from '../src/components/nav'
 import Head from 'next/head'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {Grid,Tabs,Tab,Typography,Box,Card,CardContent} from '@material-ui/core'
+import {Grid,Tabs,Tab,Typography,Box,Card,CardContent,CardMedia} from '@material-ui/core'
+import {populateDestinations} from '../src/utils/utils'
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    display: 'flex',
+  },
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
+  },
+  media: {
+    height: '30vh',
+  }
+}));
+
+function CountryCards(props){
+  const classes = useStyles
+  return(
+    <Card>
+      <CardContent>
+        <CardMedia 
+        className={classes.media}
+        image="static/images/wordpress-plus-react-header.png"/>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {props.title}
+        </Typography>
+      </CardContent>
+    </Card>
+  )
+}
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -34,21 +65,12 @@ function TabPanel(props) {
     };
   }
   
-  const useStyles = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.paper,
-      display: 'flex',
-    },
-    tabs: {
-      borderRight: `1px solid ${theme.palette.divider}`,
-    },
-  }));
   
-function VerticalTabs() {
+
+function VerticalTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-  
+    const destinations = props.destinations
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -71,27 +93,39 @@ function VerticalTabs() {
           <Tab label="Middle East & Africa" {...a11yProps(5)} />
         </Tabs>
         <TabPanel value={value} index={0}>
-          Asia
+          {destinations.asia.map(({slug,title,image,continent}) => (
+              <CountryCards slug={slug} title={title} image={image} continent={continent}/>
+          ))}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          South East Asia
+          {destinations.se.map(({slug,title,image,continent}) => (
+              <h1>{title}</h1>
+          ))}
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          {destinations.oceania.map(({slug,title,image,continent}) => (
+              <h1>{title}</h1>
+          ))}
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Item Four
+          {destinations.europe.map(({slug,title,image,continent}) => (
+              <h1>{title}</h1>
+          ))}
         </TabPanel>
         <TabPanel value={value} index={4}>
-          Item Five
+          {destinations.america.map(({slug,title,image,continent}) => (
+              <h1>{title}</h1>
+          ))}
         </TabPanel>
         <TabPanel value={value} index={5}>
-          Item Six
+          {destinations.africa.map(({slug,title,image,continent}) => (
+              <h1>{title}</h1>
+          ))}
         </TabPanel>
       </div>
     );
 }
-export default function Destinations() {
+export default function Destinations(props) {
     return(
         <div>
             <Head>
@@ -108,12 +142,33 @@ export default function Destinations() {
                     src="http://localhost:8080/wp-content/uploads/2019/11/woman-and-man-riding-on-motorcycle-2174656.jpg"/>
                 </Grid>
                 <Grid item xs={12} style={{marginRight:'50px',marginLeft:'50px'}}>
-                    <VerticalTabs />
+                    <VerticalTabs destinations={props}/>
                 </Grid>
             </Grid>
         </div>
     )
 }
-Destinations.getInitialProps = () => {
+Destinations.getInitialProps = async() => {
+  const res = await populateDestinations()
+  if (res.ok != true){
+    console.log("Failed to get the countries for the destination card")
+  }else{
+    //All possible locations
+    const locations = res.data
+    const asia = locations.filter(location => location.continent == 'Asia')
+    const oceania = locations.filter(location => location.continent == 'Oceania')
+    const se = locations.filter(location => location.continent == 'Southeast Asia')
+    const europe = locations.filter(location => location.continent == 'Europe')
+    const africa = locations.filter(location => location.continent == 'Africa & Middle East')
+    const america = locations.filter(location => location.continent == 'America')
+    return{
+      asia,
+      oceania,
+      se,
+      europe,
+      africa,
+      america
+    }
+  }
   return {}
 }

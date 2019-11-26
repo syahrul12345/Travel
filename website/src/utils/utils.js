@@ -4,15 +4,24 @@ const baseurl = 'http://127.0.0.1:8080/'
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()
-    const carouselData = data.map((carousel) => ({
+    try{
+        const carouselData = data.map((carousel) => ({
             text: carousel.title.rendered,
             textBlurb:(carousel.acf.excerpt).replace(/<[^>]*>?/gm, ''),
             image:carousel.acf.image.url,
             url:carousel.acf.url,
         }))
-    return {
-        data:carouselData
+        return {
+            ok:true,
+            data:carouselData
+        }
+    }catch(err){
+        return {
+            ok:false,
+            data:{"error":"Failed to populate post cards"}
+        }
     }
+    
 }
   
 const populatePosts = async() => {
@@ -26,15 +35,38 @@ const populatePosts = async() => {
             image:post.acf.featured_image.sizes.medium_large
         }))
         return {
+            ok:true,
             data:postData
         }
     }
     catch(err){
         return {
+            ok:false,
             data:{"error":"Failed to populate post cards"}
         }
     }
-    
-    
 }
-module.exports = {populateCarousel,populatePosts}
+// @function THis function is to populate the destination page with the country cards
+const populateDestinations = async () => {
+    const res = await fetch(`${baseurl}wp-json/wp/v2/destinations`)
+    const data = await res.json()
+    try{
+        const destinationData = data.map((post) => ({
+            slug:post.slug,
+            title:post.title.rendered,
+            image:post.acf.background_image.sizes.thumbnail,
+            continent:post.acf.continent
+        }))
+        return{
+            ok:true,
+            data:destinationData
+        }
+    }
+    catch(err){
+        return{
+            ok:false,
+            data:{"error":err.toString()}
+        }
+    }
+}
+module.exports = {populateCarousel,populatePosts,populateDestinations}

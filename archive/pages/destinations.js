@@ -4,7 +4,7 @@ import Head from 'next/head'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Grid,Tabs,Tab,Typography,Box,Card,CardContent} from '@material-ui/core'
-
+import {getContinents} from '../src/utils/utils'
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
