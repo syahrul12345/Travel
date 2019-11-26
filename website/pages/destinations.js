@@ -3,7 +3,7 @@ import Nav from '../src/components/nav'
 import Head from 'next/head'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {Grid,Tabs,Tab,Typography,Box,Card,CardContent,CardMedia} from '@material-ui/core'
+import {Grid,Tabs,Tab,Typography,Box,Card,CardContent,CardMedia, CardActionArea} from '@material-ui/core'
 import {populateDestinations} from '../src/utils/utils'
 
 const useStyles = makeStyles(theme => ({
@@ -16,22 +16,22 @@ const useStyles = makeStyles(theme => ({
     borderRight: `1px solid ${theme.palette.divider}`,
   },
   media: {
-    height: '30vh',
+    height: '10vh',
   }
 }));
 
 function CountryCards(props){
-  const classes = useStyles
+  const classes = useStyles()
   return(
     <Card>
-      <CardContent>
-        <CardMedia 
-        className={classes.media}
-        image="static/images/wordpress-plus-react-header.png"/>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <CardContent>
+          <CardMedia 
+          className={classes.media}
+          image={props.image}/>
+          <Typography variant="body2" color="textSecondary" component="p">
           {props.title}
-        </Typography>
-      </CardContent>
+          </Typography>
+        </CardContent>
     </Card>
   )
 }
@@ -47,7 +47,7 @@ function TabPanel(props) {
         aria-labelledby={`vertical-tab-${index}`}
         {...other}
       >
-        <Box p={3}>{children}</Box>
+        <Box p={1}>{children}</Box>
       </Typography>
     );
   }
@@ -94,32 +94,32 @@ function VerticalTabs(props) {
         </Tabs>
         <TabPanel value={value} index={0}>
           {destinations.asia.map(({slug,title,image,continent}) => (
-              <CountryCards slug={slug} title={title} image={image} continent={continent}/>
+              <CountryCards image={image} title={title}/>
           ))}
         </TabPanel>
         <TabPanel value={value} index={1}>
           {destinations.se.map(({slug,title,image,continent}) => (
-              <h1>{title}</h1>
+              <CountryCards image={image} title={title}/>
           ))}
         </TabPanel>
         <TabPanel value={value} index={2}>
           {destinations.oceania.map(({slug,title,image,continent}) => (
-              <h1>{title}</h1>
+              <CountryCards image={image} title={title}/>
           ))}
         </TabPanel>
         <TabPanel value={value} index={3}>
           {destinations.europe.map(({slug,title,image,continent}) => (
-              <h1>{title}</h1>
+              <CountryCards image={image} title={title}/>
           ))}
         </TabPanel>
         <TabPanel value={value} index={4}>
           {destinations.america.map(({slug,title,image,continent}) => (
-              <h1>{title}</h1>
+              <CountryCards image={image} title={title}/>
           ))}
         </TabPanel>
         <TabPanel value={value} index={5}>
           {destinations.africa.map(({slug,title,image,continent}) => (
-              <h1>{title}</h1>
+             <CountryCards image={image} title={title}/>
           ))}
         </TabPanel>
       </div>
