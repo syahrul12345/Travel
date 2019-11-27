@@ -113,7 +113,7 @@ export default function Destinations(props) {
                         width:'100%',
                         height:'100%',
                         textAlign:"center",
-                        zIndex:"100",
+                        zIndex:"0",
                         fontFamily:"Arial",
                         color:"white",
                       }}
