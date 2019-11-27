@@ -63,8 +63,8 @@ function TabPanel(props) {
         spacing={1}
         style={{marginLeft:'20px',paddingRight:'21%'}}
         >
-          {countries.map(({title,image}) => (
-            <Grid item md={4}>
+          {countries.map(({title,image},index) => (
+            <Grid item md={4} key={`${index}-${title}`}>
                 <CountryCard title={title} image={image}/>
             </Grid>
           ))}
