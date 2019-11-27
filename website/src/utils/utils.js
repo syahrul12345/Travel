@@ -69,6 +69,25 @@ const populateDestinations = async () => {
         }
     }
 }
+const getDestinationBanner = async() => {
+    const res = await fetch(`${baseurl}wp-json/wp/v2/banners?slug=destination`)
+    const data = await res.json()
+    try{
+        const destinationBanner = data.map((banner) => ({
+            text:banner.acf.overlay_text,
+            image:banner.acf.image.sizes.large
+        }))
+        return{
+            ok:true,
+            data:destinationBanner
+        }
+    }catch(err){
+        return{
+            ok:false,
+            data:{"error":err.toString()}
+        }
+    }
+}
 
 //@function Get the data of the requested page
 const getCountryInfo = async(destination) => {
@@ -77,4 +96,9 @@ const getCountryInfo = async(destination) => {
     
     return data
 }
-module.exports = {populateCarousel,populatePosts,populateDestinations,getCountryInfo}
+module.exports = {
+    populateCarousel,
+    populatePosts,
+    populateDestinations,
+    getCountryInfo,
+    getDestinationBanner}

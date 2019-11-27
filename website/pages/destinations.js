@@ -5,7 +5,7 @@ import Link from 'next/link'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {Grid,Tabs,Tab,Typography,Box,Card,CardContent,CardMedia, CardActionArea} from '@material-ui/core'
-import {populateDestinations} from '../src/utils/utils'
+import {populateDestinations,getDestinationBanner} from '../src/utils/utils'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -102,10 +102,25 @@ export default function Destinations(props) {
             container
             justify="center"
             style={{paddingTop:'1vh'}}>
-                <Grid item align="center" md={12} style={{marginBottom:"5vh"}}>
+                <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
                     <img
                     style={{maxWidth:'100vh'}}
-                    src="http://localhost:8080/wp-content/uploads/2019/11/woman-and-man-riding-on-motorcycle-2174656.jpg"/>
+                    src={props.banner.image}/>
+                    <h1 
+                      style={{
+                        position:"absolute",
+                        top:'40%',
+                        width:'100%',
+                        height:'100%',
+                        textAlign:"center",
+                        zIndex:"100",
+                        fontFamily:"Arial",
+                        color:"white",
+                      }}
+                      variant="body2" 
+                      component="p">
+                        <span style={{backgroundColor:"rgba(255, 0, 0, 0.4)"}}>{props.banner.text}</span>
+                      </h1>
                 </Grid>
                 <Grid item md={12} style={{marginRight:'50px',marginLeft:'50px'}}>
                     <Grid container direction="row">
@@ -146,6 +161,7 @@ export default function Destinations(props) {
 }
 Destinations.getInitialProps = async() => {
   const res = await populateDestinations()
+  const banner = await getDestinationBanner()
   if (res.ok != true){
     console.log("Failed to get the countries for the destination card")
   }else{
@@ -163,7 +179,8 @@ Destinations.getInitialProps = async() => {
       se,
       europe,
       africa,
-      america
+      america,
+      banner:banner.data[0]
     }
   }
   return {}
