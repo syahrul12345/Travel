@@ -42,7 +42,6 @@ function GenericCard(props){
 
 export default function CountryPage(props) {
     const router = useRouter()
-    console.log(props.info[0].posts)
     return(
         <div>
             <CountryLayout>

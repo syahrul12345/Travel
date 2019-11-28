@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/styles'
-import {Grid} from '@material-ui/core'
+import {Grid,Typography} from '@material-ui/core'
 import HomeLayout from '../src/layouts/home'
 import BlogCards from '../src/components/blogcards'
 import {populateCarousel,populatePosts} from '../src/utils/utils'
@@ -18,7 +18,7 @@ const Index = (props) => {
   const classes = useStyles()
   return (
     <HomeLayout data={props.carouselData}>
-      <h1 style={{textAlign:"center"}}>FEATURED POSTS</h1>
+      <Typography variant="h2" style={{textAlign:"center"}}>FEATURED POSTS</Typography>
        <Grid
        container
        spacing={2}
@@ -43,6 +43,7 @@ Index.getInitialProps = async() => {
   const returnedJson = {}
   returnedJson['carouselData'] = res[0].data
   returnedJson['postData'] = res[1].data
+  
   return returnedJson
 }
 

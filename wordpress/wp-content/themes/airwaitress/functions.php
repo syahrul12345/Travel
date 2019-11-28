@@ -37,12 +37,14 @@ add_theme_support('post-thumbnails');
 @ini_set( 'max_execution_time', '300' );
 
 add_filter( 'rest_post_query', function( $args ) {
-        $args['meta_query'] = array(
-		array(
-			'key'   => 'country',
-			'value' => esc_sql( $_GET['country'] ),
-		)
-	);
-
-	return $args;
+	$fields = array( 'country' );
+	foreach ( $fields as $field ) {
+			if ( isset( $_GET[ $field ] ) && ! empty( $_GET[ $field ] ) ) {
+					$args['meta_query'][] = array(
+							'key'   => $field,
+							'value' => esc_sql( $_GET[ $field ] ),
+					);
+			}
+	}
+	return $args; 
 } );
