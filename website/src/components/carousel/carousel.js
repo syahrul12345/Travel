@@ -41,28 +41,27 @@ const CarouselCards = (props) =>  {
             justify="center"
             style={{marginBlockStart:'40px',marginBlockEnd:'20px'}}>
                 <Grid item xs={8}>
-                    <Card style={{position:'relative'}}>
+                    <Card style={{position:'relative'}} >
                         <Grid
                         container
-                        alignContent="space-between"
+                        className="row"
                         justify="space-between"
-                        style={{position:'absolute',zIndex:'10',top:'130px'}}>
-                            <Grid item style={{marginLeft:'2%'}} >
-                                <Fab 
-                                onClick={slideBackward}
-                                aria-label="backward"
-                                >
-                                    <LeftIcon />
-                                </Fab>
-                            </Grid>
-                            <Grid item style={{marginRight:'2%'}}>
-                                <Fab 
-                                onClick={slideForward}
-                                aria-label="forward"
-                                >
-                                    <RightIcon />
-                                </Fab>
-                            </Grid>
+                        
+                        >
+                            <Fab 
+                            onClick={slideBackward}
+                            aria-label="backward"
+                            style={{position:'absolute',top:"130px",zIndex:"1"}}
+                            >
+                                <LeftIcon />
+                            </Fab>
+                            <Fab 
+                            onClick={slideForward}
+                            aria-label="forward"
+                            style={{position:'absolute',top:"130px",right:"0px",zIndex:"1"}}
+                            >
+                                <RightIcon />
+                            </Fab>
                         </Grid>
                         <Link href={props.url.replace(/^(?:\/\/|[^\/]+)*\//, "")}>
                         <CardActionArea

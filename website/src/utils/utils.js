@@ -96,10 +96,28 @@ const getCountryInfo = async(destination) => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
     const data = await res.json()
     //get all posts that are linked to this country
-    const postsRes = await fetch(`${baseurl}wp-json/wp/v2/posts?country=${data[0].id}`)
-    const posts = await postsRes.json()
+    const postsRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[meta_key]=country_link&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}`)
+    let posts = await postsRes.json()
+    posts = posts.map((post) => {
+        return{
+            slug:post.slug,
+            title:post.title.rendered,
+            id:post.id,
+            image:post.acf.featured_image.sizes.large
+        }
+    })
+    //Log the categories
+    const categoryRes = await fetch(`${baseurl}wp-json/wp/v2/categories`)
+    let categories = await categoryRes.json()
+    categories = categories.map((category) => {
+        return{
+            id:category.id,
+            name:category.name,
+        }
+    })
     //add the posts information to the data
     data[0].posts = posts
+    data[0].categories = categories
     return data
 }
 module.exports = {

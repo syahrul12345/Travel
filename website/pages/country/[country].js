@@ -14,7 +14,7 @@ function GenericCard(props){
     const classes = useStyles()
     return(
       <Card style={{position:"relative"}}>
-          <Link href={`/country/${props.title}`}>
+          <Link href={`/`}>
           <CardActionArea>
             <CardMedia 
             className={classes.media}
@@ -26,8 +26,6 @@ function GenericCard(props){
               width:'100%',
               height:'100%',
               textAlign:"center",
-              zIndex:"100",
-              fontFamily:"Arial",
               color:"white",
             }}
             variant="body2" 
@@ -42,6 +40,7 @@ function GenericCard(props){
 
 export default function CountryPage(props) {
     const router = useRouter()
+    const posts = props.info[0].posts
     return(
         <div>
             <CountryLayout>
@@ -58,7 +57,7 @@ export default function CountryPage(props) {
                             width:'100%',
                             height:'100%',
                             textAlign:"center",
-                            zIndex:"100",
+                            zIndex:"0",
                             fontFamily:"Arial",
                             color:"white",
                         }}
@@ -76,16 +75,17 @@ export default function CountryPage(props) {
                     </Grid>
                     <Grid item xs={12} align="center" style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
                         {/* Three cards here */}
-                        <Grid container  spacing={2}>
-                            <Grid item xs={4}>
-                                <GenericCard/>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <GenericCard/>
-                            </Grid>
-                            <Grid item xs={4}>
-                                <GenericCard/>
-                            </Grid>
+                        <Grid 
+                        container 
+                        spacing={2}
+                        justify="center">
+                            {posts.map((post) => {
+                                return(
+                                   <Grid key={post.title.rendered} item xs={4}>
+                                       <GenericCard  title={post.title} image={post.image}/>
+                                   </Grid>
+                                )
+                            })}
                         </Grid>
                     </Grid>
                 </Grid>
