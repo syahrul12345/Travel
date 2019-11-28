@@ -1,8 +1,45 @@
 import {useRouter} from 'next/router';
+import Link from 'next/link'
 import {getCountryInfo} from '../../src/utils/utils'
-import {Grid} from '@material-ui/core'
+import {Grid,Typography,makeStyles,Card,CardActionArea,CardMedia} from '@material-ui/core'
 import Head from 'next/head'
 import CountryLayout from '../../src/layouts/country'
+const useStyles = makeStyles(theme => ({
+    media: {
+      height: '20vh',
+    }
+  }));
+
+function GenericCard(props){
+    const classes = useStyles()
+    return(
+      <Card style={{position:"relative"}}>
+          <Link href={`/country/${props.title}`}>
+          <CardActionArea>
+            <CardMedia 
+            className={classes.media}
+            image={props.image}/>
+            <h1 
+            style={{
+              position:"absolute",
+              top:'40%',
+              width:'100%',
+              height:'100%',
+              textAlign:"center",
+              zIndex:"100",
+              fontFamily:"Arial",
+              color:"white",
+            }}
+            variant="body2" 
+            component="p">
+              <span style={{backgroundColor:"rgba(255, 0, 0, 0.4)"}}>{props.title}</span>
+            </h1>
+          </CardActionArea>
+          </Link>
+      </Card>
+    )
+  }
+
 export default function CountryPage(props) {
     const router = useRouter()
     console.log(props.info[0].posts)
@@ -12,13 +49,13 @@ export default function CountryPage(props) {
                 <Head>
                     <title>{router.query.country} - Airwaitress</title>
                 </Head>
-                <Grid container direction="column">
+                <Grid container direction="row">
                     <Grid style={{position:'relative'}} id="topGrid" item align="center" xs={12}>
                         <img src={props.info[0].acf.background_image.sizes.large}/>
-                        <h1 
+                        <Typography 
                         style={{
                             position:"absolute",
-                            top:'35%',
+                            top:'40%',
                             width:'100%',
                             height:'100%',
                             textAlign:"center",
@@ -26,10 +63,31 @@ export default function CountryPage(props) {
                             fontFamily:"Arial",
                             color:"white",
                         }}
-                        variant="body2" 
-                        component="p">
-                            <span style={{backgroundColor:"rgba(255, 255, 255, 0.2)",fontSize:"50px"}}>{props.info[0].title.rendered}</span>
-                        </h1>
+                        variant="h1" 
+                        component="h2">
+                            <span style={{backgroundColor:"rgba(255, 255, 255, 0.2)"}}>{props.info[0].title.rendered}</span>
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} align="center">
+                        <Typography
+                        variant="h2"
+                        style={{marginTop:"2vh"}}>
+                            ITENARIES
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} align="center" style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+                        {/* Three cards here */}
+                        <Grid container  spacing={2}>
+                            <Grid item xs={4}>
+                                <GenericCard/>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <GenericCard/>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <GenericCard/>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </CountryLayout>
