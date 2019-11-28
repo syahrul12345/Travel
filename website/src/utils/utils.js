@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 //const baseurl = 'http://52.220.139.249:8080/'
-const baseurl = 'http://127.0.0.1:8080/'
+const baseurl = 'http://localhost:8080/'
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()
@@ -91,9 +91,15 @@ const getDestinationBanner = async() => {
 
 //@function Get the data of the requested page
 const getCountryInfo = async(destination) => {
+    destination = destination.replace(/\s+/g, '-')
+    //get info about the country
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
     const data = await res.json()
-    
+    //get all posts that are linked to this country
+    const postsRes = await fetch(`${baseurl}wp-json/wp/v2/posts?country=${data[0].id}`)
+    const posts = await postsRes.json()
+    //add the posts information to the data
+    data[0].posts = posts
     return data
 }
 module.exports = {

@@ -32,13 +32,14 @@
             "name": "excerpt",
             "type": "text",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
+            "show_in_rest": 1,
             "default_value": "",
             "placeholder": "",
             "prepend": "",
@@ -66,5 +67,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1574678465
+    "modified": 1574910439
 }

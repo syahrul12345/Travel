@@ -2,7 +2,7 @@ FROM wordpress
 
 RUN sed -i 's/80/8080/' /etc/apache2/ports.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mv "$PHP_INI_DIR"/php.ini-development "$PHP_INI_DIR"/php.ini
-
+COPY php.ini "$PHP_INI_DIR"/php.ini
 
 # install_wordpress.sh & misc. dependencies
 RUN apt-get update; \
@@ -33,7 +33,7 @@ RUN sudo -u www-data composer global require \
 RUN chown -R www-data:www-data /var/www/html
 # include composer-installed executables in $PATH
 #copy ini file
-COPY php.ini /etc/php/7.2/cli/php.ini
+
 ENV PATH="/var/www/.composer/vendor/bin:${PATH}"
 
 EXPOSE 8080

@@ -35,3 +35,14 @@ add_theme_support('post-thumbnails');
 @ini_set( 'upload_max_size' , '64M' );
 @ini_set( 'post_max_size', '64M');
 @ini_set( 'max_execution_time', '300' );
+
+add_filter( 'rest_post_query', function( $args ) {
+        $args['meta_query'] = array(
+		array(
+			'key'   => 'country',
+			'value' => esc_sql( $_GET['country'] ),
+		)
+	);
+
+	return $args;
+} );

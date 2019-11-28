@@ -5,6 +5,7 @@ import Head from 'next/head'
 import CountryLayout from '../../src/layouts/country'
 export default function CountryPage(props) {
     const router = useRouter()
+    console.log(props.info[0].posts)
     return(
         <div>
             <CountryLayout>
