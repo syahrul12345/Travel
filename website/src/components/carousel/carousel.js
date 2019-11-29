@@ -71,14 +71,7 @@ const CarouselCards = (props) =>  {
                             image={props.image}
                             title="Contemplative Reptile"
                             />
-                            <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {props.text}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {props.textBlurb}
-                            </Typography>
-                            </CardContent>
+                            
                         </CardActionArea>
                         </Link>
                     </Card>

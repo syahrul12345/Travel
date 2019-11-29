@@ -23,9 +23,9 @@ const Index = (props) => {
        container
        spacing={2}
        justify="center"
-       style={{paddingRight:'10%',paddingLeft:'10%'}}>
+       style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"1vh"}}>
          {props.postData.map(({slug,title,excerpt,image},index) => (
-            <Grid item xs={3} key={index}>
+            <Grid item xs={4} key={index}>
               <BlogCards slug={slug} title={title} excerpt={excerpt} image={image}/>
             </Grid>
           ))}

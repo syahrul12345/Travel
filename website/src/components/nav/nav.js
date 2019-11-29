@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link'
-import {Grid,AppBar} from '@material-ui/core'
+import {Grid,AppBar, Typography} from '@material-ui/core'
 import { fontFamily, fontWeight } from '@material-ui/system';
 const links = [
   { href:'/destinations',label:'DESTINATIONS'},
@@ -17,20 +17,23 @@ const Nav = () => (
   <div>
     <div className="logo" style={{margin:'0 auto',display:'block',textAlign:'center'}}>
         
-        <a href= "/" 
-        style={{
-          textDecoration:'none',
-          fontSize:'30px',
-          color:"black",
-          fontFamily:"sans-serif",
-          fontWeight:"bold"}}> AIRWAITRESS</a>
+        <Link href= "/" 
+        style={{textDecoration:'none'}}>
+          <Typography variant="h4" style={{textDecoration:'none'}}>AIRWAITRESS</Typography>
+        </Link>
+
         
     </div>
     <nav>
       <ul>
         {links.map(({ key, href, label }) => (
           <li key={key}>
-            <a href={href}>{label}</a>
+            <a href={href}>
+              <Typography
+              variant="h5">
+                {label}
+              </Typography>
+            </a>
           </li>
         ))}
       </ul>

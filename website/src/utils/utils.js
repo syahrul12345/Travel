@@ -95,6 +95,7 @@ const getCountryInfo = async(destination) => {
     //get info about the country
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
     const data = await res.json()
+    
     //get all posts that are linked to this country
     const postsRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[meta_key]=country_link&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}`)
     let posts = await postsRes.json()

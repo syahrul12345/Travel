@@ -6,7 +6,7 @@ import Head from 'next/head'
 import CountryLayout from '../../src/layouts/country'
 const useStyles = makeStyles(theme => ({
     media: {
-      height: '20vh',
+      height: '30vh',
     }
   }));
 
