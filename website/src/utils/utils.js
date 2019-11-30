@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-unfetch';
+import axios from 'axios'
 //const baseurl = 'http://52.220.139.249:8080/'
 const baseurl = 'http://localhost:8080/'
 const populateCarousel = async() => {
@@ -25,7 +26,7 @@ const populateCarousel = async() => {
 }
   
 const populatePosts = async() => {
-    const res = await fetch(`${baseurl}wp-json/wp/v2/posts`)
+    const res = await fetch(`${baseurl}wp-json/wp/v2/posts?page=1&per_page=6`)
     const data = await res.json()
     try{
         const postData = data.map((post) => ({
@@ -45,6 +46,57 @@ const populatePosts = async() => {
             data:{"error":"Failed to populate post cards"}
         }
     }
+}
+const getNextPosts =async(pageID) => {
+    return new Promise((resolve,reject) => {
+        pageID = pageID + 1
+        axios.get(`${baseurl}wp-json/wp/v2/posts?page=${pageID}&per_page=6`)
+            .then(async(res) => {
+                const data = res.data
+                const postData = data.map((post) => ({
+                    slug:post.slug,
+                    title:post.title.rendered,
+                    excerpt:post.acf.excerpt,
+                    image:post.acf.featured_image.sizes.medium_large
+                }))
+                resolve(postData)
+            })
+            .catch((err) => {
+                const failObj = {
+                    status:false,
+                    message:err.toString()
+                }
+                reject(failObj)
+            })
+    })
+    
+    // if (res.status !== 200) {
+    //     return {
+    //         status:false,
+    //         message:"End of page"
+    //     }
+    // }
+    // if (res.status === 200 && pageID > 1){
+    //     try{
+    //         const postData = data.map((post) => ({
+    //             slug:post.slug,
+    //             title:post.title.rendered,
+    //             excerpt:post.acf.excerpt,
+    //             image:post.acf.featured_image.sizes.medium_large
+    //         }))
+    //         return {
+    //             ok:true,
+    //             data:postData
+    //         }
+    //     }
+    //     catch(err){
+    //         return {
+    //             ok:false,
+    //             data:{"error":`Failed to populate post cards for page ${pageID}`}
+    //         }
+    //     }
+    // }
+    
 }
 // @function THis function is to populate the destination page with the country cards
 const populateDestinations = async () => {
@@ -126,4 +178,5 @@ module.exports = {
     populatePosts,
     populateDestinations,
     getCountryInfo,
-    getDestinationBanner}
+    getDestinationBanner,
+    getNextPosts}

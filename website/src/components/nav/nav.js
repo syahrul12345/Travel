@@ -18,7 +18,7 @@ const Nav = () => (
     <div className="logo" style={{margin:'0 auto',display:'block',textAlign:'center'}}>
         
         <Link href= "/" 
-        style={{textDecoration:'none'}}>
+        >
           <Typography variant="h4" style={{textDecoration:'none'}}>AIRWAITRESS</Typography>
         </Link>
 

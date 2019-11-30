@@ -7,6 +7,10 @@ import CountryLayout from '../../src/layouts/country'
 const useStyles = makeStyles(theme => ({
     media: {
       height: '30vh',
+    },
+    banner: {
+        height:'50vh',
+        widht:'100vh',
     }
   }));
 
@@ -41,6 +45,7 @@ function GenericCard(props){
 export default function CountryPage(props) {
     const router = useRouter()
     const posts = props.info[0].posts
+    const classes = useStyles()
     return(
         <div>
             <CountryLayout>
@@ -49,7 +54,29 @@ export default function CountryPage(props) {
                 </Head>
                 <Grid container direction="row">
                     <Grid style={{position:'relative'}} id="topGrid" item align="center" xs={12}>
-                        <img src={props.info[0].acf.background_image.sizes.large}/>
+                        <div 
+                        className={classes.banner}
+                        style={{
+                            backgroundImage:`url(${props.info[0].acf.background_image.sizes.large})`,
+                            backgroundSize:'100%',
+                            position:"relative"
+                        }}>
+                            {/* <div
+                            style={{
+                                position:"absolute",
+                                top:'0%',
+                                width:'100%',
+                                height:'100%',
+                                textAlign:"center",
+                                zIndex:"0",
+                                fontFamily:"Arial",
+                                color:"white",
+                                backgroundColor:"rgba(255, 255, 255, 0.20"
+                            }}>
+                                
+                            </div> */}
+                            {/* <img  style={{display:'block'}} src={props.info[0].acf.background_image.sizes.large}/> */}
+                        </div>
                         <Typography 
                         style={{
                             position:"absolute",
@@ -58,7 +85,6 @@ export default function CountryPage(props) {
                             height:'100%',
                             textAlign:"center",
                             zIndex:"0",
-                            fontFamily:"Arial",
                             color:"white",
                         }}
                         variant="h1" 

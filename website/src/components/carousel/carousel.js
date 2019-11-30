@@ -8,7 +8,7 @@ import Head from 'next/head'
 
 const useStyles = makeStyles({
     media: {
-      height: '30vh',
+      height: '40vh',
     },
   });
 

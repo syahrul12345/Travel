@@ -9,34 +9,34 @@ const useStyles = makeStyles({
       maxHeight: '100vh',
     },
     media: {
-      height: 300,
+      height: '20vh',
     },
   });
   
 export default function BlogCards(props) {
     const classes = useStyles()
     return(
-      <Card style={{position:"relative"}}>
-          <Link href={`/`}>
-          <CardActionArea>
-            <CardMedia 
-            className={classes.media}
-            image={props.image}/>
-            <h1 
-            style={{
-              position:"absolute",
-              top:'40%',
-              width:'100%',
-              height:'100%',
-              textAlign:"center",
-              color:"white",
-            }}
-            variant="body2" 
-            component="p">
-              <span style={{backgroundColor:"rgba(255, 0, 0, 0.4)"}}>{props.title}</span>
-            </h1>
-          </CardActionArea>
-          </Link>
-      </Card>
+        <Card style={{position:"relative"}}>
+            <Link href={`/`}>
+            <CardActionArea>
+              <CardMedia 
+              className={classes.media}
+              image={props.image}/>
+              <h1 
+                style={{
+                  position:"absolute",
+                  top:'20%',
+                  width:'100%',
+                  height:'100%',
+                  textAlign:"center",
+                  color:"white",
+                }}
+                variant="body2" 
+                component="p">
+                  <span style={{backgroundColor:"rgba(255, 0, 0, 0.4)"}}>{props.title}</span>
+                </h1>
+            </CardActionArea>
+            </Link>
+        </Card>
     )
 }
