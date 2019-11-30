@@ -16,10 +16,10 @@ const populateCarousel = async() => {
             data:carouselData
         }
     }catch(err){
-        return [{
+        return {
             ok:false,
             data:{"error":"Failed to populate post cards"}
-        }]
+        }
     }
     
 }
@@ -34,10 +34,10 @@ const populatePosts = async() => {
             excerpt:post.acf.excerpt,
             image:post.acf.featured_image.sizes.medium_large
         }))
-        return [{
+        return {
             ok:true,
             data:postData
-        }]
+        }
     }
     catch(err){
         return {
