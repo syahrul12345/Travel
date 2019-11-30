@@ -16,13 +16,11 @@ const links = [
 const Nav = () => (
   <div>
     <div className="logo" style={{margin:'0 auto',display:'block',textAlign:'center'}}>
-        
-        <Link href= "/" 
-        >
-          <Typography variant="h4" style={{textDecoration:'none'}}>AIRWAITRESS</Typography>
+        <Link>
+          <a href={"/"} style={{textDecoration:"none"}}>
+            <Typography variant="h4" style={{textDecoration:'none'}}>AIRWAITRESS</Typography>
+          </a>
         </Link>
-
-        
     </div>
     <nav>
       <ul>

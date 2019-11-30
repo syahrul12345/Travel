@@ -33,7 +33,8 @@ const populatePosts = async() => {
             slug:post.slug,
             title:post.title.rendered,
             excerpt:post.acf.excerpt,
-            image:post.acf.featured_image.sizes.medium_large
+            image:post.acf.featured_image.sizes.medium_large,
+            link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, "")
         }))
         return {
             ok:true,
@@ -57,7 +58,8 @@ const getNextPosts =async(pageID) => {
                     slug:post.slug,
                     title:post.title.rendered,
                     excerpt:post.acf.excerpt,
-                    image:post.acf.featured_image.sizes.medium_large
+                    image:post.acf.featured_image.sizes.medium_large,
+                    link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                 }))
                 resolve(postData)
             })
@@ -69,34 +71,6 @@ const getNextPosts =async(pageID) => {
                 reject(failObj)
             })
     })
-    
-    // if (res.status !== 200) {
-    //     return {
-    //         status:false,
-    //         message:"End of page"
-    //     }
-    // }
-    // if (res.status === 200 && pageID > 1){
-    //     try{
-    //         const postData = data.map((post) => ({
-    //             slug:post.slug,
-    //             title:post.title.rendered,
-    //             excerpt:post.acf.excerpt,
-    //             image:post.acf.featured_image.sizes.medium_large
-    //         }))
-    //         return {
-    //             ok:true,
-    //             data:postData
-    //         }
-    //     }
-    //     catch(err){
-    //         return {
-    //             ok:false,
-    //             data:{"error":`Failed to populate post cards for page ${pageID}`}
-    //         }
-    //     }
-    // }
-    
 }
 // @function THis function is to populate the destination page with the country cards
 const populateDestinations = async () => {
@@ -156,7 +130,8 @@ const getCountryInfo = async(destination) => {
             slug:post.slug,
             title:post.title.rendered,
             id:post.id,
-            image:post.acf.featured_image.sizes.large
+            image:post.acf.featured_image.sizes.large,
+            link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
         }
     })
     //Log the categories
@@ -173,10 +148,22 @@ const getCountryInfo = async(destination) => {
     data[0].categories = categories
     return data
 }
+
+const getPostInfo = async(link) => {
+    const res = await fetch(`${baseurl}${link}`)
+    const post = await res.json()
+    const countryRes = await fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)
+    const country = await countryRes.json()
+    post["country"] = country[0].title.rendered
+    return {
+        post,
+    }
+}
 module.exports = {
     populateCarousel,
     populatePosts,
     populateDestinations,
     getCountryInfo,
     getDestinationBanner,
-    getNextPosts}
+    getNextPosts,
+    getPostInfo}

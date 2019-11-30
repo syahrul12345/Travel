@@ -17,7 +17,7 @@ export default function BlogCards(props) {
     const classes = useStyles()
     return(
         <Card style={{position:"relative"}}>
-            <Link href={`/`}>
+            <Link href={`\\${props.link}`}>
             <CardActionArea>
               <CardMedia 
               className={classes.media}
