@@ -19,6 +19,7 @@ export default function CountryPage(props) {
     const router = useRouter()
     const posts = props.info[0].posts
     const classes = useStyles()
+    console.log("IN COUNTRY")
     return(
         <div>
             <CountryLayout>
@@ -65,7 +66,7 @@ export default function CountryPage(props) {
                             {posts.map((post) => {
                                 return(
                                    <Grid key={post.title.rendered} item xs={4}>
-                                       <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link}/>
+                                       <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link} country={post.country}/>
                                    </Grid>
                                 )
                             })}

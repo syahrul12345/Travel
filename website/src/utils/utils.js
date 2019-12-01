@@ -26,15 +26,22 @@ const populateCarousel = async() => {
 }
   
 const populatePosts = async() => {
-    const res = await fetch(`${baseurl}wp-json/wp/v2/posts?page=1&per_page=6`)
-    const data = await res.json()
+    const res = await Promise.all([ fetch(`${baseurl}wp-json/wp/v2/posts?page=1&per_page=6`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
+    const data = await res[0].json()
+    const destinationData = await res[1].json()
+    
+    const destinationMap = {}
+    destinationData.forEach((destination) => {
+        destinationMap[destination.id] = destination.slug
+    })
     try{
         const postData = data.map((post) => ({
             slug:post.slug,
             title:post.title.rendered,
             excerpt:post.acf.excerpt,
             image:post.acf.featured_image.sizes.medium_large,
-            link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, "")
+            link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+            country:destinationMap[post.acf.country]
         }))
         return {
             ok:true,
@@ -49,27 +56,34 @@ const populatePosts = async() => {
     }
 }
 const getNextPosts =async(pageID) => {
-    return new Promise((resolve,reject) => {
+    return new Promise(async (resolve,reject) => {
         pageID = pageID + 1
-        axios.get(`${baseurl}wp-json/wp/v2/posts?page=${pageID}&per_page=6`)
-            .then(async(res) => {
-                const data = res.data
-                const postData = data.map((post) => ({
-                    slug:post.slug,
-                    title:post.title.rendered,
-                    excerpt:post.acf.excerpt,
-                    image:post.acf.featured_image.sizes.medium_large,
-                    link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-                }))
-                resolve(postData)
-            })
-            .catch((err) => {
-                const failObj = {
-                    status:false,
-                    message:err.toString()
-                }
-                reject(failObj)
-            })
+        const res = await Promise.all([ fetch(`${baseurl}wp-json/wp/v2/posts?page=${pageID}&per_page=6`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
+        const data = await res[0].json()
+        const destinationData = await res[1].json()
+        const destinationMap = {}
+        destinationData.forEach((destination) => {
+            destinationMap[destination.id] = destination.slug
+        })
+        try{
+            const postData = data.map((post) => ({
+                slug:post.slug,
+                title:post.title.rendered,
+                excerpt:post.acf.excerpt,
+                image:post.acf.featured_image.sizes.medium_large,
+                link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                country:destinationMap[post.acf.country]
+            }))
+            resolve(postData)
+        }
+        catch(err){
+            const failObj = {
+                ok:false,
+                data:{"error":erro.toString()}
+            }
+            reject(failObj)
+
+        }
     })
 }
 // @function THis function is to populate the destination page with the country cards

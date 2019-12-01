@@ -51,14 +51,14 @@ const Index = (props) => {
       spacing={2}
       justify="center"
       style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"1vh"}}>
-        {props.postData.map(({slug,title,excerpt,image,link},index) => (
+        {props.postData.map(({slug,title,excerpt,image,link,country},index) => (
           <Grid item xs={4} key={index}>
-            <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link}/>
+            <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
           </Grid>
         ))}
-        {additionalPosts.map(({slug,title,excerpt,image,link},index) => (
+        {additionalPosts.map(({slug,title,excerpt,image,link,country},index) => (
           <Grid item xs={4} key={index}>
-            <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link}/>
+            <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
           </Grid>
         ))}
         {/* Load the loader item */}

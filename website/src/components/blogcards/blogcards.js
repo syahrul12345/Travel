@@ -25,6 +25,7 @@ export default function BlogCards(props) {
                 component="p">
                   <span style={{backgroundColor:"rgba(255, 255, 255, 1)"}}>{props.title}</span>
                 </Typography>
+                <span>{props.country}</span>
                 </CardContent>
             </CardActionArea>
             
