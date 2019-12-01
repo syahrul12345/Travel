@@ -152,12 +152,22 @@ const getCountryInfo = async(destination) => {
 const getPostInfo = async(link) => {
     const res = await fetch(`${baseurl}${link}`)
     const post = await res.json()
-    const countryRes = await fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)
-    const country = await countryRes.json()
-    post["country"] = country[0].title.rendered
-    return {
-        post,
-    }
+    return await Promise.all([fetch(`${baseurl}/wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)])
+        .then(async (res) => {
+            const author = await res[0].json()
+            const country = await res[1].json()
+            post["country"] = country[0].title.rendered
+            post["author"] = author
+            return {
+                post
+            }
+        }).catch((err) => {
+            console.log("it errored")
+            console.log(err)
+            return {
+                post
+            }
+        })
 }
 module.exports = {
     populateCarousel,

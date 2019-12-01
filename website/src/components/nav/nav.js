@@ -3,32 +3,28 @@ import Link from 'next/link'
 import {Grid,AppBar, Typography} from '@material-ui/core'
 import { fontFamily, fontWeight } from '@material-ui/system';
 const links = [
+  {href:'/',label:'AIRWAITRESS'},
   { href:'/destinations',label:'DESTINATIONS'},
   { href:'/activites',label:'ACTIVITIES'},
   { href:'/places',label:'ATTRACTIONS'},
-  { href: '/food', label: 'FOOD' },
-  { href: '/Nightlife', label: 'NIGHTLIFE' }
+  { href: '/Nightlife', label: 'NIGHTLIFE' },
+  { href: '/food', label: 'GASTRONOMY' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link
 })
 
 const Nav = () => (
-  <div>
-    <div className="logo" style={{margin:'0 auto',display:'block',textAlign:'center'}}>
-        <Link>
-          <a href={"/"} style={{textDecoration:"none"}}>
-            <Typography variant="h4" style={{textDecoration:'none'}}>AIRWAITRESS</Typography>
-          </a>
-        </Link>
-    </div>
-    <nav>
+  
+  <div style={{marginBlockEnd:'10vh'}}>
+    <AppBar color="primary">
+      <nav style={{marginRight:'20%',marginLeft:'20%'}}>
       <ul>
         {links.map(({ key, href, label }) => (
           <li key={key}>
             <a href={href}>
               <Typography
-              variant="h5">
+              variant="subtitle2">
                 {label}
               </Typography>
             </a>
@@ -45,30 +41,31 @@ const Nav = () => (
           display:container
         }
         nav > ul {
-            padding:0
+            padding:0;
+            margin-left:20%:
         }
         ul {
           display: flex;
           padding-inline-start:0px;
-          justify-content:space-between;
         }
         
         li {
           flex:1;
           display: flex;
-          justify-content:center
+          justify-content:space-evenly;
         }
         a {
           color: black;
           text-decoration: none;
-          font-size: 20px;
           font-weight: 400;
           letter-spacing:2px;
           font-family: Montserrat, sans-serif
         }
       `}</style>
     </nav>
+    </AppBar>
   </div>
+  
 )
 
 export default Nav

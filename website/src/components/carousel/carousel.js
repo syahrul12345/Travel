@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import Link from 'next/link'
 import { makeStyles } from '@material-ui/core/styles';
-import {Grid,Card,CardContent,CardMedia, CardActionArea,Typography,Fab} from '@material-ui/core'
+import {Grid,Card,CardMedia, CardActionArea,Typography,Fab} from '@material-ui/core'
 import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RightIcon from '@material-ui/icons/KeyboardArrowRight';
 import Head from 'next/head'
