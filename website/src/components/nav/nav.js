@@ -24,7 +24,7 @@ const Nav = () => (
           <li key={key}>
             <a href={href}>
               <Typography
-              variant="subtitle2">
+              variant="body2">
                 {label}
               </Typography>
             </a>

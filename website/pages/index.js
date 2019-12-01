@@ -20,7 +20,7 @@ function CircularIndeterminate() {
   const classes = useStyles();
   return (
     <div>
-      <CircularProgress color="primary" />
+      <CircularProgress color="secondary" />
     </div>
   );
 }
@@ -45,7 +45,7 @@ const Index = (props) => {
 
   return (
     <HomeLayout data={props.carouselData}>
-      <Typography variant="h2" style={{textAlign:"center"}}>FEATURED POSTS</Typography>
+      <Typography variant="h4" style={{textAlign:"center"}}>FEATURED POSTS</Typography>
       <Grid
       container
       spacing={2}
@@ -56,7 +56,7 @@ const Index = (props) => {
             <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link}/>
           </Grid>
         ))}
-        {additionalPosts.map(({slug,title,excerpt,image},index) => (
+        {additionalPosts.map(({slug,title,excerpt,image,link},index) => (
           <Grid item xs={4} key={index}>
             <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link}/>
           </Grid>
@@ -68,12 +68,12 @@ const Index = (props) => {
         {/* Inject some html once the last page is reached */}
         {endLine ? 
           <Grid item xs={12} align="center">
-            <Typography variant="h4">NO MORE POSTS TO SHOW</Typography>
+            <Typography variant="h6">NO MORE POSTS TO SHOW</Typography>
           </Grid> : ""
         }
         <Button onClick={loadPosts} variant="contained" color="primary">Load more</Button>
       </Grid>
-      <Typography variant="h2" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
+      <Typography variant="h4" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
       <DestinationTab destinations={props.destinations}/>
     </HomeLayout>
   )

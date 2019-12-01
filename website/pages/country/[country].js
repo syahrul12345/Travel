@@ -57,7 +57,7 @@ export default function CountryPage(props) {
                             ITENARIES
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} align="center" style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+                    <Grid item xs={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
                         <Grid 
                         container 
                         spacing={2}

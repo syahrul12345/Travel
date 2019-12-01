@@ -120,12 +120,13 @@ export default function Post(props) {
             }
         },
         {
+            //Handle image captions
             shouldProcessNode: function(node){
                 return node.parent && node.parent.name && node.parent.name == "figcaption"
             },
             processNode: function(node,children){
                 return(
-                    <Typography variant="subtitle2" align="center">{node.data}</Typography>
+                    <Typography variant="caption" align="center">{node.data}</Typography>
                 )
             }
         },
@@ -149,7 +150,7 @@ export default function Post(props) {
                 <meta name="description" name={post.acf.excerpt}/>
             </Head>
             <Nav/>
-            <div style={{marginLeft:'30%',marginRight:'30%'}}>
+            <div style={{marginLeft:'21%',marginRight:'21%'}}>
                 <Typography variant="h1" component="h1" style={{fontSize:'40px'}}>
                     {post.title.rendered}
                 </Typography>
@@ -170,13 +171,13 @@ export default function Post(props) {
                         </div>
                     </div>
                     <div style={{display:'flex', justifyContent:'space-between',align:'center'}} >
-                        <IconButton aria-label="Facebook">
+                        <IconButton aria-label="Facebook" className={classes.bigAvatar}>
                             <img src="/static/images/icons8-facebook-f-24.png"/>
                         </IconButton>
-                        <IconButton aria-label="Instagram">
+                        <IconButton aria-label="Instagram" className={classes.bigAvatar}>
                             <img src="/static/images/icons8-instagram-24.png"/>
                         </IconButton>
-                        <IconButton aria-label="Telegram">
+                        <IconButton aria-label="Telegram" className={classes.bigAvatar}>
                             <img src="/static/images/icons8-telegram-app-24.png"/>
                         </IconButton>
                     </div>
