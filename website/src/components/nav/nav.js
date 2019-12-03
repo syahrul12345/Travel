@@ -59,7 +59,6 @@ const Nav = () => (
           text-decoration: none;
           font-weight: 400;
           letter-spacing:2px;
-          font-family: Montserrat, sans-serif
         }
       `}</style>
     </nav>
