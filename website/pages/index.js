@@ -4,6 +4,7 @@ import {Grid,Typography,Button,CircularProgress} from '@material-ui/core'
 import HomeLayout from '../src/layouts/home'
 import BlogCards from '../src/components/blogcards'
 import DestinationTab from '../src/components/destinations'
+import MediumCard from '../src/components/mediumcard'
 import {populateCarousel,populatePosts,populateDestinations,getNextPosts} from '../src/utils/utils'
 
 const useStyles = makeStyles({
@@ -42,40 +43,93 @@ const Index = (props) => {
       setEnd(true)
     })
   }
-
+        
   return (
     <HomeLayout data={props.carouselData}>
-      <Typography variant="h4" style={{textAlign:"center"}}>FEATURED POSTS</Typography>
-      <Grid
-      container
+      <Grid 
+      container 
+      direction="row"
       spacing={2}
-      justify="center"
       style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"1vh"}}>
-        {props.postData.map(({slug,title,excerpt,image,link,country},index) => (
-          <Grid item xs={4} key={index}>
-            <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+          <Grid item xs={4}>
+            {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
+              if(index == 0){
+                return(
+                  // <MediumCard slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+                  <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+                )
+              }
+            })}
+          </Grid>  
+          <Grid item xs={4}>
+            <Grid container spacing ={2}>
+            {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
+              if(index >= 1 && index <= 3){
+                return(
+                  <Grid item xs={12}>
+                    <MediumCard slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+                    {/* <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/> */}
+                  </Grid>
+                )
+              }
+            })}
+            </Grid>
           </Grid>
-        ))}
-        {additionalPosts.map(({slug,title,excerpt,image,link,country},index) => (
-          <Grid item xs={4} key={index}>
-            <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+          <Grid item xs={4}>
+            <Grid container spacing= {2}>
+            {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
+              if(index >= 4){
+                return(
+                  <Grid item xs={12}>
+                  <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+                    
+                  </Grid>
+                )
+              }
+            })}
+            <Grid container direction="row" align="right">
+              <Grid item xs={12}>
+                <Typography variant="subtitle1" component="body1">
+                  SEE MORE ARTICLES
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
-        ))}
-        {/* Load the loader item */}
-        <Grid item xs={12} align="center">
-          {isLoading ? <CircularIndeterminate/>:""}
-        </Grid>
-        {/* Inject some html once the last page is reached */}
-        {endLine ? 
-          <Grid item xs={12} align="center">
-            <Typography variant="h6">NO MORE POSTS TO SHOW</Typography>
-          </Grid> : ""
-        }
-        <Button onClick={loadPosts} variant="contained" color="primary">Load more</Button>
+        </Grid> 
       </Grid>
-      <Typography variant="h4" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
-      <DestinationTab destinations={props.destinations}/>
     </HomeLayout>
+    // <HomeLayout data={props.carouselData}>
+    //   <Typography variant="h4" style={{textAlign:"center"}}>FEATURED POSTS</Typography>
+    //   <Grid
+    //   container
+    //   spacing={2}
+    //   justify="center"
+    //   style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"1vh"}}>
+    //     {props.postData.map(({slug,title,excerpt,image,link,country},index) => (
+    //       <Grid item xs={4} key={index}>
+    //         <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+    //       </Grid>
+    //     ))}
+    //     {additionalPosts.map(({slug,title,excerpt,image,link,country},index) => (
+    //       <Grid item xs={4} key={index}>
+    //         <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+    //       </Grid>
+    //     ))}
+    //     {/* Load the loader item */}
+    //     <Grid item xs={12} align="center">
+    //       {isLoading ? <CircularIndeterminate/>:""}
+    //     </Grid>
+    //     {/* Inject some html once the last page is reached */}
+    //     {endLine ? 
+    //       <Grid item xs={12} align="center">
+    //         <Typography variant="h6">NO MORE POSTS TO SHOW</Typography>
+    //       </Grid> : ""
+    //     }
+    //     <Button onClick={loadPosts} variant="contained" color="primary">Load more</Button>
+    //   </Grid>
+    //   <Typography variant="h4" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
+    //   <DestinationTab destinations={props.destinations}/>
+    // </HomeLayout>
   )
 }
 
