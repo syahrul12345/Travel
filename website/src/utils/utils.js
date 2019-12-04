@@ -167,7 +167,7 @@ const getCountryInfo = async(destination) => {
 const getPostInfo = async(link) => {
     const res = await fetch(`${baseurl}${link}`)
     const post = await res.json()
-    return await Promise.all([fetch(`${baseurl}/wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)])
+    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)])
         .then(async (res) => {
             const author = await res[0].json()
             const country = await res[1].json()
@@ -184,6 +184,36 @@ const getPostInfo = async(link) => {
             }
         })
 }
+
+const getContextPosts = async(context) => {
+    const query = context.replace(/^\/|\/$/g, '');
+    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${query}`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
+        .then(async(res) => {
+            let posts = await res[0].json()
+            const destinationData = await res[1].json()
+            const destinationMap = {}
+            destinationData.forEach((destination) => {
+                destinationMap[destination.id] = destination.slug
+            })
+            posts = posts.map((post) => {
+                return {
+                    slug:post.slug,
+                    title:post.title.rendered,
+                    id:post.id,
+                    image:post.acf.featured_image.sizes.large,
+                    link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                    excerpt:post.acf.excerpt,
+                    category:post.categories,
+                    country:destinationMap[post.acf.country],
+                }
+            })
+            return posts
+        })
+        .catch((err) => {
+            console.log(err.toString())
+            return {}
+        })
+}
 module.exports = {
     populateCarousel,
     populatePosts,
@@ -191,4 +221,6 @@ module.exports = {
     getCountryInfo,
     getDestinationBanner,
     getNextPosts,
-    getPostInfo}
+    getPostInfo,
+    getContextPosts
+}

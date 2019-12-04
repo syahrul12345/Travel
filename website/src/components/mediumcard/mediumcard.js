@@ -1,4 +1,5 @@
 import {Grid,Card,CardActionArea,CardMedia,CardContent,makeStyles, Typography} from '@material-ui/core'
+import HtmlToReact from 'html-to-react'
 import Link from 'next/link'
 const useStyles = makeStyles({
     media: {
@@ -7,6 +8,8 @@ const useStyles = makeStyles({
   });
 
 export default function MediumCard(props) {
+    const HtmlToReactParser = HtmlToReact.Parser
+    const parser = new HtmlToReactParser()
     const classes = useStyles()
     return(
         <Link href={`\\${props.link}`}>
@@ -20,7 +23,7 @@ export default function MediumCard(props) {
                     <Grid item xs={8}>
                         <CardContent>
                             <Typography variant="body1">
-                                {props.title}
+                                {parser.parse(props.title)}
                             </Typography>
                         </CardContent>
                     </Grid>

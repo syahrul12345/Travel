@@ -5,7 +5,7 @@ import { fontFamily, fontWeight } from '@material-ui/system';
 const links = [
   {href:'/',label:'AIRWAITRESS'},
   { href:'/destinations',label:'DESTINATIONS'},
-  { href:'/activites',label:'ACTIVITIES'},
+  { href:'/itenaries',label:'ITENARIES'},
   { href:'/places',label:'ATTRACTIONS'},
   { href: '/Nightlife', label: 'NIGHTLIFE' },
   { href: '/food', label: 'GASTRONOMY' },
@@ -16,7 +16,7 @@ const links = [
 
 const Nav = () => (
   
-  <div style={{marginBlockEnd:'10vh'}}>
+  <div style={{marginBlockEnd:'1vh'}}>
     <AppBar color="primary">
       <nav style={{marginRight:'20%',marginLeft:'20%'}}>
       <ul>

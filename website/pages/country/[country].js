@@ -27,9 +27,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function CountryPage(props) {
     const router = useRouter()
-    const posts = props.info[0].posts
-    const categories = props.info[0].categories
     const countryData = props.info[0].acf
+    const categorized = props.categorized
+    
     const classes = useStyles()
     return(
         <div>
@@ -104,9 +104,11 @@ export default function CountryPage(props) {
                             </Grid>
                             
                         </Grid>
-                    </Grid>
-                    {categories.map(({id,name}) => {
-                            return(
+                      </Grid>
+                      {categorized.map(({id,name,posts}) => {
+                          if(posts.length > 0) {
+                              //Posts of this category exists
+                              return(
                                 <>
                                 <Grid item xs={12} align="center">
                                     <Typography
@@ -128,14 +130,24 @@ export default function CountryPage(props) {
                                                     </Grid>
                                                 )
                                             }
-                                            
                                         })}
                                     </Grid>
                                 </Grid>
+                                <Grid item xs={12} style={{paddingLeft:"5%",paddingRight:"5%",textAlign:'right'}}>
+                                    {posts.length >= 6 ? 
+                                        <Typography variant="subtitle1" component="body1">
+                                            <a href={`\\${name}`} style={{textDecoration:'none'}}>
+                                                SEE MORE {name.toUpperCase()} ARTICLES
+                                            </a>
+                                        </Typography>
+                                        :''
+                                    }
+                                    
+                                </Grid>
                                 </>
-                            )
-                    })}
-                    
+                              )
+                          }
+                      })}
                 </Grid>
             </CountryLayout>
         </div>
@@ -144,7 +156,21 @@ export default function CountryPage(props) {
 
 CountryPage.getInitialProps = async(context) => {
     const info = await getCountryInfo(context.query.country)
+    const categorized = info[0].categories.map(({id,name}) => {
+        const posts = []
+        info[0].posts.forEach((post,index) => {
+            if(post.category.includes(id)){
+                posts.push(post)
+            }
+    })
     return {
-        info
+      id,
+      name,
+      posts
     }
+  })
+  return {
+      info,
+      categorized,
+  }
 }

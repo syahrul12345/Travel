@@ -56,7 +56,7 @@ const Index = (props) => {
         direction="row"
         spacing={2}
         justify="center"
-        style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"1vh"}}>
+        style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"10vh"}}>
             <Grid item xs={4}>
               {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
                 if(index == 0){
