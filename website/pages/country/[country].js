@@ -1,7 +1,17 @@
 import {useRouter} from 'next/router';
 import Link from 'next/link'
 import {getCountryInfo} from '../../src/utils/utils'
-import {Grid,Typography,makeStyles,Card,CardActionArea,CardMedia} from '@material-ui/core'
+import {Grid,Typography,makeStyles} from '@material-ui/core'
+import InfoCard from '../../src/components/infocard'
+import PhoneIcon from '@material-ui/icons/Phone'
+import WatchIcon from '@material-ui/icons/Watch'
+import GlobeIcon from '@material-ui/icons/Public'
+import PlaneIcon from '@material-ui/icons/AirplanemodeActive'
+import PeopleIcon from '@material-ui/icons/People'
+import CalanderIcon from '@material-ui/icons/CalendarToday'
+import CurrencyIcon from '@material-ui/icons/AttachMoney'
+import TrainIcon from '@material-ui/icons/Train'
+
 import Head from 'next/head'
 import CountryLayout from '../../src/layouts/country'
 import BlogCards from '../../src/components/blogcards';
@@ -18,8 +28,9 @@ const useStyles = makeStyles(theme => ({
 export default function CountryPage(props) {
     const router = useRouter()
     const posts = props.info[0].posts
+    const categories = props.info[0].categories
+    const countryData = props.info[0].acf
     const classes = useStyles()
-    console.log("IN COUNTRY")
     return(
         <div>
             <CountryLayout>
@@ -51,27 +62,80 @@ export default function CountryPage(props) {
                             <span style={{backgroundColor:"rgba(255, 255, 255, 0.2)"}}>{props.info[0].title.rendered}</span>
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} align="center">
-                        <Typography
-                        variant="h2"
-                        style={{marginTop:"2vh"}}>
-                            ITENARIES
+                    <Grid item xs={12} style={{paddingTop:'3vh'}}>
+                        <Typography variant="body1" style={{textAlign:'left',paddingLeft:'20%',paddingRight:'20%'}}>
+                            {props.info[0].acf.blurb}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+                    <Grid item xs={12} style={{paddingTop:'3vh'}} align="center">
+                        <Typography variant="h4">
+                            TRAVEL INFORMATION
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} style={{paddingLeft:'25%',paddingRight:'25%'}}>
                         <Grid 
                         container 
-                        spacing={2}
-                        justify="center">
-                            {posts.map((post) => {
-                                return(
-                                   <Grid key={post.title.rendered} item xs={4}>
-                                       <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link} country={post.country}/>
-                                   </Grid>
-                                )
-                            })}
+                        direction="row"
+                        align="center"
+                        alignContent="center"
+                        alignItems="center"
+                        justify="center"
+                        >
+                            <Grid item xs={12} sm ={3}>
+                                <InfoCard data={countryData.country_code} text="Country Code" icon={<PhoneIcon/>}/>
+                            </Grid>
+                            <Grid item xs={12} sm ={3}>
+                                <InfoCard data={countryData.time_zone} text="Time Zone" icon={<WatchIcon/>}/>
+                            </Grid>
+                            <Grid item xs={12} sm ={3}>
+                                <InfoCard data={countryData.currency} text="Currency" icon={<CurrencyIcon/>}/>
+                            </Grid>
+                            <Grid item xs={12} sm ={3}>
+                                <InfoCard data={countryData.continent} text="Continent" icon={<GlobeIcon/>}/>
+                            </Grid>
+                            <Grid item xs={12} sm ={3}>
+                                <InfoCard data={countryData.peak_travel_season} text="Peak Travel Season" icon={<PeopleIcon/>}/>
+                            </Grid>
+                            <Grid item xs={12} sm ={3}>
+                                <InfoCard data={countryData.cheapest_travel_period} text="Cheapest Travel Period" icon={<PlaneIcon/>}/>
+                            </Grid>
+                            <Grid item xs={12} sm ={3}>
+                                <InfoCard data={countryData.public_transport_card} text="Public Transport Card" icon={<TrainIcon/>}/>
+                            </Grid>
+                            
                         </Grid>
                     </Grid>
+                    {categories.map(({id,name}) => {
+                            return(
+                                <>
+                                <Grid item xs={12} align="center">
+                                    <Typography
+                                    variant="h4"
+                                    style={{marginTop:"2vh"}}>
+                                        {name.toUpperCase()}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+                                    <Grid 
+                                    container 
+                                    spacing={2}
+                                    justify="center">
+                                        {posts.map((post) => {
+                                            if(post.category.includes(id)){
+                                                return(
+                                                    <Grid key={post.title.rendered} item xs={4}>
+                                                        <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link} country={post.country}/>
+                                                    </Grid>
+                                                )
+                                            }
+                                            
+                                        })}
+                                    </Grid>
+                                </Grid>
+                                </>
+                            )
+                    })}
+                    
                 </Grid>
             </CountryLayout>
         </div>

@@ -146,6 +146,7 @@ const getCountryInfo = async(destination) => {
             id:post.id,
             image:post.acf.featured_image.sizes.large,
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+            category:post.categories
         }
     })
     //Log the categories
