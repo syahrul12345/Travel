@@ -12,16 +12,22 @@ const useStyles = makeStyles({
 
 export default function Food(props) {
     const classes = useStyles()
-    const [country,setCountry] = React.useState('hong-kong')
+    const [country,setCountry] = React.useState('all')
+    const [latestPost,setLatestPost] = React.useState(props.posts[0])
     const [posts,setPosts] = React.useState(props.posts)
     const handleChange = event => {
         setCountry(event.target.value)
-        const newPosts = posts.filter((post) => {
-            if(post.country == event.target.value){
-                return post
-            } 
-        })
-        setPosts(newPosts)
+        if(event.target.value === "all"){
+            setPosts(props.posts)
+        }else{
+            const newPosts = props.posts.filter((post) => {
+                if(post.country == event.target.value){
+                    return post
+                } 
+            })
+            setPosts(newPosts)
+        }
+        
     }
     
     //Props.post has all the contextual posts for the current page
@@ -42,19 +48,19 @@ export default function Food(props) {
                             <Grid item xs={12}>
                                 <CardMedia
                                  className={classes.media}
-                                 image={posts[0].image}/>
+                                 image={latestPost.image}/>
                             </Grid>
                             <Grid item xs={12}>
                                  <CardContent>
                                     <Grid container>
                                         <Grid item xs={12}>
                                             <Typography variant="body1" component="body">
-                                                {posts[0].title}
+                                                {latestPost.title}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Typography variant="subtitle2">
-                                                {posts[0].excerpt}
+                                                {latestPost.excerpt}
                                             </Typography>
                                         </Grid>
                                     </Grid>
@@ -110,7 +116,7 @@ export default function Food(props) {
                                 value={country}
                                 onChange={handleChange}
                                 style={{paddingLeft:'4px'}}
-                                >
+                                >   <MenuItem value="all" key="all">Filter Country</MenuItem>
                                     {props.destinations.data.map(({slug,title}) => {
                                         return(
                                             <MenuItem value={slug} key={title}>{title}</MenuItem>
@@ -125,20 +131,25 @@ export default function Food(props) {
                 <Grid item xs={12} sm={12}>
                     <Grid container spacing={2}>
                     { posts.length != 0 ? posts.map((post,index) => {
-                        console.log('in posts')
-                        if(index == 0) {
+                        if(post.id == latestPost.id) {
                             //ignore first
                             return(
                                 ''
                             )
                         }else{
                             return(
-                                <Grid item key={post.title} xs={8}>
+                                <Grid item key={post.title} xs={12} sm={6}>
                                     <MediumCard image={post.image} link={post.link} title={post.title}/>
                                 </Grid>
                             )
                         }
-                    }) : "" }
+                    }) : 
+                        <Grid item xs={12} style={{textAlign:'center'}}>
+                            <Typography variant="subtitle1" component="body1" style={{textAlign:'center'}}>
+                                No FOOD articles to show for {country}
+                            </Typography>
+                        </Grid> 
+                    }
                     </Grid>
                 </Grid>
             </Grid>
