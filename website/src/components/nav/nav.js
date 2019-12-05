@@ -7,7 +7,7 @@ const links = [
   { href:'/destinations',label:'DESTINATIONS'},
   { href:'/itenaries',label:'ITENARIES'},
   { href:'/attractions',label:'ATTRACTIONS'},
-  { href: '/Nightlife', label: 'NIGHTLIFE' },
+  { href: '/nightlife', label: 'NIGHTLIFE' },
   { href: '/food', label: 'GASTRONOMY' },
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`

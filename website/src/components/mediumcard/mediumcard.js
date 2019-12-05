@@ -22,8 +22,11 @@ export default function MediumCard(props) {
                     </Grid>
                     <Grid item xs={7}>
                         <CardContent>
-                            <Typography variant="body1">
+                            <Typography variant="body1" component="p">
                                 {parser.parse(props.title)}
+                            </Typography>
+                            <Typography style={{fontSize:'11px'}}>
+                                {props.country}
                             </Typography>
                         </CardContent>
                     </Grid>

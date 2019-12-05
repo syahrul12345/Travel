@@ -164,12 +164,12 @@ CountryPage.getInitialProps = async(context) => {
             if(post.category.includes(id)){
                 posts.push(post)
             }
-    })
-    return {
-      id,
-      name,
-      posts
-    }
+        })
+        return {
+        id,
+        name,
+        posts
+        }
   })
   return {
       info,

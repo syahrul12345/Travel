@@ -32,7 +32,10 @@ const populatePosts = async() => {
     
     const destinationMap = {}
     destinationData.forEach((destination) => {
-        destinationMap[destination.id] = destination.slug
+        destinationMap[destination.id] = {
+            slug:destination.slug,
+            title:destination.title.rendered
+        }
     })
     try{
         const postData = data.map((post) => ({
@@ -41,7 +44,8 @@ const populatePosts = async() => {
             excerpt:post.acf.excerpt,
             image:post.acf.featured_image.sizes.medium_large,
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-            country:destinationMap[post.acf.country]
+            country:destinationMap[post.acf.country].slug,
+            country_normal:destinationMap[post.acf.country].title
         }))
         return {
             ok:true,
@@ -194,7 +198,11 @@ const getContextPosts = async(context) => {
             const destinationData = await res[1].json()
             const destinationMap = {}
             destinationData.forEach((destination) => {
-                destinationMap[destination.id] = destination.slug
+                
+                destinationMap[destination.id] = {
+                    slug:destination.slug,
+                    title:destination.title.rendered,
+                }
             })
             posts = posts.map((post) => {
                 return {
@@ -205,7 +213,9 @@ const getContextPosts = async(context) => {
                     link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                     excerpt:post.acf.excerpt,
                     category:post.categories,
-                    country:destinationMap[post.acf.country],
+                    country:destinationMap[post.acf.country].slug,
+                    country_normal:destinationMap[post.acf.country].title
+
                 }
             })
             return posts
@@ -215,6 +225,18 @@ const getContextPosts = async(context) => {
             return {}
         })
 }
+
+const getCategories = async() => {
+    const categoryRes = await fetch(`${baseurl}wp-json/wp/v2/categories`)
+    let categories = await categoryRes.json()
+    categories = categories.map((category) => {
+        return{
+            id:category.id,
+            name:category.name,
+        }
+    })
+    return categories
+}
 module.exports = {
     populateCarousel,
     populatePosts,
@@ -223,5 +245,6 @@ module.exports = {
     getDestinationBanner,
     getNextPosts,
     getPostInfo,
-    getContextPosts
+    getContextPosts,
+    getCategories
 }

@@ -6,11 +6,41 @@ import {Grid,Card,CardActionArea,CardMedia,makeStyles, CardContent,Typography,Di
 import MediumCard from '../src/components/mediumcard'
 import {populateDestinations,getContextPosts} from '../src/utils/utils'
 import Empty from '../src/components/empty'
+import Footer from '../src/components/footer'
 const useStyles = makeStyles({
     media: {
       height:'40vh'
     },
   });
+
+const texts = {
+    food:{
+        title:'Food',
+        blurb:'Delectable delights from all over the world',
+        popular:'Popular Foodie Places'
+    },
+    itenaries:{
+        title:'Itenaries',
+        blurb:'Plan your trips well, from start to finish',
+        popular:'Popular Destinations'
+    },
+    nightlife:{
+        title:'Nightlife',
+        blurb:'Have a blast with all the best bars and clubs',
+        popular:'The best nightclubs'
+    },
+    attractions:{
+        title:'Attractions',
+        blurb:'Step back and relax, never run out of things to do',
+        popular:'Top rates countries'
+    },
+    posts:{
+        title:'All Posts',
+        blurb:'Read everything available here',
+        popular:'Popular posts by country'
+    },
+
+}
 
 export default function Dynamic(props) {
     const classes = useStyles()
@@ -37,7 +67,7 @@ export default function Dynamic(props) {
     return(
         <div>
             <Head>
-                <title> {router.query.dynamic} - Airwaitress</title>
+                <title> {router.query.dynamic[0].toUpperCase() + router.query.dynamic.substring(1)} - Airwaitress</title>
             </Head>    
             <Nav/>
             {latestPost != undefined ?
@@ -77,27 +107,30 @@ export default function Dynamic(props) {
                </Grid>
                 <Grid item xs={12} sm={4}>
                    <Typography variant="h5">
-                      {router.query.dynamic}
+                      {texts[router.query.dynamic].title}
                    </Typography>
                    <Typography variant="body1">
-                       Delectable delights from all over the world
+                      {texts[router.query.dynamic].blurb}
                    </Typography>
                    <Typography variant="body1" style={{marginTop:'15vh'}}>
-                       Popular Food Destinations
+                      {texts[router.query.dynamic].popular}
                    </Typography>
                    <Divider variant="middle" style={{marginLeft:'0px',marginRight:'0px'}}/>
                     <ul style={{listStyleType:'none',paddingInlineStart:'0px'}}>
                     {props.destinations.data.map(({slug,title}) => {
-                        return(
-                            <li key={slug} >
-                                <a href={`/country/${title}`} style={{textDecoration:'none'}}>
-                                    <Typography
-                                    variant="body2">
-                                        {title}
-                                    </Typography>
-                                </a>
-                            </li>
-                        )
+                        if(props.count[slug] > 0){
+                            return(
+                                <li key={slug} >
+                                    <a href={`/country/${title}`} style={{textDecoration:'none'}}>
+                                        <Typography
+                                        variant="body2">
+                                            {title}
+                                        </Typography>
+                                    </a>
+                                </li>
+                            )
+                        }
+                       
                     })}
                     </ul>
                </Grid>
@@ -121,11 +154,14 @@ export default function Dynamic(props) {
                                 value={country}
                                 onChange={handleChange}
                                 style={{paddingLeft:'4px'}}
-                                >   <MenuItem value="all" key="all">Filter Country</MenuItem>
+                                >   <MenuItem value="all" key="all">All</MenuItem>
                                     {props.destinations.data.map(({slug,title}) => {
-                                        return(
-                                            <MenuItem value={slug} key={title}>{title}</MenuItem>
-                                        )
+                                        if(props.count[slug] > 0) {
+                                            return(
+                                                <MenuItem value={slug} key={title}>{title}</MenuItem>
+                                            )
+                                        }
+                                        
                                     })}
                                 </Select>
                             </FormControl>
@@ -136,8 +172,9 @@ export default function Dynamic(props) {
                 <Grid item xs={12} sm={12}>
                     <Grid container spacing={2}>
                     { posts.length != 0 ? posts.map((post,index) => {
-                        if(post.id == latestPost.id) {
-                            //ignore first
+                        if(post.id == latestPost.id && posts.length != 1) {
+                            //ignore first, but just in theres only one article
+                            // and you also want to show that one article
                             return(
                                 ''
                             )
@@ -157,7 +194,9 @@ export default function Dynamic(props) {
                     }
                     </Grid>
                 </Grid>
+                
             </Grid>
+            <Footer/>
             </> : <Empty/>
             }
         </div>
@@ -168,6 +207,21 @@ Dynamic.getInitialProps = async(context) => {
     const destinations = await populateDestinations()
     const posts = await getContextPosts(context.query.dynamic)
     const returnedJson = {}
+    const countMap = {}
+    //Coun how many articles each destination has
+    //Important to ensure that only destination that have articles will be provided
+    destinations.data.map((destination) => {
+        const temp = []
+        posts.forEach((post) => {
+            if(post.country ==destination.slug ){
+                temp.push(post)
+            }
+        })
+        const key = destination.slug
+        const count = temp.length
+        countMap[key] = count
+    })
+    returnedJson['count'] = countMap
     returnedJson['posts'] = posts
     returnedJson['destinations'] = destinations
     return returnedJson

@@ -48,7 +48,6 @@ const Index = (props) => {
       setEnd(true)
     })
   }
-        
   return (
     <HomeLayout data={props.carouselData}>
         <Grid 
@@ -58,21 +57,21 @@ const Index = (props) => {
         justify="center"
         style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"10vh"}}>
             <Grid item xs={4}>
-              {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
+              {props.postData.map(({slug,title,excerpt,image,link,country_normal},index) => {
                 if(index == 0){
                   return(
-                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country} height="40vh"/>
+                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country_normal} height="40vh"/>
                   )
                 }
               })}
             </Grid>  
             <Grid item xs={4}>
               <Grid container spacing ={2}>
-              {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
+              {props.postData.map(({slug,title,excerpt,image,link,country_normal},index) => {
                 if(index >= 1 && index <= 3){
                   return(
                     <Grid item xs={12}>
-                      <MediumCard slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+                      <MediumCard slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country_normal}/>
                     </Grid>
                   )
                 }
@@ -81,11 +80,11 @@ const Index = (props) => {
             </Grid>
             <Grid item xs={4}>
               <Grid container spacing= {2}>
-              {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
+              {props.postData.map(({slug,title,excerpt,image,link,country_normal},index) => {
                 if(index >= 4){
                   return(
                     <Grid item xs={12}>
-                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country} height="20vh"/>
+                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country_normal} height="20vh"/>
                     </Grid>
                   )
                 }
@@ -97,7 +96,9 @@ const Index = (props) => {
         <Grid container direction="row" align="right" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%'}}>
             <Grid item xs={12}>
               <Typography variant="subtitle1" component="body1">
-                SEE MORE ARTICLES
+                <a href={`\\all`} style={{textDecoration:'none'}}>
+                  SEE MORE ARTICLES
+                </a>
               </Typography>
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>

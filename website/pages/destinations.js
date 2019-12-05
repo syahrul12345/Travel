@@ -8,7 +8,7 @@ import {Grid,Tabs,Tab,Typography,Box,Card,CardContent,CardMedia, CardActionArea}
 import {populateDestinations,getDestinationBanner} from '../src/utils/utils'
 import CountryCard from '../src/components/countrycard'
 import DestinationTab from '../src/components/destinations'
-
+import Footer from '../src/components/footer'
 export default function Destinations(props) {
     return(
         <div style={{marginTop:'10vh'}}>
@@ -42,6 +42,7 @@ export default function Destinations(props) {
                 </Grid>
             </Grid>
             <DestinationTab destinations={props.destinations}/>
+            <Footer/>
         </div>
     )
 }
