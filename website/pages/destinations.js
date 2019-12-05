@@ -11,7 +11,7 @@ import DestinationTab from '../src/components/destinations'
 
 export default function Destinations(props) {
     return(
-        <div>
+        <div style={{marginTop:'10vh'}}>
             <Head>
                 <title> Destinations </title>
             </Head>

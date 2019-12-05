@@ -61,8 +61,7 @@ const Index = (props) => {
               {props.postData.map(({slug,title,excerpt,image,link,country},index) => {
                 if(index == 0){
                   return(
-                    // <MediumCard slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
-                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country} height="40vh"/>
                   )
                 }
               })}
@@ -74,7 +73,6 @@ const Index = (props) => {
                   return(
                     <Grid item xs={12}>
                       <MediumCard slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
-                      {/* <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/> */}
                     </Grid>
                   )
                 }
@@ -87,22 +85,23 @@ const Index = (props) => {
                 if(index >= 4){
                   return(
                     <Grid item xs={12}>
-                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country}/>
+                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country} height="20vh"/>
                     </Grid>
                   )
                 }
               })}
-              <Grid container direction="row" align="right">
-                <Grid item xs={12}>
-                  <Typography variant="subtitle1" component="body1">
-                    SEE MORE ARTICLES
-                  </Typography>
-                </Grid>
-              </Grid>
+              
             </Grid>
           </Grid> 
         </Grid>
-        <Divider variant="middle" style={{marginRight:'9%',marginLeft:'9%',marginTop:'1%'}}/>
+        <Grid container direction="row" align="right" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%'}}>
+            <Grid item xs={12}>
+              <Typography variant="subtitle1" component="body1">
+                SEE MORE ARTICLES
+              </Typography>
+              <Divider variant="middle" style={{margin:'0px'}}/>
+            </Grid>
+        </Grid>
         <Typography variant="h5" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
         <DestinationTab destinations={props.destinations}/>
     </HomeLayout>
@@ -118,7 +117,6 @@ Index.getInitialProps = async() => {
   const returnedJson = {}
   returnedJson['carouselData'] = res[0].data
   returnedJson['postData'] = res[1].data
-  // returnedJson['destinations'] = res[2].data
   //clean the data
   const locations = res[2].data
   const asia = locations.filter(location => location.continent == 'Asia')

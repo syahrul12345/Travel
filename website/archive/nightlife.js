@@ -4,13 +4,14 @@ import Nav from '../src/components/nav'
 import {Grid,Card,CardActionArea,CardMedia,makeStyles, CardContent,Typography,Divider,MenuItem,Select,FormControl,InputLabel} from '@material-ui/core'
 import MediumCard from '../src/components/mediumcard'
 import {populateDestinations,getContextPosts} from '../src/utils/utils'
+import Empty from '../src/components/empty'
 const useStyles = makeStyles({
     media: {
       height:'40vh'
     },
   });
 
-export default function Food(props) {
+export default function Attractions(props) {
     const classes = useStyles()
     const [country,setCountry] = React.useState('all')
     const [latestPost,setLatestPost] = React.useState(props.posts[0])
@@ -34,15 +35,17 @@ export default function Food(props) {
     return(
         <div>
             <Head>
-                <title> Food - Airwaitress</title>
+                <title> Nightlife - Airwaitress</title>
             </Head>    
             <Nav/>
+            {latestPost != undefined ?
+            <>
             <Grid 
             container 
             spacing={8}
             style={{paddingRight:'20%',paddingLeft:'20%',marginTop:"5vh"}}>
                 <Grid item xs={12} sm={8}>
-                <Link href={`\\${props.link}`}>
+                <Link href={`\\${latestPost.link}`}>
                     <CardActionArea>
                         <Grid container spacing ={2}>
                             <Grid item xs={12}>
@@ -72,13 +75,13 @@ export default function Food(props) {
                </Grid>
                 <Grid item xs={12} sm={4}>
                    <Typography variant="h5">
-                       Food
+                        Attractions
                    </Typography>
                    <Typography variant="body1">
-                       Delectable delights from all over the world
+                       Never run out of things to do, no matter where you are around the world
                    </Typography>
                    <Typography variant="body1" style={{marginTop:'15vh'}}>
-                       Popular Food Destinations
+                       Popular Hotspots
                    </Typography>
                    <Divider variant="middle" style={{marginLeft:'0px',marginRight:'0px'}}/>
                     <ul style={{listStyleType:'none',paddingInlineStart:'0px'}}>
@@ -153,11 +156,13 @@ export default function Food(props) {
                     </Grid>
                 </Grid>
             </Grid>
+            </> : 
+            <Empty/>}
         </div>
     )
 }
 
-Food.getInitialProps = async(context) => {
+Attractions.getInitialProps = async(context) => {
     const destinations = await populateDestinations()
     const posts = await getContextPosts(context.pathname)
     const returnedJson = {}

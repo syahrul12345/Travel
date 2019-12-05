@@ -137,8 +137,9 @@ const getCountryInfo = async(destination) => {
     const data = await res.json()
 
     //get all posts that are linked to this country
-    const postsRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}`)
+    const postsRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=30`)
     let posts = await postsRes.json()
+    
     posts = posts.map((post) => {
         return{
             slug:post.slug,
@@ -186,7 +187,7 @@ const getPostInfo = async(link) => {
 }
 
 const getContextPosts = async(context) => {
-    const query = context.replace(/^\/|\/$/g, '');
+    let query = context.replace(/^\/|\/$/g, '');
     return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${query}`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
         .then(async(res) => {
             let posts = await res[0].json()

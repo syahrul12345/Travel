@@ -3,7 +3,7 @@ import HtmlToReact from 'html-to-react'
 import Link from 'next/link'
 const useStyles = makeStyles({
     media: {
-      height: '20vh',
+      height: '15vh',
     },
   });
 
@@ -15,12 +15,12 @@ export default function MediumCard(props) {
         <Link href={`\\${props.link}`}>
             <CardActionArea>
                 <Grid container>
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <CardMedia
                         image={props.image}
                         className={classes.media}/>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <CardContent>
                             <Typography variant="body1">
                                 {parser.parse(props.title)}

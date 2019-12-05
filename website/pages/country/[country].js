@@ -29,7 +29,6 @@ export default function CountryPage(props) {
     const router = useRouter()
     const countryData = props.info[0].acf
     const categorized = props.categorized
-    
     const classes = useStyles()
     return(
         <div>
@@ -122,13 +121,16 @@ export default function CountryPage(props) {
                                     container 
                                     spacing={2}
                                     justify="center">
-                                        {posts.map((post) => {
+                                        {posts.map((post,index) => {
                                             if(post.category.includes(id)){
-                                                return(
-                                                    <Grid key={post.title.rendered} item xs={4}>
-                                                        <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link} country={post.country}/>
-                                                    </Grid>
-                                                )
+                                                while(index < 6){
+                                                    //Only display first 6 cards
+                                                    return(
+                                                        <Grid key={post.title.rendered} item xs={4}>
+                                                            <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link} country={post.country} height="20vh"/>
+                                                        </Grid>
+                                                    )
+                                                }
                                             }
                                         })}
                                     </Grid>

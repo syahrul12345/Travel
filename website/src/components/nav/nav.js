@@ -6,7 +6,7 @@ const links = [
   {href:'/',label:'AIRWAITRESS'},
   { href:'/destinations',label:'DESTINATIONS'},
   { href:'/itenaries',label:'ITENARIES'},
-  { href:'/places',label:'ATTRACTIONS'},
+  { href:'/attractions',label:'ATTRACTIONS'},
   { href: '/Nightlife', label: 'NIGHTLIFE' },
   { href: '/food', label: 'GASTRONOMY' },
 ].map(link => {
