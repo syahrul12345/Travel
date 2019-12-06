@@ -76,7 +76,7 @@ const Index = (props) => {
         justify="center"
         style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"10vh"}}>
             <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}}>
-                <Grid container direction="row" justify="flex-end" style={{position:'absolute',top:'0',right:'7%'}}>
+                <Grid container direction="row" justify="flex-end" style={{position:'absolute',top:'0'}}>
                     <IconButton onClick={moveBack}>
                       <LeftArrow/>
                     </IconButton>
@@ -86,7 +86,7 @@ const Index = (props) => {
                     
                 </Grid>
                 <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="60vh"/>
-                <Grid container direction="row" justify="flex-end" style={{position:'absolute',bottom:'0',right:'7%'}}>
+                <Grid container direction="row" justify="flex-end" style={{position:'absolute',bottom:'0',right:'1%'}}>
                   <Typography variant="subtitle1" component="body1">
                     <a href={`\\all`} style={{textDecoration:'none'}}>
                       SEE MORE ARTICLES
