@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "next build",
+    "next":"next start",
     "start": "CHOKIDAR_USEPOLLING=true node server.js"
   },
   "keywords": [],
