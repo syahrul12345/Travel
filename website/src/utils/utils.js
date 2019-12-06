@@ -42,7 +42,7 @@ const populatePosts = async() => {
             slug:post.slug,
             title:post.title.rendered,
             excerpt:post.acf.excerpt,
-            image:post.acf.featured_image.sizes.medium_large,
+            image:post.acf.featured_image.sizes['2048x2048'],
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
             country:destinationMap[post.acf.country].slug,
             country_normal:destinationMap[post.acf.country].title
@@ -237,6 +237,38 @@ const getCategories = async() => {
     })
     return categories
 }
+const populateContinents = async() => {
+    const continentRes = await fetch(`${baseurl}wp-json/wp/v2/continent`)
+    let continents = await continentRes.json()
+    continents = continents.map((continent) => {
+        return {
+            slug:continent.slug,
+            name:continent.title.rendered,
+            text:continent.acf.overlay_text,
+            image:continent.acf.image.sizes.large
+        }
+    })
+    return {
+        ok:true,
+        data:continents,
+    }
+}
+const getFeatured = async() => {
+    const featuredRes = await fetch(`${baseurl}wp-json/wp/v2/featured_categories`)
+    let featured = await featuredRes.json()
+    featured = featured.map((feat) => {
+        return{
+            slug:feat.slug,
+            title:feat.title.rendered,
+            excerpt:feat.acf.excerpt,
+            image:feat.acf.image.sizes.large
+        }
+    })
+    return {
+        ok:true,
+        data:featured
+    }
+}
 module.exports = {
     populateCarousel,
     populatePosts,
@@ -246,5 +278,7 @@ module.exports = {
     getNextPosts,
     getPostInfo,
     getContextPosts,
-    getCategories
+    getCategories,
+    populateContinents,
+    getFeatured
 }

@@ -1,12 +1,14 @@
 import {useState} from 'react'
 import { makeStyles } from '@material-ui/styles'
-import {Grid,Typography,Button,CircularProgress,Divider} from '@material-ui/core'
+import {Grid,Typography,Button,CircularProgress,Divider,IconButton} from '@material-ui/core'
+import LeftArrow from '@material-ui/icons/ArrowBack'
+import RightArrow  from '@material-ui/icons/ArrowForward'
 import HomeLayout from '../src/layouts/home'
 import BlogCards from '../src/components/blogcards'
 import DestinationTab from '../src/components/destinations'
-import MediumCard from '../src/components/mediumcard'
-import {populateCarousel,populatePosts,populateDestinations,getNextPosts} from '../src/utils/utils'
-
+import LargeCard from '../src/components/largecard'
+import {populateCarousel,populatePosts,populateDestinations,populateContinents,getFeatured} from '../src/utils/utils'
+import ContinentCard from '../src/components/continentcard'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -33,20 +35,37 @@ function CircularIndeterminate() {
 
 const Index = (props) => {
   const classes = useStyles()
-  const [currentPage,setPage] = useState(1)
-  const [additionalPosts,addPosts]= useState([])
-  const [endLine,setEnd] = useState(false)
-  const [isLoading,setLoading] = useState(false)
-  const loadPosts = async() => {
-    setLoading(true)
-    setPage(currentPage+1)
-    getNextPosts(currentPage).then((res) => {
-      setLoading(false)
-      addPosts(res)
-    }).catch((err) => {
-      setLoading(false)
-      setEnd(true)
-    })
+  // const [currentPage,setPage] = useState(1)
+  // const [additionalPosts,addPosts]= useState([])
+  // const [endLine,setEnd] = useState(false)
+  // const [isLoading,setLoading] = useState(false)
+  // const loadPosts = async() => {
+  //   setLoading(true)
+  //   setPage(currentPage+1)
+  //   getNextPosts(currentPage).then((res) => {
+  //     setLoading(false)
+  //     addPosts(res)
+  //   }).catch((err) => {
+  //     setLoading(false)
+  //     setEnd(true)
+  //   })
+  // }
+  //set the latest post as the 0th index
+  const [currentPost,setPost] = useState(0)
+  
+  const moveBack = () => {
+    if(currentPost == 0){
+      setPost(props.postData.length-1)
+    }else{
+      setPost(currentPost-1)
+    }
+  }
+  const moveFront = () => {
+    if(currentPost == 5){
+      setPost(0)
+    }else{
+      setPost(currentPost+1)
+    }
   }
   return (
     <HomeLayout data={props.carouselData}>
@@ -56,50 +75,49 @@ const Index = (props) => {
         spacing={2}
         justify="center"
         style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"10vh"}}>
-            <Grid item xs={4}>
-              {props.postData.map(({slug,title,excerpt,image,link,country_normal},index) => {
-                if(index == 0){
-                  return(
-                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country_normal} height="40vh"/>
-                  )
-                }
-              })}
+            <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}}>
+                <Grid container direction="row" justify="flex-end" style={{position:'absolute',top:'0',right:'7%'}}>
+                    <IconButton onClick={moveBack}>
+                      <LeftArrow/>
+                    </IconButton>
+                    <IconButton onClick={moveFront}>
+                      <RightArrow/>
+                    </IconButton>
+                    
+                </Grid>
+                <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="60vh"/>
+                <Grid container direction="row" justify="flex-end" style={{position:'absolute',bottom:'0',right:'7%'}}>
+                  <Typography variant="subtitle1" component="body1">
+                    <a href={`\\all`} style={{textDecoration:'none'}}>
+                      SEE MORE ARTICLES
+                    </a>
+                  </Typography>
+                </Grid>
             </Grid>  
-            <Grid item xs={4}>
+            <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}} >
               <Grid container spacing ={2}>
-              {props.postData.map(({slug,title,excerpt,image,link,country_normal},index) => {
-                if(index >= 1 && index <= 3){
+                {props.continents.map(({name,text,image}) => {
                   return(
-                    <Grid item xs={12}>
-                      <MediumCard slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country_normal}/>
+                    <Grid item xs={4}>
+                      <ContinentCard title={text} image={image}/>
                     </Grid>
                   )
-                }
-              })}
+                })}
               </Grid>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}} >
               <Grid container spacing= {2}>
-              {props.postData.map(({slug,title,excerpt,image,link,country_normal},index) => {
-                if(index >= 4){
-                  return(
-                    <Grid item xs={12}>
-                    <BlogCards slug={slug} title={title} excerpt={excerpt} image={image} link={link} country={country_normal} height="20vh"/>
-                    </Grid>
-                  )
-                }
-              })}
-              
+                <Grid item xs={6}>
+                  <BlogCards slug={props.featured[0].slug} title={props.featured[0].excerpt} image={props.featured[0].image} link={props.featured[0].slug} height="30vh"/>
+                </Grid>
+                <Grid item xs={6}>
+                  <BlogCards slug={props.featured[1].slug} title={props.featured[1].excerpt} image={props.featured[1].image} link={props.featured[1].slug} height="50vh"/>
+                </Grid>
             </Grid>
           </Grid> 
         </Grid>
         <Grid container direction="row" align="right" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%'}}>
             <Grid item xs={12}>
-              <Typography variant="subtitle1" component="body1">
-                <a href={`\\all`} style={{textDecoration:'none'}}>
-                  SEE MORE ARTICLES
-                </a>
-              </Typography>
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>
         </Grid>
@@ -114,10 +132,10 @@ Index.getInitialProps = async() => {
   const carouselData = populateCarousel()
   const postData = populatePosts()
   const destinations = populateDestinations()
-  const res = await Promise.all([carouselData,postData,destinations])
+  const continents = populateContinents()
+  const featured = getFeatured()
+  const res = await Promise.all([carouselData,postData,destinations,continents,featured])
   const returnedJson = {}
-  returnedJson['carouselData'] = res[0].data
-  returnedJson['postData'] = res[1].data
   //clean the data
   const locations = res[2].data
   const asia = locations.filter(location => location.continent == 'Asia')
@@ -134,6 +152,10 @@ Index.getInitialProps = async() => {
     africa,
     america
   }
+  returnedJson['carouselData'] = res[0].data
+  returnedJson['postData'] = res[1].data
+  returnedJson['continents'] = res[3].data
+  returnedJson['featured'] = res[4].data
   return returnedJson
 }
 

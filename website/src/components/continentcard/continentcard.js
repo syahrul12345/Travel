@@ -7,11 +7,11 @@ const useStyles = makeStyles({
         height: '20vh',
     },
   });
-export default function CountryCard(props){
+export default function ContinentCard(props){
     const classes = useStyles()
     return(
       <Card style={{position:"relative"}}>
-          <Link href={`/country/${props.title}`}>
+          <Link href={`/continent/${props.title}`}>
           <CardActionArea>
             <CardMedia 
             style={{height:'20vh'}}

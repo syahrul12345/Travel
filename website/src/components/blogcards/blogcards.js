@@ -5,12 +5,6 @@ import HtmlToReact from 'html-to-react'
 
   
 export default function BlogCards(props) {
-    const useStyles = makeStyles({
-      media: {
-        height: props.height,
-      },
-    });
-    const classes = useStyles()
     const HtmlToReactParser = HtmlToReact.Parser
     const parser = new HtmlToReactParser()
     return(
