@@ -82,7 +82,7 @@ export default function Dynamic(props) {
                         <Grid container spacing ={2}>
                             <Grid item xs={12}>
                                 <CardMedia
-                                 className={classes.media}
+                                 style={{height:'40vh'}}
                                  image={latestPost.image}/>
                             </Grid>
                             <Grid item xs={12}>
