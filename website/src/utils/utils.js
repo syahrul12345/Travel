@@ -261,7 +261,7 @@ const getFeatured = async() => {
             slug:feat.slug,
             title:feat.title.rendered,
             excerpt:feat.acf.excerpt,
-            image:feat.acf.image.sizes.large
+            image:feat.acf.image.sizes['2048x2048']
         }
     })
     return {
