@@ -17,7 +17,7 @@ export default function BlogCards(props) {
           <Link href={`\\${props.link}`}>
             <CardActionArea>
               <CardMedia 
-              className={classes.media}
+              style={{height:props.height}}
               image={props.image}/>
               <CardContent >
                 <Typography

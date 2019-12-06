@@ -18,7 +18,7 @@ export default function MediumCard(props) {
                     <Grid item xs={5}>
                         <CardMedia
                         image={props.image}
-                        className={classes.media}/>
+                        style={{height:'15vh'}}/>
                     </Grid>
                     <Grid item xs={7}>
                         <CardContent>

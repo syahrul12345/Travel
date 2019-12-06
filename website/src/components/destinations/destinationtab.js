@@ -23,7 +23,7 @@ function TabPanel(props) {
     const countries = props.destination
     return (
       <div 
-      className={classes.root}
+      style={{flexGrow:'1h'}}
       hidden= {props.value !== props.index}>
         <Grid 
         container

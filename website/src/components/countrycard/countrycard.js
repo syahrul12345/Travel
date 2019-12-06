@@ -14,7 +14,7 @@ export default function CountryCard(props){
           <Link href={`/country/${props.title}`}>
           <CardActionArea>
             <CardMedia 
-            className={classes.media}
+            style={{height:'20vh'}}
             image={props.image}/>
             <Typography 
             style={{
