@@ -61,7 +61,7 @@ const Index = (props) => {
     }
   }
   const moveFront = () => {
-    if(currentPost == 5){
+    if(currentPost == props.postData.length-1){
       setPost(0)
     }else{
       setPost(currentPost+1)
