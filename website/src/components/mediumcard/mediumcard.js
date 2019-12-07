@@ -10,7 +10,6 @@ const useStyles = makeStyles({
 export default function MediumCard(props) {
     const HtmlToReactParser = HtmlToReact.Parser
     const parser = new HtmlToReactParser()
-    const classes = useStyles()
     return(
         <Link href={`\\${props.link}`}>
             <CardActionArea>
@@ -22,10 +21,13 @@ export default function MediumCard(props) {
                     </Grid>
                     <Grid item xs={7}>
                         <CardContent>
-                            <Typography variant="body1" component="p">
+                            <Typography variant="h5" component="p">
                                 {parser.parse(props.title)}
                             </Typography>
-                            <Typography style={{fontSize:'11px'}}>
+                            <Typography variant="body1" component="p">
+                                {parser.parse(props.excerpt)}
+                            </Typography>
+                            <Typography variant="subtitle1">
                                 {props.country}
                             </Typography>
                         </CardContent>

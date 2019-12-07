@@ -35,7 +35,9 @@ export default function BlogCards(props) {
                         <span>{props.country}</span>
                     <Grid container justify="flex-end" style={{marginTop:'1vh'}}>
                         <Grid item>
-                            <Button variant="contained" color="primary"> View Post </Button>
+                            <Link href={`\\${props.link}`}>
+                                <Button variant="contained" color="primary"> View Post </Button>
+                            </Link>
                         </Grid>
                     </Grid>
                 </CardContent>

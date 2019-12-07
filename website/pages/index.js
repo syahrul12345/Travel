@@ -1,6 +1,6 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import { makeStyles } from '@material-ui/styles'
-import {Grid,Typography,Button,CircularProgress,Divider,IconButton} from '@material-ui/core'
+import {Grid,Typography,Button,Divider,IconButton} from '@material-ui/core'
 import LeftArrow from '@material-ui/icons/ArrowBack'
 import RightArrow  from '@material-ui/icons/ArrowForward'
 import HomeLayout from '../src/layouts/home'
@@ -24,35 +24,9 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-function CircularIndeterminate() {
-  const classes = useStyles();
-  return (
-    <div>
-      <CircularProgress color="secondary" />
-    </div>
-  );
-}
-
 const Index = (props) => {
-  const classes = useStyles()
-  // const [currentPage,setPage] = useState(1)
-  // const [additionalPosts,addPosts]= useState([])
-  // const [endLine,setEnd] = useState(false)
-  // const [isLoading,setLoading] = useState(false)
-  // const loadPosts = async() => {
-  //   setLoading(true)
-  //   setPage(currentPage+1)
-  //   getNextPosts(currentPage).then((res) => {
-  //     setLoading(false)
-  //     addPosts(res)
-  //   }).catch((err) => {
-  //     setLoading(false)
-  //     setEnd(true)
-  //   })
-  // }
-  //set the latest post as the 0th index
   const [currentPost,setPost] = useState(0)
-  
+  const [destination,setDestination] = useState(0)
   const moveBack = () => {
     if(currentPost == 0){
       setPost(props.postData.length-1)
@@ -87,7 +61,7 @@ const Index = (props) => {
                 </Grid>
                 <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="60vh"/>
                 <Grid container direction="row" justify="flex-end" style={{position:'absolute',bottom:'0',right:'1%'}}>
-                  <Typography variant="subtitle1" component="body1">
+                  <Typography variant="subtitle1" component="p">
                     <a href={`\\all`} style={{textDecoration:'none'}}>
                       SEE MORE ARTICLES
                     </a>
@@ -96,10 +70,10 @@ const Index = (props) => {
             </Grid>  
             <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}} >
               <Grid container spacing ={2}>
-                {props.continents.map(({name,text,image}) => {
+                {props.continents.map(({slug,name,text,image}) => {
                   return(
                     <Grid item xs={4}>
-                      <ContinentCard title={text} image={image}/>
+                      <ContinentCard handler={setDestination} slug={slug} title={text} image={image}/>
                     </Grid>
                   )
                 })}
@@ -122,7 +96,10 @@ const Index = (props) => {
             </Grid>
         </Grid>
         <Typography variant="h5" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
-        <DestinationTab destinations={props.destinations}/>
+        <div id="destinations">
+          <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
+        </div>
+        
     </HomeLayout>
   )
 }
@@ -130,7 +107,7 @@ const Index = (props) => {
 
 Index.getInitialProps = async() => {
   const carouselData = populateCarousel()
-  const postData = populatePosts()
+  const postData = populatePosts(6)
   const destinations = populateDestinations()
   const continents = populateContinents()
   const featured = getFeatured()

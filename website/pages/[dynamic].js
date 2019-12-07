@@ -65,7 +65,7 @@ export default function Dynamic(props) {
     
     //Props.post has all the contextual posts for the current page
     return(
-        <div>
+        <div style={{height:'100vh'}}>
             <Head>
                 <title> {router.query.dynamic[0].toUpperCase() + router.query.dynamic.substring(1)} - Airwaitress</title>
             </Head>    
@@ -181,7 +181,7 @@ export default function Dynamic(props) {
                         }else{
                             return(
                                 <Grid item key={post.title} xs={12} sm={6}>
-                                    <MediumCard image={post.image} link={post.link} title={post.title}/>
+                                    <MediumCard image={post.image} link={post.link} title={post.title} excerpt={post.excerpt} country={post.country}/>
                                 </Grid>
                             )
                         }

@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState} from 'react'
 import Nav from '../src/components/nav'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -10,6 +10,7 @@ import CountryCard from '../src/components/countrycard'
 import DestinationTab from '../src/components/destinations'
 import Footer from '../src/components/footer'
 export default function Destinations(props) {
+    const [destination,setDestination] = useState(0)
     return(
         <div style={{marginTop:'10vh'}}>
             <Head>
@@ -41,7 +42,7 @@ export default function Destinations(props) {
                       </h1>
                 </Grid>
             </Grid>
-            <DestinationTab destinations={props.destinations}/>
+            <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
             <Footer/>
         </div>
     )

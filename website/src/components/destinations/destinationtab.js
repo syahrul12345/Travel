@@ -1,4 +1,4 @@
-import React from 'react'
+import {useEffect} from 'react'
 import Link from 'next/link'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,10 +56,14 @@ function TabPanel(props) {
   
 export default function Destinations(props) {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState(props.currentDestination);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
+    useEffect(() => {
+      setValue(props.currentDestination)
+    },[props.currentDestination])
+    
     return(
         <div>
             <Grid

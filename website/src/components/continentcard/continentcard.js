@@ -8,11 +8,33 @@ const useStyles = makeStyles({
     },
   });
 export default function ContinentCard(props){
-    const classes = useStyles()
+    const click = () => {
+      switch(props.slug){
+        case 'asia':
+          props.handler(0)
+          break;
+        case 'southeast-asia':
+          props.handler(1)
+          break;
+        case 'oceania':
+          props.handler(2)
+          break;
+        case 'europe':
+          props.handler(3)
+          break;
+        case 'america':
+          props.handler(4)
+          break;
+        case 'africa':
+          props.handler(5)
+          break;
+      }
+    }
+    
     return(
       <Card style={{position:"relative"}}>
-          <Link href={`/continent/${props.title}`}>
-          <CardActionArea>
+          <Link href={`#destinations`}>
+          <CardActionArea onClick={click}>
             <CardMedia 
             style={{height:'20vh'}}
             image={props.image}/>
@@ -24,12 +46,10 @@ export default function ContinentCard(props){
               height:'100%',
               textAlign:"center",
               zIndex:"100",
-              fontFamily:"Arial",
-              color:"white",
             }}
             variant="h6" 
             component="p">
-              <span style={{backgroundColor:"rgba(255, 255, 255, 0.3)"}}>{props.title}</span>
+              <span style={{backgroundColor:"rgba(255, 255, 255, 1)"}}>{props.title}</span>
             </Typography>
           </CardActionArea>
           </Link>

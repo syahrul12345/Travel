@@ -25,8 +25,8 @@ const populateCarousel = async() => {
     
 }
   
-const populatePosts = async() => {
-    const res = await Promise.all([ fetch(`${baseurl}wp-json/wp/v2/posts?page=1&per_page=6`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
+const populatePosts = async(count) => {
+    const res = await Promise.all([ fetch(`${baseurl}wp-json/wp/v2/posts?page=1&per_page=${count}`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
     const data = await res[0].json()
     const destinationData = await res[1].json()
     
@@ -38,15 +38,18 @@ const populatePosts = async() => {
         }
     })
     try{
-        const postData = data.map((post) => ({
-            slug:post.slug,
-            title:post.title.rendered,
-            excerpt:post.acf.excerpt,
-            image:post.acf.featured_image.sizes['2048x2048'],
-            link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-            country:destinationMap[post.acf.country].slug,
-            country_normal:destinationMap[post.acf.country].title
-        }))
+        const postData = data.map((post) => {
+            return {
+                slug:post.slug,
+                title:post.title.rendered,
+                excerpt:post.acf.excerpt,
+                image:post.acf.featured_image.sizes['2048x2048'],
+                link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                category:post.categories,
+                country:destinationMap[post.acf.country].slug,
+                country_normal:destinationMap[post.acf.country].title 
+            }
+        })
         return {
             ok:true,
             data:postData
@@ -55,7 +58,7 @@ const populatePosts = async() => {
     catch(err){
         return {
             ok:false,
-            data:{"error":"Failed to populate post cards"}
+            data:{"error":err.toString()}
         }
     }
 }

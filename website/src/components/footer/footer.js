@@ -13,8 +13,7 @@ const links = [
 
 export default function Footer(){
     return(
-     
-            <nav style={{marginRight:'20%',marginLeft:'20%'}}>
+            <nav style={{marginRight:'20%',marginLeft:'20%',marginTop:'2vh'}}>
             <ul>
                 {links.map(({ key, href, label }) => (
                 <li key={key}>
