@@ -6,7 +6,7 @@ import theme from '../src/utils/theme'
 class _Document extends Document {
   render () {
     return (
-      <html lang='pt-BR' dir='ltr'>
+      <html lang='en-US' dir='ltr'>
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />

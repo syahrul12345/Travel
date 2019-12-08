@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "next build",
-    "next":"next start",
+    "next": "next start",
     "start": "CHOKIDAR_USEPOLLING=true node server.js"
   },
   "keywords": [],
@@ -23,6 +23,7 @@
     "next": "latest",
     "next-redux-wrapper": "latest",
     "postcss-css-variables": "^0.13.0",
+    "postcss-easy-import": "^3.0.0",
     "raw-loader": "^3.1.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",

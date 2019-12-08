@@ -1,7 +1,8 @@
 import React from 'react';
-import Link from 'next/link'
-import {Grid,AppBar, Typography} from '@material-ui/core'
-import { fontFamily, fontWeight } from '@material-ui/system';
+import {AppBar, Typography,Grid,MenuItem,Menu, IconButton} from '@material-ui/core'
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+import "./style.css"
 const links = [
   {href:'/',label:'AIRWAITRESS'},
   { href:'/destinations',label:'DESTINATIONS'},
@@ -13,58 +14,61 @@ const links = [
   link.key = `nav-link-${link.href}-${link.label}`
   return link
 })
+export default function Nav() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-const Nav = () => (
-  
-  <div style={{marginBlockEnd:'1vh'}}>
-    <AppBar color="primary">
-      <nav style={{marginRight:'20%',marginLeft:'20%'}}>
-      <ul>
-        {links.map(({ key, href, label }) => (
-          <li key={key}>
-            <a href={href}>
-              <Typography
-              variant="body2">
-                {label}
-              </Typography>
-            </a>
-          </li>
-        ))}
-      </ul>
-      <style jsx>{`
-        :global(body) {
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-            Helvetica, sans-serif;
-        }
-        nav {
-          display:container
-        }
-        nav > ul {
-            padding:0;
-            margin-left:20%:
-        }
-        ul {
-          display: flex;
-          padding-inline-start:0px;
-        }
-        
-        li {
-          flex:1;
-          display: flex;
-          justify-content:space-evenly;
-        }
-        a {
-          color: black;
-          text-decoration: none;
-          font-weight: 400;
-          letter-spacing:2px;
-        }
-      `}</style>
-    </nav>
-    </AppBar>
-  </div>
-  
-)
-
-export default Nav
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return(
+    <div style={{marginBlockEnd:'1vh'}}>
+      <AppBar color="primary">
+        <nav id="desktopNav">
+          <ul>
+            {links.map(({ key, href, label }) => (
+              <li key={key}>
+                <a href={href}>
+                  <Typography
+                  variant="body2">
+                    {label}
+                  </Typography>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      <div className="mobileMenu">
+        <Grid container justify="flex-end">
+          <IconButton
+            aria-label="more"
+            aria-controls="long-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <MoreVertIcon />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose}
+          > 
+            {links.map(link => (
+              <a href={link.href}>
+                <MenuItem key={link} selected={link.label === 'AIRWAITRESS'} onClick={handleClose}>
+                  {link.label}
+                </MenuItem>
+              </a>
+            ))}
+          </Menu>
+        </Grid>
+      </div>
+      </AppBar>
+    </div>
+    
+  )
+}

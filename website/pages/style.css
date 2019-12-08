@@ -1,0 +1,67 @@
+@media only screen and (min-width:786px){
+    .mainGrid{
+        padding-right:  10%;
+        padding-left:   10%;
+        margin-top:     10vh !important;
+    } 
+    .firstGrid{
+        position:relative;
+        margin-left:5% !important;
+    }
+    .seeMoreContainer{
+        position:absolute;
+        bottom:0;
+        right:1%;
+        justify-content:flex-end;
+
+    }
+    .mobileSeeMore{
+        display:none !important;
+    }
+    .arrowContainer{
+        position: absolute;
+        top:0;
+        justify-content: flex-end;
+    }
+    .continentGrid{
+        position:relative;
+        margin-left:5% !important;
+    } 
+    .blogGrid{
+        position: relative;
+        margin-left:5% !important
+    }
+    .allArticlesMainGrid{
+        padding-right:  20%;
+        padding-left:   20%;
+        margin-top:     10vh !important;
+    }
+}
+@media only screen and (max-width:786px){
+    .firstGrid{
+        position:relative;
+        padding-top:4vh !important;
+    }
+    .arrowContainer{
+        position: absolute;
+        justify-content: center;
+        bottom: 35% !important;
+    }
+    .seeMoreContainer{
+        position:absolute;
+        justify-content: center;
+        bottom:25%;
+    }
+    .desktopSeeMore{
+        display:none
+    }
+    .continentGrid {
+        margin-left:   5% !important;
+        margin-right:  5% !important;
+    }
+    .allArticlesMainGrid{
+        padding-right:  1%;
+        padding-left:   1%;
+        margin-top:     10vh !important;
+    }
+}

@@ -9,6 +9,7 @@ import DestinationTab from '../src/components/destinations'
 import LargeCard from '../src/components/largecard'
 import {populateCarousel,populatePosts,populateDestinations,populateContinents,getFeatured} from '../src/utils/utils'
 import ContinentCard from '../src/components/continentcard'
+import './style.css'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -48,9 +49,17 @@ const Index = (props) => {
         direction="row"
         spacing={2}
         justify="center"
-        style={{paddingRight:'10%',paddingLeft:'10%',marginTop:"10vh"}}>
-            <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}}>
-                <Grid container direction="row" justify="flex-end" style={{position:'absolute',top:'0'}}>
+        className="mainGrid"
+        >
+            <Grid 
+            className="firstGrid"
+            item xs={12} 
+            >
+                <Grid 
+                container
+                className="arrowContainer" 
+                direction="row"
+                >
                     <IconButton onClick={moveBack}>
                       <LeftArrow/>
                     </IconButton>
@@ -59,32 +68,43 @@ const Index = (props) => {
                     </IconButton>
                     
                 </Grid>
-                <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="60vh"/>
-                <Grid container direction="row" justify="flex-end" style={{position:'absolute',bottom:'0',right:'1%'}}>
-                  <Typography variant="subtitle1" component="p">
-                    <a href={`\\all`} style={{textDecoration:'none'}}>
+                <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="70vh"/>
+                <Grid 
+                container 
+                direction="row" 
+                className="seeMoreContainer"
+                >
+                  <Typography className="desktopSeeMore" variant="subtitle1" component="p">
+                    <a href={`\\articles`} style={{textDecoration:'none'}}>
                       SEE MORE ARTICLES
                     </a>
                   </Typography>
+                  <Button  className="mobileSeeMore" variant="contained">
+                    <Typography variant="subtitle1" component="p">
+                      <a href={`\\articles`} style={{textDecoration:'none'}}>
+                        SEE MORE ARTICLES
+                      </a>
+                    </Typography>
+                  </Button>
                 </Grid>
             </Grid>  
-            <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}} >
-              <Grid container spacing ={2}>
+            <Grid className="continentGrid" item xs={12}>
+              <Grid container spacing={2}>
                 {props.continents.map(({slug,name,text,image}) => {
                   return(
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={4}>
                       <ContinentCard handler={setDestination} slug={slug} title={text} image={image}/>
                     </Grid>
                   )
                 })}
               </Grid>
             </Grid>
-            <Grid item xs={12} style={{marginLeft:'5%',position:'relative'}} >
+            <Grid item className="blogGrid" xs={12}>
               <Grid container spacing= {2}>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                   <BlogCards slug={props.featured[0].slug} title={props.featured[0].excerpt} image={props.featured[0].image} link={props.featured[0].slug} height="30vh"/>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                   <BlogCards slug={props.featured[1].slug} title={props.featured[1].excerpt} image={props.featured[1].image} link={props.featured[1].slug} height="50vh"/>
                 </Grid>
             </Grid>

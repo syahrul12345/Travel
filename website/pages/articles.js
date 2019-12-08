@@ -3,6 +3,7 @@ import {Grid,Typography,Divider,FormControl,Select,MenuItem} from '@material-ui/
 import {populatePosts,populateDestinations,getCategories} from '../src/utils/utils'
 import MediumCard from '../src/components/mediumcard'
 import { useEffect } from 'react'
+import './style.css'
 export default function All(props){
     const [country,setCountry] = React.useState('all')
     const [category,setCategory] = React.useState(9999)
@@ -42,9 +43,9 @@ export default function All(props){
             <Nav/>
             <Grid
             container
+            className="allArticlesMainGrid"
             spacing={2}
             direction="row"
-            style={{paddingRight:'20%',paddingLeft:'20%',marginTop:"5vh"}}
             >
                 <Grid item xs={12} style={{textAlign:'center'}}>
                    <Typography variant="h4">

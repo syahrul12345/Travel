@@ -1,11 +1,7 @@
 import {Grid,Card,CardActionArea,CardMedia,CardContent,makeStyles, Typography} from '@material-ui/core'
 import HtmlToReact from 'html-to-react'
 import Link from 'next/link'
-const useStyles = makeStyles({
-    media: {
-      height: '15vh',
-    },
-  });
+import './style.css'
 
 export default function MediumCard(props) {
     const HtmlToReactParser = HtmlToReact.Parser
@@ -20,11 +16,18 @@ export default function MediumCard(props) {
                         style={{height:'15vh'}}/>
                     </Grid>
                     <Grid item xs={7}>
-                        <CardContent>
-                            <Typography variant="h5" component="p">
+                        <CardContent
+                        className="cardContent">
+                            <Typography
+                            className="contentHeader" 
+                            variant="h5" 
+                            component="p">
                                 {parser.parse(props.title)}
                             </Typography>
-                            <Typography variant="body1" component="p">
+                            <Typography 
+                            className="contentExcerpt"
+                            variant="body1" 
+                            component="p">
                                 {parser.parse(props.excerpt)}
                             </Typography>
                             <Typography variant="subtitle1">

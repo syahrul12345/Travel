@@ -16,7 +16,8 @@ export default function BlogCards(props) {
               <CardContent >
                 <Typography
                 variant="body1" 
-                component="p">
+                component="p"
+                style={{textAlign:'center'}}>
                   {parser.parse(props.title)}
                 </Typography>
                 <Typography

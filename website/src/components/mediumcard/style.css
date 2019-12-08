@@ -1,0 +1,41 @@
+.cardContent{
+    padding-top:0 !important;
+    padding-bottom:0 !important;
+}
+.contentHeader{
+     /* autoprefixer: off */
+     -webkit-box-orient: vertical !important;
+     /* autoprefixer: on */
+     overflow:hidden;
+     text-overflow: ellipsis;
+     -moz-box-orient: vertical !important;
+     line-clamp: 2;
+     -webkit-line-clamp: 2;
+     -ms-text-overflow: ellipsis;
+     -o-text-overflow: ellipsis;
+     display: -webkit-box;
+}
+.contentExcerpt{
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical !important;
+    /* autoprefixer: on */
+    overflow:hidden;
+    text-overflow: ellipsis;
+    -moz-box-orient: vertical !important;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    display: -webkit-box;
+}   
+@media only screen and (min-width:786px){
+    
+}
+
+@media only screen and (max-width:786px){
+    
+    .contentHeader{
+        min-height: 62px;
+    }
+    
+}
