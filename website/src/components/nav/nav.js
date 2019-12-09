@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Typography,Grid,MenuItem,Menu, IconButton} from '@material-ui/core'
+import {AppBar, Typography,Tabs,Tab} from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import "./style.css"
@@ -42,30 +42,22 @@ export default function Nav() {
           </ul>
         </nav>
       <div className="mobileMenu">
-        <Grid container justify="flex-end">
-          <IconButton
-            aria-label="more"
-            aria-controls="long-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose}
-          > 
-            {links.map(link => (
-              <a href={link.href}>
-                <MenuItem key={link} selected={link.label === 'AIRWAITRESS'} onClick={handleClose}>
-                  {link.label}
-                </MenuItem>
+      <Tabs
+          variant="scrollable"
+          scrollButtons="on"
+          indicatorColor="primary"
+          textColor="primary"
+          aria-label="scrollable force tabs example"
+        >
+          {links.map(({key,href,label}) => {
+            return(
+              <a href={href}>
+                <Tab label={label}/>
               </a>
-            ))}
-          </Menu>
-        </Grid>
+            )
+          })}
+          
+      </Tabs>
       </div>
       </AppBar>
     </div>
