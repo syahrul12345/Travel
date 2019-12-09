@@ -16,6 +16,7 @@ const links = [
 })
 export default function Nav() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [dummyVal,setVal] = React.useState(0)
   const open = Boolean(anchorEl);
 
   const handleClick = event => {
@@ -45,6 +46,7 @@ export default function Nav() {
       <Tabs
           variant="scrollable"
           scrollButtons="on"
+          value={dummyVal}
           indicatorColor="primary"
           textColor="primary"
           aria-label="scrollable force tabs example"
@@ -52,7 +54,7 @@ export default function Nav() {
           {links.map(({key,href,label}) => {
             return(
               <a href={href}>
-                <Tab label={label}/>
+                <Tab value={key} label={label}/>
               </a>
             )
           })}
