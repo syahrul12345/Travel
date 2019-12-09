@@ -37,7 +37,7 @@ const Index = (props) => {
 
 Index.getInitialProps = async() => {
   const carouselData = populateCarousel()
-  const postData = populatePosts()
+  const postData = populatePosts(6)
   //populate the information to be setn tothe front end
   const res = await Promise.all([carouselData,postData])
   const returnedJson = {}

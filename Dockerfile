@@ -37,3 +37,19 @@ RUN chown -R www-data:www-data /var/www/html
 ENV PATH="/var/www/.composer/vendor/bin:${PATH}"
 
 EXPOSE 8080
+
+FROM node
+
+USER node
+RUN mkdir -p /home/node/app
+RUN sudo chmod -R 777 /home/node
+WORKDIR /home/node/app
+
+COPY --chown=node:node package.json .
+COPY --chown=node:node yarn.lock .
+
+RUN yarn --pure-lockfile
+
+COPY --chown=node:node . .
+
+EXPOSE 4040

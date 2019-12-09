@@ -1,8 +1,7 @@
 import React from 'react';
-import {AppBar, Typography,Grid,MenuItem,Menu, IconButton} from '@material-ui/core'
+import {AppBar, Typography,Tabs,Tab} from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import LeftArrow from '@material-ui/icons/ArrowBack'
-import RightArrow  from '@material-ui/icons/ArrowForward'
+
 import "./style.css"
 const links = [
   {href:'/',label:'AIRWAITRESS'},
@@ -29,9 +28,6 @@ export default function Nav() {
     <div style={{marginBlockEnd:'1vh'}}>
       <AppBar color="primary">
         <nav id="desktopNav">
-          <IconButton className="leftArrow">
-            <LeftArrow/>
-          </IconButton>
           <ul>
             {links.map(({ key, href, label }) => (
               <li key={key}>
@@ -44,10 +40,25 @@ export default function Nav() {
               </li>
             ))}
           </ul>
-          <IconButton className="rightArrow">
-            <RightArrow/>
-          </IconButton>
         </nav>
+      <div className="mobileMenu">
+      <Tabs
+          variant="scrollable"
+          scrollButtons="on"
+          indicatorColor="primary"
+          textColor="primary"
+          aria-label="scrollable force tabs example"
+        >
+          {links.map(({key,href,label}) => {
+            return(
+              <a href={href}>
+                <Tab label={label}/>
+              </a>
+            )
+          })}
+          
+      </Tabs>
+      </div>
       </AppBar>
     </div>
     
