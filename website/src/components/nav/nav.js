@@ -1,7 +1,8 @@
 import React from 'react';
 import {AppBar, Typography,Grid,MenuItem,Menu, IconButton} from '@material-ui/core'
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import LeftArrow from '@material-ui/icons/ArrowBack'
+import RightArrow  from '@material-ui/icons/ArrowForward'
 import "./style.css"
 const links = [
   {href:'/',label:'AIRWAITRESS'},
@@ -28,6 +29,9 @@ export default function Nav() {
     <div style={{marginBlockEnd:'1vh'}}>
       <AppBar color="primary">
         <nav id="desktopNav">
+          <IconButton className="leftArrow">
+            <LeftArrow/>
+          </IconButton>
           <ul>
             {links.map(({ key, href, label }) => (
               <li key={key}>
@@ -40,33 +44,10 @@ export default function Nav() {
               </li>
             ))}
           </ul>
-        </nav>
-      <div className="mobileMenu">
-        <Grid container justify="flex-end">
-          <IconButton
-            aria-label="more"
-            aria-controls="long-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreVertIcon />
+          <IconButton className="rightArrow">
+            <RightArrow/>
           </IconButton>
-          <Menu
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose}
-          > 
-            {links.map(link => (
-              <a href={link.href}>
-                <MenuItem key={link} selected={link.label === 'AIRWAITRESS'} onClick={handleClose}>
-                  {link.label}
-                </MenuItem>
-              </a>
-            ))}
-          </Menu>
-        </Grid>
-      </div>
+        </nav>
       </AppBar>
     </div>
     
