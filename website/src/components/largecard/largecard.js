@@ -37,32 +37,29 @@ export default function BlogCards(props) {
                 </CardContent>
                 <div
                 className="contentCardMobile">
-                    <Typography
-                        variant="h4" 
-                        component="p"
-                        color="primary"
-                        >
-                        <span style={{backgroundColor:'black'}}> {parser.parse(props.title)}</span>
-                    </Typography>
-                    <Typography
-                        variant="h5"
-                        component="p"
-                        color="primary"
-                        >
-                        <span style={{backgroundColor:'black'}} >{parser.parse(props.excerpt)}</span>
-                    </Typography>
-                    <Typography 
-                    variant="subtitle1"
-                    color="primary">
-                        <span style={{backgroundColor:'black'}}>{props.country}</span>
-                    </Typography>
-                    {/* <Grid container justify="flex-end" style={{marginTop:'1vh'}}>
-                        <Grid item>
-                            <Link href={`\\${props.link}`}>
-                                <Button variant="contained" color="primary"> View Post </Button>
-                            </Link>
-                        </Grid>
-                    </Grid> */}
+                    <Link href={`\\${props.link}`}>
+                        <div>
+                        <Typography
+                            variant="h4" 
+                            component="p"
+                            color="primary"
+                            >
+                            <span style={{backgroundColor:'black'}}> {parser.parse(props.title)}</span>
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            component="p"
+                            color="primary"
+                            >
+                            <span style={{backgroundColor:'black'}} >{parser.parse(props.excerpt)}</span>
+                        </Typography>
+                        <Typography 
+                        variant="subtitle1"
+                        color="primary">
+                            <span style={{backgroundColor:'black'}}>{props.country}</span>
+                        </Typography>
+                        </div>
+                    </Link>
                 </div>
                 
             </Grid>

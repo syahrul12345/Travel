@@ -1,6 +1,6 @@
 import {useState,useEffect} from 'react'
 import { makeStyles } from '@material-ui/styles'
-import {Grid,Typography,Button,Divider,IconButton} from '@material-ui/core'
+import {Grid,Typography,Button,Divider,IconButton,GridList,GridListTile,GridListTileBar} from '@material-ui/core'
 import LeftArrow from '@material-ui/icons/ArrowBack'
 import RightArrow  from '@material-ui/icons/ArrowForward'
 import HomeLayout from '../src/layouts/home'
@@ -10,24 +10,36 @@ import LargeCard from '../src/components/largecard'
 import {populateCarousel,populatePosts,populateDestinations,populateContinents,getFeatured} from '../src/utils/utils'
 import ContinentCard from '../src/components/continentcard'
 import './style.css'
+import MobileDestinations from '../src/components/mobiledestinations/mobiledestinations'
 
 const useStyles = makeStyles(theme => ({
-  container: {
+  mobileGridList: {
+    position:'relative',
     display: 'flex',
-    flexWrap: 'wrap'
-  },
-  title: {
-    fontSize: 14
-  },
-  root: {
-    width: '100%',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
   },
-}))
+  gridList: {
+    flexWrap: 'nowrap',
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: 'translateZ(0)',
+  },
+  title: {
+    color: theme.palette.primary.light,
+  },
+  titleBar: {
+    background:
+      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
+}));
 
 const Index = (props) => {
   const [currentPost,setPost] = useState(0)
   const [destination,setDestination] = useState(0)
+  const [dummyVal,setDummy] = useState(0)
+  const classes = useStyles()
   const moveBack = () => {
     if(currentPost == 0){
       setPost(props.postData.length-1)
@@ -66,9 +78,30 @@ const Index = (props) => {
                     <IconButton onClick={moveFront}>
                       <RightArrow/>
                     </IconButton>
-                    
                 </Grid>
-                <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="70vh"/>
+                <div className="desktopLargeCard">
+                  <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="70vh"/>
+                </div>
+                <div 
+                className={classes.mobileGridList,"mobileGridList"}>
+                  <GridList className={classes.gridList} cols={1}>
+                    {props.postData.map((post,index) => (
+                      <GridListTile style={{height:'100%'}}>
+                        <LargeCard slug={props.postData[index].slug} title={props.postData[index].title} excerpt={props.postData[index].excerpt} image={props.postData[index].image} link={props.postData[index].link} country={props.postData[index].country_normal} height="70vh"/>
+                        </GridListTile>
+                    ))}
+                  </GridList>
+                  <Button 
+                  style={{position:'absolute',bottom:'20%',left:'25%',}}
+                  className="mobileSeeMore" 
+                  variant="contained" >
+                    <Typography variant="subtitle1" component="p">
+                      <a href={`\\articles`} style={{textDecoration:'none'}}>
+                        SEE MORE ARTICLES
+                      </a>
+                    </Typography>
+                  </Button>
+                </div>
                 <Grid 
                 container 
                 direction="row" 
@@ -79,15 +112,13 @@ const Index = (props) => {
                       SEE MORE ARTICLES
                     </a>
                   </Typography>
-                  <Button  className="mobileSeeMore" variant="contained">
-                    <Typography variant="subtitle1" component="p">
-                      <a href={`\\articles`} style={{textDecoration:'none'}}>
-                        SEE MORE ARTICLES
-                      </a>
-                    </Typography>
-                  </Button>
                 </Grid>
-            </Grid>  
+                
+                  
+            </Grid> 
+            <Grid container>
+              
+            </Grid> 
             <Grid className="continentGrid" item xs={12}>
               <Grid container spacing={2}>
                 {props.continents.map(({slug,name,text,image}) => {
@@ -115,9 +146,12 @@ const Index = (props) => {
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>
         </Grid>
-        <Typography variant="h5" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
-        <div id="destinations">
+        <div className="destinations">
+          <Typography variant="h5" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
           <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
+        </div>
+        <div className="mobileDestinations">
+          <MobileDestinations/>
         </div>
         
     </HomeLayout>
