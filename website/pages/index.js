@@ -12,34 +12,10 @@ import ContinentCard from '../src/components/continentcard'
 import './style.css'
 import MobileDestinations from '../src/components/mobiledestinations/mobiledestinations'
 
-const useStyles = makeStyles(theme => ({
-  mobileGridList: {
-    position:'relative',
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-  },
-  gridList: {
-    flexWrap: 'nowrap',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
-  },
-  title: {
-    color: theme.palette.primary.light,
-  },
-  titleBar: {
-    background:
-      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-  },
-}));
-
 const Index = (props) => {
   const [currentPost,setPost] = useState(0)
   const [destination,setDestination] = useState(0)
   const [dummyVal,setDummy] = useState(0)
-  const classes = useStyles()
   const moveBack = () => {
     if(currentPost == 0){
       setPost(props.postData.length-1)
@@ -83,8 +59,21 @@ const Index = (props) => {
                   <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="70vh"/>
                 </div>
                 <div 
-                className={classes.mobileGridList,"mobileGridList"}>
-                  <GridList className={classes.gridList} cols={1}>
+                className={"mobileGridList"}
+                style={{
+                  position:'relative',
+                  display:'flex',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-around',
+                  overflow: 'hidden',
+                }}>
+                  <GridList style={{
+                    width:'100%',
+                    flexWrap: 'nowrap',
+                    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+                    transform: 'translateZ(0)',
+                  }} 
+                  cols={1}>
                     {props.postData.map((post,index) => (
                       <GridListTile style={{height:'100%'}}>
                         <LargeCard slug={props.postData[index].slug} title={props.postData[index].title} excerpt={props.postData[index].excerpt} image={props.postData[index].image} link={props.postData[index].link} country={props.postData[index].country_normal} height="70vh"/>
