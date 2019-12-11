@@ -29,7 +29,7 @@ export default function CountryCard(props){
             }}
             variant="h6" 
             component="p">
-              <span style={{backgroundColor:"rgba(255, 255, 255, 0.3)"}}>{props.title}</span>
+              <span style={{backgroundColor:"black"}}>{props.title}</span>
             </Typography>
           </CardActionArea>
           </Link>

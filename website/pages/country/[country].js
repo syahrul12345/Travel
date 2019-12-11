@@ -15,6 +15,7 @@ import TrainIcon from '@material-ui/icons/Train'
 import Head from 'next/head'
 import CountryLayout from '../../src/layouts/country'
 import BlogCards from '../../src/components/blogcards';
+import './style.css'
 const useStyles = makeStyles(theme => ({
     media: {
       height: '30vh',
@@ -42,7 +43,6 @@ export default function CountryPage(props) {
                         className={classes.banner}
                         style={{
                             backgroundImage:`url(${props.info[0].acf.background_image.sizes.large})`,
-                            backgroundSize:'100%',
                             position:"relative"
                         }}>
                         </div>
@@ -80,25 +80,25 @@ export default function CountryPage(props) {
                         alignItems="center"
                         justify="center"
                         >
-                            <Grid item xs={12} sm ={3}>
+                            <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.country_code} text="Country Code" icon={<PhoneIcon/>}/>
                             </Grid>
-                            <Grid item xs={12} sm ={3}>
+                            <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.time_zone} text="Time Zone" icon={<WatchIcon/>}/>
                             </Grid>
-                            <Grid item xs={12} sm ={3}>
+                            <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.currency} text="Currency" icon={<CurrencyIcon/>}/>
                             </Grid>
-                            <Grid item xs={12} sm ={3}>
+                            <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.continent} text="Continent" icon={<GlobeIcon/>}/>
                             </Grid>
-                            <Grid item xs={12} sm ={3}>
+                            <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.peak_travel_season} text="Peak Travel Season" icon={<PeopleIcon/>}/>
                             </Grid>
-                            <Grid item xs={12} sm ={3}>
+                            <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.cheapest_travel_period} text="Cheapest Travel Period" icon={<PlaneIcon/>}/>
                             </Grid>
-                            <Grid item xs={12} sm ={3}>
+                            <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.public_transport_card} text="Public Transport Card" icon={<TrainIcon/>}/>
                             </Grid>
                             

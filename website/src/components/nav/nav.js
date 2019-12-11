@@ -1,6 +1,5 @@
 import React from 'react';
 import {AppBar, Typography,Tabs,Tab} from '@material-ui/core'
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import "./style.css"
 const links = [
@@ -48,7 +47,8 @@ export default function Nav() {
           scrollButtons="on"
           value={dummyVal}
           indicatorColor="primary"
-          textColor="primary"
+          indicator="false"
+          textcolor="primary"
           aria-label="scrollable force tabs example"
         >
           {links.map(({key,href,label}) => {

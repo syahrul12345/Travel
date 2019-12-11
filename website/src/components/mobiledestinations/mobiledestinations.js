@@ -1,38 +1,43 @@
-import {Grid,Typography,FormControl,Select,Divider,MenuItem} from '@material-ui/core'
+import {Grid,Typography,FormControl,Select,Divider,MenuItem,GridList,GridListTile} from '@material-ui/core'
+import CountryCard from '../countrycard'
 export default function MobileDestination(props){
-    const [country,setCountry] = React.useState('all')
-    const [category,setCategory] = React.useState(9999)
-    const [currentPosts,setPosts] = React.useState(props.posts)
-    const handleCountryFilterChange = event => {
-        setCountry(event.target.value)
-    }
-    const handleCategoryFilterChange = event => {
-        setCategory(event.target.value)
+    const continents = [
+        "Asia",
+        "Southeast Asia",
+        "Oceania",
+        "America",
+        "Europe",
+        "Africa and Middle East"
+    ]
+    const [continent,setContinent] = React.useState('Asia')
+    const [countries,setCountries] = React.useState([])
+    const handleContinentFilterChange = event => {
+        setContinent(event.target.value)
     }
 
-    // React.useEffect(() => {
-    //     const tempPosts = props.posts.filter((post) => {
-    //         if(country === 'all' && category === 9999 ){
-    //             return post
-    //         }
-    //         else if(country === 'all' && category !== 9999){
-    //             if(post.category.includes(category)){
-    //                 return post
-    //             }
-    //         }
-    //         else if(country !== 'all' && category === 9999){
-    //             //filter only by country
-    //             if(post.country == country){
-    //                 return post
-    //             }
-    //         }else if(country !== 'all' && country !== 9999){
-    //             if(post.category.includes(category) && post.country == country){
-    //                 return post
-    //             }
-    //         }
-    //     })       
-    //     setPosts(tempPosts)
-    // },[country,category])
+    React.useEffect(() => {
+        switch(continent){
+            case("Asia"):
+                setCountries(props.destinations["asia"])
+                break;
+            case("Southeast Asia"):
+                setCountries(props.destinations["se"])
+                break;
+            case("Oceania"):
+                setCountries(props.destinations["oceania"])
+                break;
+            case("America"):
+                setCountries(props.destinations["america"])
+                break;
+            case("Europe"):
+                setCountries(props.destinations["europe"])
+                break;
+            case("Africa and Middle East"):
+                setCountries(props.destinations["africa"])
+                break;
+        }
+    },[continent])
+    
     return(
         <div>
             <Grid
@@ -50,50 +55,40 @@ export default function MobileDestination(props){
                                 <Select
                                 labelId="country-filter"
                                 id="country-filter"
-                                value={country}
-                                onChange={handleCountryFilterChange}
+                                value={continent}
+                                onChange={handleContinentFilterChange}
                                 style={{paddingLeft:'px'}}
-                                >   <MenuItem value='all' key="all">All Countries</MenuItem>
-                                    {/* {props.destinations.data.map(({slug,title}) => {
-                                        if(props.destinationCount[slug] > 0) {
-                                            return(
-                                                <MenuItem value={slug} key={title}>{title}</MenuItem>
-                                            )
-                                        }
-                                    })} */}
-                                </Select>
-                            </FormControl>
-                            <FormControl>
-                                <Select
-                                labelId="country-filter"
-                                id="country-filter"
-                                value={country}
-                                onChange={handleCountryFilterChange}
-                                style={{paddingLeft:'4px'}}
-                                >   <MenuItem value='all' key="all">All Countries</MenuItem>
-                                    {/* {props.destinations.data.map(({slug,title}) => {
-                                        if(props.destinationCount[slug] > 0) {
-                                            return(
-                                                <MenuItem value={slug} key={title}>{title}</MenuItem>
-                                            )
-                                        }
-                                    })} */}
+                                >   <MenuItem value='all' key="all">All Continents</MenuItem>
+                                    {continents.map((continent) => {
+                                        return(
+                                            <MenuItem value={continent} key={continent}>{continent}</MenuItem>
+                                        )
+                                    })}
+                                    
                                 </Select>
                             </FormControl>
                         </Grid>
                     </Grid>
                     <Divider variant="middle" style={{marginTop:'1vh'}}/>
                 </Grid>
-                <Grid item xs={12}>
-                    <Grid container spacing={2}>
-                    {/* {currentPosts.map((post) =>{
-                        return(
-                            <Grid item key={post.title} xs={12} sm={6}>
-                                     <MediumCard image={post.image} link={post.link} title={post.title} excerpt={post.excerpt} country={post.country}/>
-                            </Grid>
-                        )
-                    })} */}
-                    </Grid>
+                <Grid item xs={12} style={{paddingLeft:'1vh'}}>
+                    <GridList 
+                        style={{
+                            width:'100%',
+                            flexWrap: 'nowrap',
+                            // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+                            transform: 'translateZ(0)',
+                            margin:'0',
+                        }} 
+                        cols={1}>
+                        {countries.map((country,index) => {
+                            return(
+                                <GridListTile style={{height:'21vh'}}>
+                                    <CountryCard title={country.title} image={country.image}/>
+                                </GridListTile>
+                            )
+                        })}
+                    </GridList>
                 </Grid>    
             </Grid>
         </div>

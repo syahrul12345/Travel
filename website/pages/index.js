@@ -59,14 +59,7 @@ const Index = (props) => {
                   <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="70vh"/>
                 </div>
                 <div 
-                className={"mobileGridList"}
-                style={{
-                  position:'relative',
-                  display:'flex',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-around',
-                  overflow: 'hidden',
-                }}>
+                className="mobileGridList">
                   <GridList style={{
                     width:'100%',
                     flexWrap: 'nowrap',
@@ -140,7 +133,7 @@ const Index = (props) => {
           <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
         </div>
         <div className="mobileDestinations">
-          <MobileDestinations/>
+          <MobileDestinations destinations={props.destinations}/>
         </div>
         
     </HomeLayout>
