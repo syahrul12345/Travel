@@ -81,13 +81,13 @@ export default function CountryPage(props) {
                             <Grid item xs={3} sm ={3}>
                                 <InfoCard data={countryData.continent} text="Continent" icon={<GlobeIcon/>}/>
                             </Grid>
-                            <Grid item xs={3} sm ={3}>
+                            <Grid item xs={3} sm ={4}>
                                 <InfoCard data={countryData.peak_travel_season} text="Peak Season" icon={<PeopleIcon/>}/>
                             </Grid>
-                            <Grid item xs={3} sm ={3}>
+                            <Grid item xs={3} sm ={4}>
                                 <InfoCard data={countryData.cheapest_travel_period} text="Cheapest Season" icon={<PlaneIcon/>}/>
                             </Grid>
-                            <Grid item xs={3} sm ={3}>
+                            <Grid item xs={3} sm ={4}>
                                 <InfoCard data={countryData.public_transport_card} text="Transport Card" icon={<TrainIcon/>}/>
                             </Grid>
                             
