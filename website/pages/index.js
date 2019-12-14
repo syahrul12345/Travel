@@ -128,7 +128,7 @@ const Index = (props) => {
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>
         </Grid>
-        <div className="destinations">
+        <div className="destinations" id="destinations">
           <Typography variant="h5" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
           <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
         </div>
@@ -143,7 +143,7 @@ const Index = (props) => {
 
 Index.getInitialProps = async() => {
   const carouselData = populateCarousel()
-  const postData = populatePosts(6)
+  const postData = populatePosts(4)
   const destinations = populateDestinations()
   const continents = populateContinents()
   const featured = getFeatured()

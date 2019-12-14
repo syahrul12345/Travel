@@ -9,12 +9,12 @@
       
   }
   
-  ul {
+  nav > ul {
     display: flex;
     padding-inline-start:0px;
   }
   
-  li {
+  nav > ul > li {
     flex:1;
     display: flex;
     justify-content:space-evenly;

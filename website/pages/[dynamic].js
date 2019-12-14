@@ -65,13 +65,13 @@ export default function Dynamic(props) {
     
     //Props.post has all the contextual posts for the current page
     return(
-        <div style={{height:'100vh'}}>
+        <div>
             <Head>
                 <title> {router.query.dynamic[0].toUpperCase() + router.query.dynamic.substring(1)} - Airwaitress</title>
             </Head>    
             <Nav/>
             {latestPost != undefined ?
-            <>
+            <div style={{minHeight:'88vh'}}>
             <Grid 
             container 
             spacing={8}
@@ -196,9 +196,9 @@ export default function Dynamic(props) {
                 </Grid>
                 
             </Grid>
-            <Footer/>
-            </> : <Empty/>
+            </div> : <Empty/>
             }
+            <Footer/>
         </div>
     )
 }

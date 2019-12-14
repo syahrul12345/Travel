@@ -79,8 +79,8 @@
     .mobileGridList{
         position:'relative';
         display:'flex';
-        flexWrap: 'wrap';
-        justifyContent: 'space-around';
+        flex-wrap: 'wrap';
+        justify-content: 'space-around';
         overflow: 'hidden';
     }
 }

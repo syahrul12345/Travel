@@ -33,7 +33,7 @@ export default function Footer(){
                     Helvetica, sans-serif;
                 }
                 nav {
-                display:container
+                display:container !important
                 }
                 nav > ul {
                     padding:0;

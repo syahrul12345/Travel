@@ -48,9 +48,9 @@ export default function ContinentCard(props){
               zIndex:"100",
               color:"white"
             }}
-            variant="h6" 
+            variant="h4" 
             component="p">
-              <span style={{backgroundColor:"black"}}>{props.title}</span>
+              <span style={{borderTop:'5px solid',borderBottom:'5px solid'}}><strong>{props.title}</strong></span>
             </Typography>
           </CardActionArea>
           </Link>

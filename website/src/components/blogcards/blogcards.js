@@ -15,13 +15,13 @@ export default function BlogCards(props) {
               image={props.image}/>
               <CardContent >
                 <Typography
-                variant="body1" 
+                variant="h6" 
                 component="p"
-                style={{textAlign:'center'}}>
+                style={{textAlign:'left'}}>
                   {parser.parse(props.title)}
                 </Typography>
                 <Typography
-                variant="body2"
+                variant="body1"
                 component="p">
                   {parser.parse(props.excerpt)}
                 </Typography>
