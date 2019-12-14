@@ -95,7 +95,7 @@ const getNextPosts =async(pageID) => {
 }
 // @function THis function is to populate the destination page with the country cards
 const populateDestinations = async () => {
-    const res = await fetch(`${baseurl}wp-json/wp/v2/destinations`)
+    const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?per_page=100`)
     const data = await res.json()
     try{
         const destinationData = data.map((post) => ({
