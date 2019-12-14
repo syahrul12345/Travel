@@ -59,7 +59,7 @@ export default function CountryPage(props) {
                         }}
                         variant="h1" 
                         component="h2">
-                            <span style={{borderTop:'10px solid',borderBottom:'10px solid'}}>{props.info[0].title.rendered}</span>
+                            <span style={{borderTop:'10px solid',borderBottom:'10px solid'}}><strong>{props.info[0].title.rendered}</strong></span>
                         </Typography>
                     </Grid>
                     <Grid item xs={12} style={{paddingTop:'3vh'}}>
