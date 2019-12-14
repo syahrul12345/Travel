@@ -1,0 +1,27 @@
+@media only screen and (min-width:786px){
+    .contentCardDesktop{
+        position:absolute;
+        top:30%;
+        left:50%;
+        min-width: 60vh;
+        max-width: 60vh;
+        background-color: white;
+    }
+    .contentCardMobile{
+        display:none;
+    }
+}
+@media only screen and (max-width:786px){
+    .contentCardDesktop{
+        display: none;
+    }
+    .contentCardMobile{
+        position:absolute;
+        word-wrap: normal;
+        top:30%;
+        left:23%;
+    }
+    .media{
+        height:50vh !important;
+    }
+}

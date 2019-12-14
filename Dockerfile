@@ -1,8 +1,8 @@
 FROM wordpress
 
 RUN sed -i 's/80/8080/' /etc/apache2/ports.conf /etc/apache2/sites-enabled/000-default.conf
-
 RUN mv "$PHP_INI_DIR"/php.ini-development "$PHP_INI_DIR"/php.ini
+COPY php.ini "$PHP_INI_DIR"/php.ini
 
 # install_wordpress.sh & misc. dependencies
 RUN apt-get update; \
@@ -21,6 +21,7 @@ RUN curl -sL https://raw.githubusercontent.com/composer/getcomposer.org/master/w
 	mkdir /var/www/.composer; \
 	chown www-data:www-data /var/www/.composer
 
+
 # phpunit, phpcs, wpcs
 RUN sudo -u www-data composer global require \
 	phpunit/phpunit \
@@ -28,7 +29,10 @@ RUN sudo -u www-data composer global require \
 	phpcompatibility/phpcompatibility-wp \
 	automattic/vipwpcs
 
+#nsure wordpress has permissions
+RUN chown -R www-data:www-data /var/www/html
 # include composer-installed executables in $PATH
+#copy ini file
+
 ENV PATH="/var/www/.composer/vendor/bin:${PATH}"
 
-EXPOSE 8080

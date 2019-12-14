@@ -1,0 +1,71 @@
+{
+    "key": "group_5dda11433fb3b",
+    "title": "Blogpost compulsory information",
+    "fields": [
+        {
+            "key": "field_5dda116d52fac",
+            "label": "Featured Image",
+            "name": "featured_image",
+            "type": "image",
+            "instructions": "Upload the featured image for this post.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": ""
+        },
+        {
+            "key": "field_5dda1e36231ea",
+            "label": "Excerpt",
+            "name": "excerpt",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "excerpt",
+        "featured_image"
+    ],
+    "active": 1,
+    "description": "",
+    "modified": 1574910439
+}

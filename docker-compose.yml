@@ -27,9 +27,11 @@ services:
             - ./docker/migratedb_import.sh:/usr/local/bin/migratedb_import
             - ./docker/postlightheadlesswpstarter.wordpress.xml:/var/www/postlightheadlesswpstarter.wordpress.xml
             - ./docker/plugins:/var/www/plugins
-    frontend:
+    website:
         command: bash -c 'yarn && yarn start'
-        container_name: frontend
+        container_name: website
+        environment:
+            -   WORDPRESS_URL=${WORDPRESS_URL}
         expose:
             - '3000'
         image: node
@@ -37,17 +39,5 @@ services:
             - '3000:3000'
         user: node
         volumes:
-            - ./frontend:/home/node/app
-        working_dir: /home/node/app
-    frontend-graphql:
-        command: bash -c 'yarn && yarn start'
-        container_name: frontend-graphql
-        expose:
-            - '3001'
-        image: node
-        ports:
-            - '3001:3001'
-        user: node
-        volumes:
-            - ./frontend-graphql:/home/node/app
+            - ./website:/home/node/app
         working_dir: /home/node/app

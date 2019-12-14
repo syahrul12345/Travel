@@ -1,0 +1,16 @@
+@media only screen and (min-width:786px){
+    .contentExcerpt{
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical !important;
+        /* autoprefixer: on */
+        overflow:hidden;
+        text-overflow: ellipsis;
+        -moz-box-orient: vertical !important;
+        line-clamp: 4;
+        -webkit-line-clamp: 4;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        min-height: 50px !important;
+        display: -webkit-box;
+    }   
+}
