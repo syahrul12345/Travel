@@ -1,5 +1,4 @@
 import {useRouter} from 'next/router';
-import Link from 'next/link'
 import {getCountryInfo} from '../../src/utils/utils'
 import {Grid,Typography,makeStyles} from '@material-ui/core'
 import InfoCard from '../../src/components/infocard'
@@ -8,7 +7,6 @@ import WatchIcon from '@material-ui/icons/Watch'
 import GlobeIcon from '@material-ui/icons/Public'
 import PlaneIcon from '@material-ui/icons/AirplanemodeActive'
 import PeopleIcon from '@material-ui/icons/People'
-import CalanderIcon from '@material-ui/icons/CalendarToday'
 import CurrencyIcon from '@material-ui/icons/AttachMoney'
 import TrainIcon from '@material-ui/icons/Train'
 
@@ -16,21 +14,11 @@ import Head from 'next/head'
 import CountryLayout from '../../src/layouts/country'
 import BlogCards from '../../src/components/blogcards';
 import './style.css'
-const useStyles = makeStyles(theme => ({
-    media: {
-      height: '30vh',
-    },
-    banner: {
-        height:'50vh',
-        widht:'100vh',
-    }
-  }));
 
 export default function CountryPage(props) {
     const router = useRouter()
     const countryData = props.info[0].acf
     const categorized = props.categorized
-    const classes = useStyles()
     return(
         <div>
             <CountryLayout>
@@ -40,7 +28,7 @@ export default function CountryPage(props) {
                 <Grid container direction="row">
                     <Grid style={{position:'relative'}} id="topGrid" item align="center" xs={12}>
                         <div 
-                        className={classes.banner}
+                        className="banner"
                         style={{
                             backgroundImage:`url(${props.info[0].acf.background_image.sizes.large})`,
                             backgroundSize:'100%',
