@@ -194,6 +194,25 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5df4a4f47cf54",
+            "label": "Exchange Rates",
+            "name": "exchange_rates",
+            "type": "text",
+            "instructions": "Input the exchange rate",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -226,7 +245,7 @@
         "tags",
         "send-trackbacks"
     ],
-    "active": true,
+    "active": 1,
     "description": "",
-    "modified": 1576312869
+    "modified": 1576314123
 }
