@@ -1,20 +1,18 @@
 import {Card,CardActionArea,CardMedia,CardContent,Typography,makeStyles} from '@material-ui/core'
-const useStyles = makeStyles({
-    media: {
-        height:'10vh'
-    }
-})
+import './style.css'
 
 export default function InfoCard(props){
-    const classes = useStyles();
     return(
             <CardActionArea>
                 <CardContent>
                     {props.icon}
-                    <Typography variant="body1">
+                    <Typography variant="h6">
                         {props.text}
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography
+                    variant="body1"
+                    className="contentExcerpt"
+                    >
                        {props.data}
                     </Typography>
                 </CardContent>

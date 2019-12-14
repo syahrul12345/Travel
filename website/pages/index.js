@@ -30,6 +30,7 @@ const Index = (props) => {
       setPost(currentPost+1)
     }
   }
+  
   return (
     <HomeLayout data={props.carouselData}>
         <Grid 

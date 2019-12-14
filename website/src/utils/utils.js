@@ -152,7 +152,7 @@ const getCountryInfo = async(destination) => {
             slug:post.slug,
             title:post.title.rendered,
             id:post.id,
-            image:post.acf.featured_image.sizes.large,
+            image:post.acf.featured_image.sizes['2048x2048'],
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
             category:post.categories
         }
