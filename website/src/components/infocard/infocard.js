@@ -3,8 +3,7 @@ import './style.css'
 
 export default function InfoCard(props){
     return(
-            <CardActionArea>
-                <CardContent>
+                <CardContent style={{paddingBottom:'0px'}}>
                     {props.icon}
                     <Typography variant="h6">
                         {props.text}
@@ -16,6 +15,5 @@ export default function InfoCard(props){
                        {props.data}
                     </Typography>
                 </CardContent>
-            </CardActionArea>
     )
 }

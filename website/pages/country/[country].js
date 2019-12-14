@@ -51,11 +51,11 @@ export default function CountryPage(props) {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} style={{paddingTop:'3vh'}}>
-                        <Typography variant="body1" style={{textAlign:'left',paddingLeft:'20%',paddingRight:'20%'}}>
+                        <Typography variant="body1" style={{textAlign:'left',paddingLeft:'20%',paddingRight:'20%',paddingBottom:'4vh'}}>
                             {props.info[0].acf.blurb}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} style={{paddingTop:'3vh'}} align="center">
+                    <Grid item xs={12} style={{paddingTop:'3vh',paddingBottom:'4vh'}} align="center">
                         <Typography variant="h4">
                             TRAVEL INFORMATION
                         </Typography>
