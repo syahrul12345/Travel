@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link'
-import {Grid,CardContent,CardMedia, Button,Typography,Paper} from '@material-ui/core'
+import {Grid,CardContent,CardMedia, Button,Typography,Paper, CardActionArea} from '@material-ui/core'
 import HtmlToReact from 'html-to-react'
 import './style.css'
   
@@ -9,6 +9,9 @@ export default function BlogCards(props) {
     const parser = new HtmlToReactParser()
     return(
             <Grid item xs={12} sm={8}>
+                <Link href={`\\${props.link}`}>
+                <CardActionArea
+                >
                 <CardMedia 
                 className="media"
                 style={{height:props.height}}
@@ -27,13 +30,13 @@ export default function BlogCards(props) {
                             {parser.parse(props.excerpt)}
                         </Typography>
                         <span>{props.country}</span>
-                    <Grid container justify="flex-end" style={{marginTop:'1vh'}}>
+                    {/* <Grid container justify="flex-end" style={{marginTop:'1vh'}}>
                         <Grid item>
                             <Link href={`\\${props.link}`}>
                                 <Button variant="contained" color="primary"> View Post </Button>
                             </Link>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </CardContent>
                 <div
                 className="contentCardMobile">
@@ -61,7 +64,8 @@ export default function BlogCards(props) {
                         </div>
                     </Link>
                 </div>
-                
+                </CardActionArea>
+                </Link>
             </Grid>
 
     )
