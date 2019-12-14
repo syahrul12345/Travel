@@ -43,6 +43,7 @@ export default function CountryPage(props) {
                         className={classes.banner}
                         style={{
                             backgroundImage:`url(${props.info[0].acf.background_image.sizes.large})`,
+                            backgroundSize:'100%',
                             position:"relative"
                         }}>
                         </div>
@@ -58,7 +59,7 @@ export default function CountryPage(props) {
                         }}
                         variant="h1" 
                         component="h2">
-                            <span style={{backgroundColor:"rgba(255, 255, 255, 0.2)"}}>{props.info[0].title.rendered}</span>
+                            <span style={{borderTop:'10px solid',borderBottom:'10px solid'}}>{props.info[0].title.rendered}</span>
                         </Typography>
                     </Grid>
                     <Grid item xs={12} style={{paddingTop:'3vh'}}>

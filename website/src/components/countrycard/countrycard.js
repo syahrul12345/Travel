@@ -24,12 +24,11 @@ export default function CountryCard(props){
               height:'100%',
               textAlign:"center",
               zIndex:"100",
-              fontFamily:"Arial",
               color:"white",
             }}
-            variant="h6" 
+            variant="h4" 
             component="p">
-              <span style={{backgroundColor:"black"}}>{props.title}</span>
+              <span style={{borderTop:'5px solid',borderBottom:'5px solid'}}>{props.title}</span>
             </Typography>
           </CardActionArea>
           </Link>
