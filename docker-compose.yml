@@ -11,6 +11,16 @@ services:
         image: mariadb
         ports:
             - '3307:3306'
+    db-staging-headless:
+        container_name: db-staging-headless
+        environment:
+            - MYSQL_RANDOM_ROOT_PASSWORD=yes
+            - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+            - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
+            - MYSQL_USER=${WORDPRESS_DB_USER}
+        image: mariadb
+        ports:
+            - '3309:3308'
     wp-headless:
         build: .
         command: bash -c 'install_wordpress && apache2-foreground'
@@ -25,7 +35,24 @@ services:
             - ./wordpress:/var/www/html
             - ./docker/install_wordpress.sh:/usr/local/bin/install_wordpress
             - ./docker/migratedb_import.sh:/usr/local/bin/migratedb_import
-            - ./docker/postlightheadlesswpstarter.wordpress.xml:/var/www/postlightheadlesswpstarter.wordpress.xml
+            - ./docker/airwaitress.wordpress.xml:/var/www/airwaitress.wordpress.xml
+            - ./docker/plugins:/var/www/plugins
+    
+    wp-staging-headless:
+        build: .
+        command: bash -c 'install_wordpress && apache2-foreground'
+        container_name: wp-staging-headless
+        depends_on:
+            - db-staging-headless
+        env_file: ./.env
+        ports:
+            - '8081:8081'
+        user: www-data
+        volumes:
+            - ./wordpress:/var/www/html
+            - ./docker/install_wordpress.sh:/usr/local/bin/install_wordpress
+            - ./docker/migratedb_import.sh:/usr/local/bin/migratedb_import
+            - ./docker/airwaitress.wordpress.xml:/var/www/airwaitress.wordpress.xml
             - ./docker/plugins:/var/www/plugins
     website:
         command: bash -c 'yarn && yarn start'
