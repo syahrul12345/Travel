@@ -195,7 +195,7 @@ const getPostInfo = async(link) => {
 
 const getContextPosts = async(context) => {
     let query = context.replace(/^\/|\/$/g, '');
-    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${query}`),fetch(`${baseurl}wp-json/wp/v2/destinations?page=1&per_page=200`)])
+    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${query}`),fetch(`${baseurl}wp-json/wp/v2/destinations?page=1&per_page=100`)])
         .then(async(res) => {
             let posts = await res[0].json()
             const destinationData = await res[1].json()
