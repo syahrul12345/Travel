@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch';
 import axios from 'axios'
 //const baseurl = 'http://52.220.139.249:8080/'
-const baseurl = 'http://localhost:8080/'
+const baseurl = 'http://127.0.0.1:8080/'
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()
@@ -26,7 +26,7 @@ const populateCarousel = async() => {
 }
   
 const populatePosts = async(count) => {
-    const res = await Promise.all([ fetch(`${baseurl}wp-json/wp/v2/posts?page=1&per_page=${count}`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
+    const res = await Promise.all([ fetch(`${baseurl}wp-json/wp/v2/posts?page=1&per_page=${count}`),fetch(`${baseurl}wp-json/wp/v2/destinations?page=1&per_page=100`)])
     const data = await res[0].json()
     const destinationData = await res[1].json()
     
@@ -195,7 +195,7 @@ const getPostInfo = async(link) => {
 
 const getContextPosts = async(context) => {
     let query = context.replace(/^\/|\/$/g, '');
-    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${query}`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
+    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${query}`),fetch(`${baseurl}wp-json/wp/v2/destinations?page=1&per_page=200`)])
         .then(async(res) => {
             let posts = await res[0].json()
             const destinationData = await res[1].json()
