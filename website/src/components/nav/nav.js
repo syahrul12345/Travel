@@ -6,9 +6,9 @@ const links = [
   {href:'/',label:'AIRWAITRESS'},
   { href:'/destinations',label:'DESTINATIONS'},
   { href:'/itineraries',label:'ITINERARIES'},
-  { href:'/attractions',label:'ATTRACTIONS'},
-  { href: '/nightlife', label: 'NIGHTLIFE' },
-  { href: '/food', label: 'GASTRONOMY' },
+  { href:'/travelguides',label:'TRAVEL GUIDES'},
+  { href: '/food', label: 'FOOD' },
+  
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
   return link
