@@ -19,8 +19,8 @@ const texts = {
         blurb:'Delectable delights from all over the world',
         popular:'Popular Foodie Places'
     },
-    itenaries:{
-        title:'Itenaries',
+    itineraries:{
+        title:'Itineraries',
         blurb:'Plan your trips well, from start to finish',
         popular:'Popular Destinations'
     },

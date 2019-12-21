@@ -22,24 +22,8 @@ export default function Destinations(props) {
             justify="center"
             style={{paddingTop:'1vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <img
-                    style={{maxWidth:'100vh'}}
-                    src={props.banner.image}/>
-                    <h1 
-                      style={{
-                        position:"absolute",
-                        top:'40%',
-                        width:'100%',
-                        height:'100%',
-                        textAlign:"center",
-                        zIndex:"0",
-                        fontFamily:"Arial",
-                        color:"white",
-                      }}
-                      variant="body2" 
-                      component="p">
-                        <span style={{backgroundColor:"rgba(255, 0, 0, 0.4)"}}>{props.banner.text}</span>
-                      </h1>
+                    <Typography variant="h1"> Destinations </Typography>
+                    <Typography variant="h4"> Where is your calling? </Typography>
                 </Grid>
             </Grid>
             <DestinationTab currentDestination = {destination} destinations={props.destinations}/>

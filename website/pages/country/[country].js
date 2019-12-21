@@ -116,7 +116,7 @@ export default function CountryPage(props) {
                                                     //Only display first 6 cards
                                                     return(
                                                         <Grid key={post.title.rendered} item xs={4}>
-                                                            <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={`${name}\\${post.link}`} country={props.info[0].title.rendered} height="20vh"/>
+                                                            <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link} country={props.info[0].title.rendered} height="20vh"/>
                                                         </Grid>
                                                     )
                                                 }

@@ -5,7 +5,7 @@ import "./style.css"
 const links = [
   {href:'/',label:'AIRWAITRESS'},
   { href:'/destinations',label:'DESTINATIONS'},
-  { href:'/itenaries',label:'ITENARIES'},
+  { href:'/itineraries',label:'ITINERARIES'},
   { href:'/attractions',label:'ATTRACTIONS'},
   { href: '/nightlife', label: 'NIGHTLIFE' },
   { href: '/food', label: 'GASTRONOMY' },
