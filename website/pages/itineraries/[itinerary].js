@@ -22,8 +22,8 @@ export default function Post(props) {
 Post.getInitialProps = async(context) => {
     const formatDate = (input) => {
         const d = new Date(input)
-        const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
-        "July", "Aug", "Sept", "Oct", "Nov", "Dec"
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
         ];
         const month = d.getMonth()
         const day = d.getDate()

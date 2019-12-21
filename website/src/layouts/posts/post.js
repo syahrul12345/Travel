@@ -150,24 +150,13 @@ export default function Post(props) {
             <Nav/>
             <div style={{marginLeft:'21%',marginRight:'21%'}}>
                 <Typography variant="h1" component="h1" style={{fontSize:'40px'}}>
-                    {parser.parse(post.title.rendered)}
+                    <strong>{parser.parse(post.title.rendered)}</strong>
                 </Typography>
-                <Typography variant="subtitle2" component="body" style={{paddingTop:'2vh'}}>
-                    {parser.parseWithInstructions(post.acf.excerpt,isValidNode,processingInstructions)}
-                </Typography>
-                {/* Profile gird */}
-                <div style={{display:'flex',justifyContent:'space-between',paddingTop:'1vh'}}>
-                    <div style={{display:'flex',justifyContent:'space-between'}}>
-                        <Avatar className={classes.bigAvatar} alt={post.author.name} src={post.author.avatar_urls[96]}/>
-                        <div style={{display:'flex',paddingLeft:'1vh',flexDirection:'column'}}>
-                            <Typography variant="subtitle1">
-                                {post.author.name}
-                            </Typography>
-                            <Typography variant="subtitle1">
-                                {post.date}
-                            </Typography>
-                        </div>
-                    </div>
+                {/* Social buton gird */}
+                <div style={{display:'flex',justifyContent:'space-between',alignContent:'center',alignItems:'center'}}>
+                    <Typography variant="subtitle1">
+                        {post.date}
+                    </Typography>
                     <div style={{display:'flex', justifyContent:'space-between',align:'center'}} >
                         <IconButton aria-label="Facebook" className={classes.bigAvatar}>
                             <img src="/static/images/icons8-facebook-f-24.png"/>
@@ -180,10 +169,32 @@ export default function Post(props) {
                         </IconButton>
                     </div>
                 </div>
+                {/* Content grid */}
+                <Card>
+                    <CardMedia
+                    image={props.post.acf.featured_image.sizes["2048x2048"]}
+                    style={{height:"60vh",zIndex:'100'}}/>
+                </Card>
                 <Typography variant="body1">
                     {parser.parseWithInstructions(post.content.rendered,isValidNode,processingInstructions)}
                 </Typography>
+                {/* Profile gird */}
+                <div style={{display:'flex',justifyContent:'space-between',paddingTop:'1vh'}}>
+                    <div style={{display:'flex',justifyContent:'space-between'}}>
+                        <Avatar className={classes.bigAvatar} alt={post.author.name} src={post.author.avatar_urls[96]}/>
+                        <div style={{display:'flex',paddingLeft:'1vh',flexDirection:'column'}}>
+                            <Typography variant="subtitle1">
+                                {post.author.name}
+                            </Typography>
+                            <Typography variant="subtitle2">
+                                {post.author.description}
+                            </Typography>
+                        </div>
+                    </div>
+                    
+                </div>
             </div>
+            
         </div>
        
     )
