@@ -256,6 +256,21 @@ const populateContinents = async() => {
         data:continents,
     }
 }
+const getPostsByCategory = async(category,amount) => {
+    const postCategorized = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${category}&page=1&per_page=${amount}`)
+    const posts = await postCategorized.json()
+    const cleanedPosts = posts.map((post) => {
+        return {
+            slug:post.slug,
+            title:post.title.rendered,
+            image:post.acf.featured_image.sizes['2048x2048'],
+            link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+        }
+    })
+    return cleanedPosts
+}
+
+
 const getFeatured = async() => {
     const featuredRes = await fetch(`${baseurl}wp-json/wp/v2/featured_categories`)
     let featured = await featuredRes.json()
@@ -283,5 +298,6 @@ module.exports = {
     getContextPosts,
     getCategories,
     populateContinents,
-    getFeatured
+    getFeatured,
+    getPostsByCategory
 }
