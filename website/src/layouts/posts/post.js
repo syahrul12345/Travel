@@ -1,6 +1,6 @@
 import React from 'react'
 import HtmlToReact from 'html-to-react'
-import Head from 'next/head'
+import Head from 'next/Head'
 import Nav from '../../components/nav' 
 import Footer from '../../components/footer'
 import Related from '../../components/related'
