@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router';
 import {getCountryInfo} from '../../src/utils/utils'
-import {Grid,Typography,makeStyles} from '@material-ui/core'
+import {Grid,Typography,makeStyles, CardMedia} from '@material-ui/core'
 import InfoCard from '../../src/components/infocard'
 import PhoneIcon from '@material-ui/icons/Phone'
 import WatchIcon from '@material-ui/icons/Watch'
@@ -27,14 +27,17 @@ export default function CountryPage(props) {
                 </Head>
                 <Grid container direction="row">
                     <Grid style={{position:'relative'}} id="topGrid" item align="center" xs={12}>
-                        <div 
+                        <CardMedia
+                        image={props.info[0].acf.background_image.sizes['2048x2048']}
+                        style={{height:'60vh'}}/>
+                        {/* <div 
                         className="banner"
                         style={{
                             backgroundImage:`url(${props.info[0].acf.background_image.sizes['2048x2048']})`,
                             backgroundSize:'100%',
                             position:"relative"
                         }}>
-                        </div>
+                        </div> */}
                         <Typography 
                         style={{
                             position:"absolute",
