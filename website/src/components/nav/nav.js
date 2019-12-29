@@ -13,6 +13,7 @@ const links = [
   link.key = `nav-link-${link.href}-${link.label}`
   return link
 })
+
 export default function Nav() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [dummyVal,setVal] = React.useState(0)
@@ -42,13 +43,13 @@ export default function Nav() {
           </ul>
         </nav>
       <div className="mobileMenu">
-      <Tabs
+      {/* <Tabs
+          indicator
           variant="scrollable"
           scrollButtons="on"
-          value={dummyVal}
           indicatorColor="primary"
-          indicator="false"
-          textcolor="primary"
+          textColor="primary"
+          value={dummyVal}
           aria-label="scrollable force tabs example"
         >
           {links.map(({key,href,label}) => {
@@ -59,7 +60,7 @@ export default function Nav() {
             )
           })}
           
-      </Tabs>
+      </Tabs> */}
       </div>
       </AppBar>
     </div>

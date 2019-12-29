@@ -1,7 +1,10 @@
 import React from 'react'
 import HtmlToReact from 'html-to-react'
 import Head from 'next/head'
-import Nav from '../../components/nav'
+import Nav from '../../components/nav' 
+import Footer from '../../components/footer'
+import Related from '../../components/related'
+import Facebook from '../../components/facebook'
 import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
@@ -140,12 +143,12 @@ export default function Post(props) {
     const isValidNode = () => {
         return true
     }
-    
     return (
         <div style={{marginTop:'10vh'}}>
             <Head>
                 <title>{parser.parse(post.title.rendered)}</title>
                 <meta name="description" name={post.acf.excerpt}/>
+                
             </Head>
             <Nav/>
             <div style={{marginLeft:'21%',marginRight:'21%'}}>
@@ -191,12 +194,15 @@ export default function Post(props) {
                             </Typography>
                         </div>
                     </div>
-                    
                 </div>
+                <Facebook/>
+                
             </div>
-            
+            <div style={{marginLeft:'10%',marginRight:'10%'}}>
+                <Related related={props.related}/>
+            </div>
+            <Footer/>
         </div>
-       
     )
 }
 

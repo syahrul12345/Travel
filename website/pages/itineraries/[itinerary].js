@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Post(props) {
     return(
-        <PostLayout post={props.post}></PostLayout>
+        <PostLayout post={props.post} related={props.relatedPost}></PostLayout>
     )
 }
 
@@ -31,10 +31,13 @@ Post.getInitialProps = async(context) => {
         return day + ' ' + monthNames[month] + ' ' + year
     }
     const path = context.asPath;
-    const data = await getPostInfo(path)
+    const res = await Promise.all([getPostInfo(path)])
+    const data = res[0]
     const post = data.post
+    const relatedPost = data.relatedPosts
     post.date = formatDate(post.date)
     return {
-        post
+        post,
+        relatedPost
     }
 }

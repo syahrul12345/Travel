@@ -172,8 +172,27 @@ const getCountryInfo = async(destination) => {
     return data
 }
 
+//Get the related posts for a particular country
+const getRelated = async(destination,relation) => {
+    destination = destination.replace(/\s+/g, '-')
+    const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
+    const data = await res.json()
+    const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=6`)
+    const posts = await catRes.json()
+    const cleanedRelated = posts.map((post) => {
+        return {
+            id:post.id,
+            title:post.title.rendered,
+            link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+            image:post.acf.featured_image.sizes['2048x2048']
+        }
+    })
+    return cleanedRelated
+}
+
 const getPostInfo = async(link) => {
     const res = await fetch(`${baseurl}${link}`)
+    const relation = link.split('/')[1]
     const post = await res.json()
     return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)])
         .then(async (res) => {
@@ -181,11 +200,14 @@ const getPostInfo = async(link) => {
             const country = await res[1].json()
             post["country"] = country[0].title.rendered
             post["author"] = author
+            const relatedPosts = await getRelated(post["country"],relation)
+            //lets get the related posts
             return {
-                post
+                post,
+                relatedPosts,
             }
         }).catch((err) => {
-            console.log("it errored")
+            console.log(`Error when loading post page for post ${link}`)
             console.log(err)
             return {
                 post

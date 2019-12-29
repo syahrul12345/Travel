@@ -31,10 +31,10 @@ Post.getInitialProps = async(context) => {
         return day + ' ' + monthNames[month] + ' ' + year
     }
     const path = context.asPath;
-    const data = await getPostInfo(path)
+    const res = await Promise.all([getPostInfo(path)])
+    const data = await res[0]
     const post = data.post
     post.date = formatDate(post.date)
-    console.log(post.date)
     return {
         post
     }
