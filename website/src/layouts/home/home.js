@@ -1,5 +1,5 @@
 import Nav from '../../components/nav'
-import Head from 'next/Head'
+import Head from 'next/head'
 import Carousel from '../../components/carousel'
 import Footer from '../../components/footer'
 export default function HomeLayout(props) {
