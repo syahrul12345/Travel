@@ -1,11 +1,10 @@
 import {Typography, BottomNavigation, BottomNavigationAction} from '@material-ui/core'
 const links = [
-    { href:'/join',label:'JOIN US'},
-    { href: '/contact', label: 'CONTACT US' },
-    { href: '/advertise', label: 'ADVERTISE' },
     { href: '/about', label: 'ABOUT' },
+    { href: '/advertise', label: 'PARTNER' },
+    { href: '/contact', label: 'CONTACT' },
+    { href:'/terms',label:'TERMS OF USE'},
     { href:'/privacy',label:'PRIVACY POLICY'},
-    { href:'/terms',label:'TERMS'},
   ].map(link => {
     link.key = `nav-link-${link.href}-${link.label}`
     return link
@@ -14,6 +13,8 @@ const links = [
 export default function Footer(){
     return(
             <nav style={{marginRight:'20%',marginLeft:'20%',marginTop:'2vh'}}>
+                <Typography variant="subtitle1" style={{textAlign:"center"}}>© Copyright 2020 - The Layover.Life</Typography>
+                <Typography variant="subtitle2" style={{textAlign:"center"}}>All Rights Reserved.</Typography>
             <ul>
                 {links.map(({ key, href, label }) => (
                 <li key={key}>
@@ -37,7 +38,6 @@ export default function Footer(){
                 }
                 nav > ul {
                     padding:0;
-                    margin-left:20%:
                 }
                 ul {
                 display: flex;
@@ -56,6 +56,7 @@ export default function Footer(){
                 letter-spacing:2px;
                 }
             `}</style>
+            
             </nav>
     )
     

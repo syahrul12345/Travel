@@ -30,7 +30,7 @@ export default function CountryPage(props) {
                         <div 
                         className="banner"
                         style={{
-                            backgroundImage:`url(${props.info[0].acf.background_image.sizes.large})`,
+                            backgroundImage:`url(${props.info[0].acf.background_image.sizes['2048x2048']})`,
                             backgroundSize:'100%',
                             position:"relative"
                         }}>
