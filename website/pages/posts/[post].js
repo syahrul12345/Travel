@@ -1,18 +1,5 @@
 import {getPostInfo} from '../../src/utils/utils'
-import { makeStyles } from '@material-ui/core/styles';
 import PostLayout from '../../src/layouts/posts'
-const useStyles = makeStyles(theme => ({
-    root: {
-      ...theme.typography,
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(1),
-    },
-    bigAvatar: {
-        height:60,
-        width:60,
-    }
-  }));
-
 export default function Post(props) {
     return(
         <PostLayout post={props.post}></PostLayout>
