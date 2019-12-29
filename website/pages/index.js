@@ -1,5 +1,4 @@
 import {useState,useEffect} from 'react'
-import { makeStyles } from '@material-ui/styles'
 import {Grid,Typography,Button,Divider,IconButton,GridList,GridListTile,GridListTileBar} from '@material-ui/core'
 import LeftArrow from '@material-ui/icons/ArrowBack'
 import RightArrow  from '@material-ui/icons/ArrowForward'
@@ -69,7 +68,7 @@ const Index = (props) => {
                   }} 
                   cols={1}>
                     {props.postData.map((post,index) => (
-                      <GridListTile style={{height:'100%'}}>
+                      <GridListTile key={props.postData[index].slug} style={{height:'100%'}}>
                         <LargeCard slug={props.postData[index].slug} title={props.postData[index].title} excerpt={props.postData[index].excerpt} image={props.postData[index].image} link={props.postData[index].link} country={props.postData[index].country_normal} height="70vh"/>
                         </GridListTile>
                     ))}
@@ -106,7 +105,7 @@ const Index = (props) => {
               <Grid container spacing={2}>
                 {props.continents.map(({slug,name,text,image}) => {
                   return(
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={4} key={slug} >
                       <ContinentCard handler={setDestination} slug={slug} title={text} image={image}/>
                     </Grid>
                   )

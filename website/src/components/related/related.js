@@ -13,11 +13,10 @@ export default function Related(props) {
             </Grid>
             {props.related.map((post) => {
                 return(
-                    <Grid item xs={12} md={4}>
+                    <Grid key={post.title} item xs={12} md={4}>
                        <BlogCards title={post.title} image={post.image} link={post.link} height='20vh'/>
                     </Grid>
                 )
-                
             })}
         </Grid>
     )

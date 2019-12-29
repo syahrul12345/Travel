@@ -1,9 +1,5 @@
-import {FacebookProvider,Comments} from 'react-facebook'
-
 export default function Facebook() {
     return(
-        <FacebookProvider appId="1028885374122493">
-            <Comments href="http://www.facebook.com" />
-        </FacebookProvider>
+        <div className="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="" data-numposts="5"></div>
     )
 }

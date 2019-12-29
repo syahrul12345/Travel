@@ -15,6 +15,8 @@ class _Document extends Document {
           <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
         </Head>
         <body>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=1028885374122493&autoLogAppEvents=1"></script>
           <Main />
           <NextScript />
         </body>

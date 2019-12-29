@@ -5,6 +5,7 @@ import Nav from '../../components/nav'
 import Footer from '../../components/footer'
 import Related from '../../components/related'
 import Facebook from '../../components/facebook'
+import {FacebookProvider,Share} from 'react-facebook'
 import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
@@ -41,37 +42,37 @@ export default function Post(props) {
             switch(node.parent.name){
                 case('h2'):
                     return (
-                        <Typography variant="h2" style={{fontSize:'38px'}}>
+                        <Typography component={'span'} variant="h2" style={{fontSize:'38px'}}>
                             {node.data}
                         </Typography>
                     )
                 case('h3'):
                     return (
-                        <Typography variant="h3">
+                        <Typography component={'span'} variant="h3">
                             {node.data}
                         </Typography>
                     )
                 case('h4'):
                     return (
-                        <Typography variant="h4">
+                        <Typography component={'span'} variant="h4">
                             {node.data}
                         </Typography>
                     )
                 case('h5'):
                     return (
-                        <Typography variant="h5">
+                        <Typography component={'span'} variant="h5">
                             {node.data}
                         </Typography>
                     )
                 case('h6'):
                     return (
-                        <Typography variant="h6">
+                        <Typography component={'span'} variant="h6">
                             {node.data}
                         </Typography>
                     )
                 default:
                     return(
-                        <Typography variant="h2">
+                        <Typography component={'span'} variant="body">
                             {node.data}
                         </Typography>
                     )
@@ -127,7 +128,7 @@ export default function Post(props) {
             },
             processNode: function(node,children){
                 return(
-                    <Typography variant="caption" align="center">{node.data}</Typography>
+                    <Typography component={'span'} variant="caption" align="center">{node.data}</Typography>
                 )
             }
         },
@@ -147,38 +148,55 @@ export default function Post(props) {
         <div style={{marginTop:'10vh'}}>
             <Head>
                 <title>{parser.parse(post.title.rendered)}</title>
-                <meta name="description" name={post.acf.excerpt}/>
-                
+                <meta name="description" content={post.acf.excerpt}/>
             </Head>
             <Nav/>
             <div style={{marginLeft:'21%',marginRight:'21%'}}>
-                <Typography variant="h1" component="h1" style={{fontSize:'40px'}}>
+                <Typography component={'span'} variant="h1" component="h1" style={{fontSize:'40px'}}>
                     <strong>{parser.parse(post.title.rendered)}</strong>
                 </Typography>
-                {/* Social buton gird */}
+                {/* Social buton grid */}
                 <div style={{display:'flex',justifyContent:'space-between',alignContent:'center',alignItems:'center'}}>
-                    <Typography variant="subtitle1">
+                    <Typography component={'span'} variant="subtitle1">
                         {post.date}
                     </Typography>
                     <div style={{display:'flex', justifyContent:'space-between',align:'center'}} >
-                        <IconButton aria-label="Facebook" className={classes.bigAvatar}>
-                            <img src="/static/images/icons8-facebook-f-24.png"/>
-                        </IconButton>
-                        <IconButton aria-label="Instagram" className={classes.bigAvatar}>
-                            <img src="/static/images/icons8-instagram-24.png"/>
-                        </IconButton>
+                        <FacebookProvider appId="1028885374122493">
+                            <Share href="http://www.facebook.com">
+                                {({ handleClick, loading }) => (
+                                    <IconButton disabled={loading} onClick={handleClick} aria-label="Facebook" className={classes.bigAvatar}>
+                                        <img src="/static/images/icons8-facebook-f-24.png" alt="facebook-share"/>
+                                    </IconButton>
+                                )}
+                            </Share>
+                        </FacebookProvider>
+                        <a href={"tg://msg_url?url=https://valid.url&amp;text=text"}>
+                            <IconButton aria-label="Instagram" className={classes.bigAvatar}>
+                                <img src="/static/images/icons8-instagram-24.png" alt="instagram-share"/>
+                            </IconButton>
+                        </a>
+                        <a href={"tg://msg_url?url=https://valid.url&amp;text=text"}>
                         <IconButton aria-label="Telegram" className={classes.bigAvatar}>
-                            <img src="/static/images/icons8-telegram-app-24.png"/>
+                            <img src="/static/images/icons8-telegram-app-24.png" alt="telegram-share"/>
                         </IconButton>
+                        </a>
                     </div>
                 </div>
+            </div>
+            {/* <div style={{display:'flex',justifyContent:'center',justify:'center'}}>
+                <img 
+                src={props.post.acf.featured_image.sizes["2048x2048"]} 
+                alt={`${post.title.rendered}`}
+                style={{height:'60vh'}}/>
+            </div> */}
                 {/* Content grid */}
+            <div style={{marginLeft:'21%',marginRight:'21%'}}>
                 <Card>
                     <CardMedia
                     image={props.post.acf.featured_image.sizes["2048x2048"]}
                     style={{height:"60vh",zIndex:'100'}}/>
                 </Card>
-                <Typography variant="body1">
+                <Typography component={'span'} variant="body1">
                     {parser.parseWithInstructions(post.content.rendered,isValidNode,processingInstructions)}
                 </Typography>
                 {/* Profile gird */}
@@ -186,17 +204,18 @@ export default function Post(props) {
                     <div style={{display:'flex',justifyContent:'space-between'}}>
                         <Avatar className={classes.bigAvatar} alt={post.author.name} src={post.author.avatar_urls[96]}/>
                         <div style={{display:'flex',paddingLeft:'1vh',flexDirection:'column'}}>
-                            <Typography variant="subtitle1">
+                            <Typography component={'span'} variant="subtitle1">
                                 {post.author.name}
                             </Typography>
-                            <Typography variant="subtitle2">
+                            <Typography component={'span'} variant="subtitle2">
                                 {post.author.description}
                             </Typography>
                         </div>
                     </div>
                 </div>
+            <div style={{display:'flex',justifyContent:'center',justifyItems:'center'}}>
                 <Facebook/>
-                
+            </div>
             </div>
             <div style={{marginLeft:'10%',marginRight:'10%'}}>
                 <Related related={props.related}/>
