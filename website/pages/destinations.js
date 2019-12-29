@@ -1,12 +1,8 @@
 import {useState} from 'react'
 import Nav from '../src/components/nav'
 import Head from 'next/head'
-import Link from 'next/link'
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import {Grid,Tabs,Tab,Typography,Box,Card,CardContent,CardMedia, CardActionArea} from '@material-ui/core'
 import {populateDestinations,getDestinationBanner,getPostsByCategory} from '../src/utils/utils'
-import CountryCard from '../src/components/countrycard'
 import DestinationTab from '../src/components/destinations'
 import Footer from '../src/components/footer'
 import BlogCards from '../src/components/blogcards'
@@ -24,7 +20,7 @@ export default function Destinations(props) {
             style={{paddingTop:'1vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
                     <Typography variant="h3" style={{marginBottom:'5vh'}}> Destinations </Typography>
-                    <Typography variant="h4"> Where is your calling? </Typography>
+                    <Typography variant="h5"> Where is your calling? </Typography>
                 </Grid>
             </Grid>
             <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
