@@ -1,29 +1,16 @@
 import {getPostInfo} from '../../src/utils/utils'
-import { makeStyles } from '@material-ui/core/styles';
 import PostLayout from '../../src/layouts/posts'
-const useStyles = makeStyles(theme => ({
-    root: {
-      ...theme.typography,
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(1),
-    },
-    bigAvatar: {
-        height:60,
-        width:60,
-    }
-  }));
-
 export default function Post(props) {
     return(
-        <PostLayout post={props.post}></PostLayout>
+        <PostLayout post={props.post} related={props.relatedPost}></PostLayout>
     )
 }
 
 Post.getInitialProps = async(context) => {
     const formatDate = (input) => {
         const d = new Date(input)
-        const monthNames = ["Jan", "Feb", "March", "April", "May", "June",
-        "July", "Aug", "Sept", "Oct", "Nov", "Dec"
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
         ];
         const month = d.getMonth()
         const day = d.getDate()
@@ -31,10 +18,13 @@ Post.getInitialProps = async(context) => {
         return day + ' ' + monthNames[month] + ' ' + year
     }
     const path = context.asPath;
-    const data = await getPostInfo(path)
+    const res = await Promise.all([getPostInfo(path)])
+    const data = res[0]
     const post = data.post
+    const relatedPost = data.relatedPosts
     post.date = formatDate(post.date)
     return {
-        post
+        post,
+        relatedPost
     }
 }
