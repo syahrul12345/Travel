@@ -15,23 +15,23 @@ app
       res.sendFile(path.join(__dirname, "./public/static", "robots.txt"))
     })
 
-    server.get('/post/:slug', (req, res) => {
-      const actualPage = '/post';
-      const queryParams = { slug: req.params.slug, apiRoute: 'post' };
-      app.render(req, res, actualPage, queryParams);
-    });
+    // server.get('/post/:slug', (req, res) => {
+    //   const actualPage = '/post';
+    //   const queryParams = { slug: req.params.slug, apiRoute: 'post' };
+    //   app.render(req, res, actualPage, queryParams);
+    // });
 
-    server.get('/page/:slug', (req, res) => {
-      const actualPage = '/post';
-      const queryParams = { slug: req.params.slug, apiRoute: 'page' };
-      app.render(req, res, actualPage, queryParams);
-    });
+    // server.get('/page/:slug', (req, res) => {
+    //   const actualPage = '/post';
+    //   const queryParams = { slug: req.params.slug, apiRoute: 'page' };
+    //   app.render(req, res, actualPage, queryParams);
+    // });
 
-    server.get('/category/:slug', (req, res) => {
-      const actualPage = '/category';
-      const queryParams = { slug: req.params.slug };
-      app.render(req, res, actualPage, queryParams);
-    });
+    // server.get('/category/:slug', (req, res) => {
+    //   const actualPage = '/category';
+    //   const queryParams = { slug: req.params.slug };
+    //   app.render(req, res, actualPage, queryParams);
+    // });
 
     server.get('/_preview/:id/:rev/:type/:status/:wpnonce', (req, res) => {
       const actualPage = '/preview';

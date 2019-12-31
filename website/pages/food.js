@@ -10,7 +10,7 @@ export default function Food(props) {
         <div style={{marginTop:'10vh',marginLeft:'6%',marginRight:'6%'}}>
             <Head>
                 <title> Travel Guides - The Layover Life</title>
-                <meta name="description" name="All the travel guides that you need"/>
+                <meta name="description" content="All the travel guides that you need"/>
             </Head>
             <Nav/>
             <Grid

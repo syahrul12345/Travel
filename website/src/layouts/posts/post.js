@@ -8,16 +8,13 @@ import Facebook from '../../components/facebook'
 import {FacebookProvider,Share} from 'react-facebook'
 import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
+import './style.css'
 const useStyles = makeStyles(theme => ({
     root: {
       ...theme.typography,
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1),
     },
-    bigAvatar: {
-        height:60,
-        width:60,
-    }
   }));
 
 export default function Post(props) {
@@ -164,19 +161,19 @@ export default function Post(props) {
                         <FacebookProvider appId="1028885374122493">
                             <Share href="http://www.facebook.com">
                                 {({ handleClick, loading }) => (
-                                    <IconButton disabled={loading} onClick={handleClick} aria-label="Facebook" className={classes.bigAvatar}>
+                                    <IconButton disabled={loading} onClick={handleClick} aria-label="Facebook" className="bigAvatar">
                                         <img src="/static/images/icons8-facebook-f-24.png" alt="facebook-share"/>
                                     </IconButton>
                                 )}
                             </Share>
                         </FacebookProvider>
                         <a href={"tg://msg_url?url=https://valid.url&amp;text=text"}>
-                            <IconButton aria-label="Instagram" className={classes.bigAvatar}>
+                            <IconButton aria-label="Instagram" className="bigAvatar">
                                 <img src="/static/images/icons8-instagram-24.png" alt="instagram-share"/>
                             </IconButton>
                         </a>
                         <a href={"tg://msg_url?url=https://valid.url&amp;text=text"}>
-                        <IconButton aria-label="Telegram" className={classes.bigAvatar}>
+                        <IconButton aria-label="Telegram" className="bigAvatar">
                             <img src="/static/images/icons8-telegram-app-24.png" alt="telegram-share"/>
                         </IconButton>
                         </a>
@@ -202,7 +199,7 @@ export default function Post(props) {
                 {/* Profile gird */}
                 <div style={{display:'flex',justifyContent:'space-between',paddingTop:'1vh'}}>
                     <div style={{display:'flex',justifyContent:'space-between'}}>
-                        <Avatar className={classes.bigAvatar} alt={post.author.name} src={post.author.avatar_urls[96]}/>
+                        <Avatar className="bigAvatar" alt={post.author.name} src={post.author.avatar_urls[96]}/>
                         <div style={{display:'flex',paddingLeft:'1vh',flexDirection:'column'}}>
                             <Typography component={'span'} variant="subtitle1">
                                 {post.author.name}

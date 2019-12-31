@@ -12,6 +12,7 @@ export default function Destinations(props) {
         <div style={{marginTop:'10vh'}}>
             <Head>
                 <title> Destinations </title>
+                <meta name="description" content="All the countries that we cover"/>
             </Head>
             <Nav/>
             <Grid

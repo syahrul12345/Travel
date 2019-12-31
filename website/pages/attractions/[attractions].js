@@ -147,7 +147,7 @@ export default function Post(props) {
         <div style={{marginTop:'10vh'}}>
             <Head>
                 <title>{post.title.rendered}</title>
-                <meta name="description" name={post.acf.excerpt}/>
+                <meta name="description" content={post.acf.excerpt}/>
             </Head>
             <Nav/>
             <div style={{marginLeft:'21%',marginRight:'21%'}}>
