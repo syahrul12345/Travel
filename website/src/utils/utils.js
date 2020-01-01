@@ -191,9 +191,11 @@ const getRelated = async(destination,relation) => {
 }
 
 const getPostInfo = async(link) => {
-    const res = await fetch(`${baseurl}${link}`)
+    const slug = link.split('/')[2]
+    const res = await fetch(`${baseurl}/wp-json/wp/v2/posts?slug=${slug}`)
     const relation = link.split('/')[1]
-    const post = await res.json()
+    const data = await res.json()
+    const post = data[0]
     return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)])
         .then(async (res) => {
             const author = await res[0].json()

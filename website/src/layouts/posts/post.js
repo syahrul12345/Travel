@@ -190,7 +190,7 @@ export default function Post(props) {
             <div style={{marginLeft:'21%',marginRight:'21%'}}>
                 <Card>
                     <CardMedia
-                    image={props.post.acf.featured_image.sizes["2048x2048"]}
+                    image={post.acf.featured_image.sizes["2048x2048"]}
                     style={{height:"60vh",zIndex:'100'}}/>
                 </Card>
                 <Typography component={'span'} variant="body1">
