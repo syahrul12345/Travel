@@ -202,6 +202,8 @@ const getPostInfo = async(link) => {
             const country = await res[1].json()
             post["country"] = country[0].title.rendered
             post["author"] = author
+            //Change to HTTPS. lol
+            author.avatar_urls["96"] = author.avatar_urls["96"].slice(0,4) + "s" + author.avatar_urls["96"].slice(4)
             const relatedPosts = await getRelated(post["country"],relation)
             //lets get the related posts
             return {
