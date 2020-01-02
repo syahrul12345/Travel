@@ -200,6 +200,7 @@ const getPostInfo = async(link) => {
         .then(async (res) => {
             const author = await res[0].json()
             const country = await res[1].json()
+            post.acf.featured_image.sizes["2048x2048"] = baseurl + post.acf.featured_image.sizes["2048x2048"].replace(/^(?:\/\/|[^\/]+)*\//, "")
             post["country"] = country[0].title.rendered
             post["author"] = author
             //Change to HTTPS. lol
