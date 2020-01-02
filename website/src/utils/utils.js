@@ -101,7 +101,7 @@ const populateDestinations = async () => {
         const destinationData = data.map((post) => ({
             slug:post.slug,
             title:post.title.rendered,
-            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${baseurl}${post.acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             continent:post.acf.continent
         }))
         return{
@@ -274,7 +274,7 @@ const populateContinents = async() => {
             slug:continent.slug,
             name:continent.title.rendered,
             text:continent.acf.overlay_text,
-            image:continent.acf.image.sizes.large
+            image:`${baseurl}${continent.acf.image.sizes.large.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
         }
     })
     return {
@@ -305,7 +305,7 @@ const getFeatured = async() => {
             slug:feat.slug,
             title:feat.title.rendered,
             excerpt:feat.acf.excerpt,
-            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${baseurl}${feat.acf.image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
         }
     })
     return {
