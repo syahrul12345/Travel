@@ -43,7 +43,7 @@ const populatePosts = async(count) => {
                 slug:post.slug,
                 title:post.title.rendered,
                 excerpt:post.acf.excerpt,
-                image:post.acf.featured_image.sizes['2048x2048'],
+                image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                 category:post.categories,
                 country:destinationMap[post.acf.country].slug,
@@ -77,7 +77,7 @@ const getNextPosts =async(pageID) => {
                 slug:post.slug,
                 title:post.title.rendered,
                 excerpt:post.acf.excerpt,
-                image:post.acf.featured_image.sizes.medium_large,
+                image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                 country:destinationMap[post.acf.country]
             }))
@@ -101,7 +101,7 @@ const populateDestinations = async () => {
         const destinationData = data.map((post) => ({
             slug:post.slug,
             title:post.title.rendered,
-            image:post.acf.background_image.sizes.medium_large,
+            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             continent:post.acf.continent
         }))
         return{
@@ -122,7 +122,7 @@ const getDestinationBanner = async() => {
     try{
         const destinationBanner = data.map((banner) => ({
             text:banner.acf.overlay_text,
-            image:banner.acf.image.sizes.large
+            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
         }))
         return{
             ok:true,
@@ -152,7 +152,7 @@ const getCountryInfo = async(destination) => {
             slug:post.slug,
             title:post.title.rendered,
             id:post.id,
-            image:post.acf.featured_image.sizes['2048x2048'],
+            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
             category:post.categories
         }
@@ -184,7 +184,7 @@ const getRelated = async(destination,relation) => {
             id:post.id,
             title:post.title.rendered,
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-            image:post.acf.featured_image.sizes['2048x2048']
+            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
         }
     })
     return cleanedRelated
@@ -289,7 +289,7 @@ const getPostsByCategory = async(category,amount) => {
         return {
             slug:post.slug,
             title:post.title.rendered,
-            image:post.acf.featured_image.sizes['2048x2048'],
+            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
         }
     })
@@ -305,7 +305,7 @@ const getFeatured = async() => {
             slug:feat.slug,
             title:feat.title.rendered,
             excerpt:feat.acf.excerpt,
-            image:feat.acf.image.sizes['2048x2048']
+            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
         }
     })
     return {
