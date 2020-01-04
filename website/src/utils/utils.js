@@ -316,6 +316,13 @@ const getFeatured = async() => {
         data:featured
     }
 }
+
+const getFooterInfo = async(slug) => {
+    const res = await fetch(`${baseurl}wp-json/wp/v2/pages?slug=${slug}`)
+    console.log(`${baseurl}wp-json/wp/v2/pages?slug=${slug}`)
+    const data = await res.json()
+    return data[0]
+}
 module.exports = {
     populateCarousel,
     populatePosts,
@@ -328,5 +335,6 @@ module.exports = {
     getCategories,
     populateContinents,
     getFeatured,
-    getPostsByCategory
+    getPostsByCategory,
+    getFooterInfo
 }

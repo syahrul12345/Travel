@@ -1,7 +1,7 @@
 import {Typography, BottomNavigation, BottomNavigationAction} from '@material-ui/core'
 const links = [
     { href: '/about', label: 'ABOUT' },
-    { href: '/advertise', label: 'PARTNER' },
+    { href: '/partner', label: 'PARTNER' },
     { href: '/contact', label: 'CONTACT' },
     { href:'/terms',label:'TERMS OF USE'},
     { href:'/privacy',label:'PRIVACY POLICY'},
