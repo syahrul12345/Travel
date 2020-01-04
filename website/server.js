@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const next = require('next');
 const path = require('path')
 const dev = process.env.NODE_ENV === 'production';
@@ -9,10 +10,19 @@ app
   .prepare()
   .then(() => {
     const server = express();
-    
+    server.use(bodyParser.json())
     server.get("/robots.txt", (req, res) => {
       res.header("Content-Type", "text/plain")
       res.sendFile(path.join(__dirname, "./public/static", "robots.txt"))
+    })
+
+    // received a request for partner
+    server.post("/api/partner", (req,res) => {
+      console.log(req.body)
+    })
+    // received a request for contact
+    server.post("/api/contact", (req,res) => {
+      console.log(req.body)
     })
 
     // server.get('/post/:slug', (req, res) => {

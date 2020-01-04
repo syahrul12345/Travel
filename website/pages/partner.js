@@ -1,19 +1,30 @@
+import {useState} from 'react'
 import FooterLayout from '../src/layouts/footerpage'
 import {getFooterInfo} from '../src/utils/utils'
 import { makeStyles } from '@material-ui/core/styles';
 import {Button,TextField,Grid} from '@material-ui/core';
 import {parse} from '../src/utils/parse'
-const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-      justifyContent:'center',
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-    },
-  }));
+import axios from 'axios'
 export default function Partner(props) {
+    const [values,setValues] = useState({
+        name:'',
+        email:'',
+        number:'',
+        title:'',
+        message:'',
+    })
+    const handleTextFieldChange = (call) => event => {
+        setValues({...values,[call]:event.target.value})
+    }
+    const handleClick = () => {
+        axios.post('/api/partner',values)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
     const data = props.content
     return(
         <div>
@@ -38,6 +49,7 @@ export default function Partner(props) {
                         placeholder="How Do Your Colleagues Address You?"
                         fullWidth
                         margin="normal"
+                        onChange={handleTextFieldChange('name')}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -50,6 +62,7 @@ export default function Partner(props) {
                         placeholder="What’s Your Work Email?"
                         fullWidth
                         margin="normal"
+                        onChange={handleTextFieldChange('email')}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -62,6 +75,7 @@ export default function Partner(props) {
                         placeholder="Which Number Do We Call You?"
                         fullWidth
                         margin="normal"
+                        onChange={handleTextFieldChange('number')}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -74,6 +88,7 @@ export default function Partner(props) {
                         placeholder="Give Us A One Line Summary!"
                         fullWidth
                         margin="normal"
+                        onChange={handleTextFieldChange('title')}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -88,13 +103,16 @@ export default function Partner(props) {
                         multiline
                         rows="6"
                         margin="normal"
+                        onChange={handleTextFieldChange('message')}
                         variant="outlined"
                         InputLabelProps={{
                             shrink: true,
                         }}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button>Send</Button>
+                        <Button
+                        onClick={() => handleClick()}
+                        >Send</Button>
                     </Grid>
                 </Grid>
             </FooterLayout>

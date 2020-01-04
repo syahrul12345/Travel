@@ -1,9 +1,29 @@
+import {useState} from 'react'
 import FooterLayout from '../src/layouts/footerpage'
 import {getFooterInfo} from '../src/utils/utils'
 import { makeStyles } from '@material-ui/core/styles';
 import {Button,TextField,Grid} from '@material-ui/core';
 import {parse} from '../src/utils/parse'
+import axios from 'axios'
 export default function Contact(props) {
+    const [values,setValues] = useState({
+        name:'',
+        email:'',
+        title:'',
+        message:'',
+    })
+    const handleTextFieldChange = (call) => event => {
+        setValues({...values,[call]:event.target.value})
+    }
+    const handleClick = () => {
+        axios.post('/api/contact',values)
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
     const data = props.content
     return(
         <div>
@@ -29,6 +49,7 @@ export default function Contact(props) {
                         "
                         fullWidth
                         margin="normal"
+                        onChange={handleTextFieldChange('name')}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -41,6 +62,7 @@ export default function Contact(props) {
                         placeholder="What’s Your Digital Mail Address?"
                         fullWidth
                         margin="normal"
+                        onChange={handleTextFieldChange('email')}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -53,6 +75,7 @@ export default function Contact(props) {
                         placeholder="Give Us A One Line Summary!"
                         fullWidth
                         margin="normal"
+                        onChange={handleTextFieldChange('title')}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -67,13 +90,16 @@ export default function Contact(props) {
                         multiline
                         rows="6"
                         margin="normal"
+                        onChange={handleTextFieldChange('message')}
                         variant="outlined"
                         InputLabelProps={{
                             shrink: true,
                         }}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button>Send</Button>
+                        <Button
+                        onClick={() => handleClick()}
+                        >Send</Button>
                     </Grid>
                 </Grid>
             </FooterLayout>
