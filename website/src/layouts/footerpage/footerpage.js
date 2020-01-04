@@ -4,7 +4,7 @@ import Nav from '../../components/nav'
 import Footer from '../../components/footer'
 import HtmlToReact from 'html-to-react'
 import './style.css'
-export default function Contact(props) {
+export default function Page(props) {
     const info = props.content
     //we need to parse the data
     const HtmlToReactParser = HtmlToReact.Parser
@@ -132,7 +132,7 @@ export default function Contact(props) {
         <div>
             <Head>
                 <title>{info.title.rendered} - The Layover Life</title>
-                <meta name="description" content="Privacy Policy page for thelayover.life"/>
+                <meta name="description" content={`${info.title.rendered} page for thelayover.life`}/>
             </Head>
             <Nav/>
             <Grid container 
@@ -145,11 +145,21 @@ export default function Contact(props) {
                     <Card
                     style={{margin:'10vh 10vh 0vh 10vh'}}>
                         <CardContent>
-                            {parser.parseWithInstructions(info.content.rendered,isValidNode,processingInstructions)}
+                            {info.title.rendered == 'Partner' || info.title.rendered == "Contact" ? 
+                                 <></>   
+                                :
+                                <>
+                                    {parser.parseWithInstructions(info.content.rendered,isValidNode,processingInstructions)}
+                                </>
+                            }
+                            
+                            {/* Possibly forms */}
+                            {props.children}
                         </CardContent>
                     </Card>
                 </Grid>
             </Grid>
+            
             <Footer/> 
         </div>
         
