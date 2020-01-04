@@ -49,7 +49,7 @@ export default function Footer(){
                 display: flex;
                 justify-content:space-evenly;
                 }
-                a {
+                li > a {
                 color: black;
                 text-decoration: none;
                 font-weight: 400;

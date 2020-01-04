@@ -319,7 +319,6 @@ const getFeatured = async() => {
 
 const getFooterInfo = async(slug) => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/pages?slug=${slug}`)
-    console.log(`${baseurl}wp-json/wp/v2/pages?slug=${slug}`)
     const data = await res.json()
     return data[0]
 }

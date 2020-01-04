@@ -77,7 +77,7 @@ export default function Contact(props) {
             },
             processNode: function(node,children){
                 //handle the captions
-                if (node && node.name == 'a'){
+                if (node && node.name == "a"){
                     return <div>
                         <Card>
                             <a href={`//${node['attribs'].href}`} style={{color:'inherit'}}>
@@ -115,6 +115,7 @@ export default function Contact(props) {
                 )
             }
         },
+        
         {
           // Anything else
           shouldProcessNode: function (node) {
