@@ -3,7 +3,7 @@ import BlogCards from '../blogcards'
 export default function Related(props) {
     return(
         <>
-            {props.related != undefined || props.related.length != 0 ?
+            {props.related != undefined && props.related.length != 0 ?
                 <Grid
                 container
                 direction="row"
