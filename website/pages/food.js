@@ -7,7 +7,7 @@ import Footer from '../src/components/footer'
 export default function Food(props) {
     const foodguides = props.foodguides
     return(
-        <div style={{marginTop:'10vh',marginLeft:'6%',marginRight:'6%'}}>
+        <div>
             <Head>
                 <title> Travel Guides - The Layover Life</title>
                 <meta name="description" content="All the travel guides that you need"/>
@@ -24,7 +24,8 @@ export default function Food(props) {
                 <Grid item md={12}>
                     <Grid 
                     container
-                    spacing={2}>
+                    spacing={2}
+                    style={{marginLeft:'6%',marginRight:'6%'}}>
                         {foodguides.map((post) => {
                             return(
                                 <Grid item xs={12} md={4}>

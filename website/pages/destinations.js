@@ -9,7 +9,7 @@ import BlogCards from '../src/components/blogcards'
 export default function Destinations(props) {
     const [destination,setDestination] = useState(0)
     return(
-        <div style={{marginTop:'10vh'}}>
+        <div>
             <Head>
                 <title> Destinations </title>
                 <meta name="description" content="All the countries that we cover"/>

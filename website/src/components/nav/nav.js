@@ -3,10 +3,10 @@ import {AppBar, Typography,Tabs,Tab} from '@material-ui/core'
 
 import "./style.css"
 const links = [
-  {href:'/',label:'AIRWAITRESS'},
   { href:'/destinations',label:'DESTINATIONS'},
   { href:'/travelguides',label:'TRAVEL GUIDES'},
   { href: '/food', label: 'FOOD' },
+  {href:'/crewlife',label:'CREWLIFE'},
   
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`
@@ -26,7 +26,23 @@ export default function Nav() {
   };
   return(
     <div style={{marginBlockEnd:'1vh'}}>
-      <AppBar color="primary">
+      <AppBar 
+      position="relative"
+      color="primary">
+      <div style={{
+        display:'flex',
+        justifyContent:'center'}}>
+        <a href="/">
+          <img 
+            style={{
+              maxHeight:'20vh',
+              maxWidth:'20vw',
+              paddingTop:'2vh',
+              marginBottom:'1.5vh'}}
+            src="/static/images/smolidays-logo-1.png" 
+            alt="smolidays-logo"/>
+        </a>
+      </div>
         <nav id="desktopNav">
           <ul>
             {links.map(({ key, href, label }) => (

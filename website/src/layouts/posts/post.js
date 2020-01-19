@@ -163,13 +163,13 @@ export default function Post(props) {
         return true
     }
     return (
-        <div style={{marginTop:'10vh'}}>
+        <div>
             <Head>
                 <title>{parser.parse(post.title.rendered)}</title>
                 <meta name="description" content={post.acf.excerpt}/>
             </Head>
             <Nav/>
-            <div style={{marginLeft:'21%',marginRight:'21%'}}>
+            <div style={{marginLeft:'21%',marginRight:'21%',marginTop:'5vh'}}>
                 <Typography component={'span'} variant="h1" component="h1" style={{fontSize:'40px'}}>
                     <strong>{parser.parse(post.title.rendered)}</strong>
                 </Typography>
