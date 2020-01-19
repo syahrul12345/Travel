@@ -17,7 +17,7 @@ Post.getInitialProps = async(context) => {
         const month = d.getMonth()
         const day = d.getDate()
         const year = d.getFullYear().toString().substr(2)
-        return day + ' ' + monthNames[month] + ' ' + year
+        return day + ' ' + monthNames[month] + ' 20' + year
     }
     const path = context.asPath;
     const res = await Promise.all([getPostInfo(path)])

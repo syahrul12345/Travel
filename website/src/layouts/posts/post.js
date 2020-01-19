@@ -6,7 +6,7 @@ import Footer from '../../components/footer'
 import Related from '../../components/related'
 import Facebook from '../../components/facebook'
 import {FacebookProvider,Share} from 'react-facebook'
-import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea } from '@material-ui/core'
+import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import './style.css'
 const useStyles = makeStyles(theme => ({
@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1),
     },
+    bigAvatar: {
+        width: 80,
+        height: 80,
+    }
   }));
 
 export default function Post(props) {
@@ -93,7 +97,10 @@ export default function Post(props) {
                 //handle the captions
                 if (node && node.name == 'a'){
                     return <div>
-                        <Card>
+                        <Card
+                        style={{
+                            marginTop:'5vh',
+                            marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
                             <a href={`//${node['attribs'].href}`} style={{color:'inherit'}}>
                                 <CardActionArea>
                                     <CardMedia
@@ -107,7 +114,10 @@ export default function Post(props) {
                 }else{
                     return(
                         <div>
-                            <Card>
+                            <Card
+                            style={{
+                                marginTop:'5vh',
+                                marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
                                 <CardMedia
                                 image={node['attribs'].src}
                                 style={{height:'50vh'}}/>
@@ -125,7 +135,18 @@ export default function Post(props) {
             },
             processNode: function(node,children){
                 return(
-                    <Typography component={'span'} variant="caption" align="center">{node.data}</Typography>
+                    <Grid
+                    container
+                    alignContent="center"
+                    alignItems="center"
+                    justify="center"
+                    style={{marginBottom:'3vh'}}>
+                        <Typography 
+                        component={'span'} 
+                        variant="caption" 
+                        align="center"
+                        style={{textAlign:"center",fontSize:'0.85rem'}}><i>{node.data}</i></Typography>
+                    </Grid>
                 )
             }
         },
@@ -197,20 +218,36 @@ export default function Post(props) {
                     {parser.parseWithInstructions(post.content.rendered,isValidNode,processingInstructions)}
                 </Typography>
                 {/* Profile gird */}
-                <div style={{display:'flex',justifyContent:'space-between',paddingTop:'1vh'}}>
-                    <div style={{display:'flex',justifyContent:'space-between'}}>
-                        <Avatar className="bigAvatar" alt={post.author.name} src={post.author.avatar_urls[96]}/>
-                        <div style={{display:'flex',paddingLeft:'1vh',flexDirection:'column'}}>
+                <Paper style={{
+                    display:'flex',
+                    justifyContent:'flex-start',
+                    paddingLeft:'5vh',
+                    paddingTop:'3vh',
+                    paddingBottom:'3vh',
+                    marginBottom:'10vh',
+                    }}>
+                    <div style={{
+                        display:'flex',
+                        justifyContent:'space-between',
+                        alignContent:'center',
+                        alignItems:'center'}}>
+                        <Avatar
+                        alt={post.author.name} 
+                        src={post.author.avatar_urls[96]}
+                        className={classes.bigAvatar}/>
+                        <div style={{display:'flex',paddingLeft:'4vh',flexDirection:'column'}}>
                             <Typography component={'span'} variant="subtitle1">
-                                {post.author.name}
+                                <b>{post.author.name}</b>
                             </Typography>
-                            <Typography component={'span'} variant="subtitle2">
-                                {post.author.description}
-                            </Typography>
-                        </div>
+                            <Typography 
+                            component={'span'} 
+                            variant="subtitle2">
+                                YEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEA HOOYEAHOOYEAHOOYEAHOO YEAHOOYEAHOOYEAHOOYEAHO OYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOO
+                        </Typography>
+                        </div>  
                     </div>
-                </div>
-            <div style={{display:'flex',justifyContent:'center',justifyItems:'center'}}>
+                </Paper>
+            <div style={{display:'flex',justifyContent:'flex-start',justifyItems:'flex-start'}}>
                 <Facebook/>
             </div>
             </div>

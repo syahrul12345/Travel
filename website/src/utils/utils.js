@@ -175,18 +175,23 @@ const getCountryInfo = async(destination) => {
 }
 
 //Get the related posts for a particular country
-const getRelated = async(destination,relation) => {
+const getRelated = async(currentPostId,destination,relation) => {
     destination = destination.replace(/\s+/g, '-')
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
-    const data = await res.json()
-    const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=6`)
+    //  Link below for future use when we want to use country + category
+    // const data = await res.json()
+    // const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=6`)
+    const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&per_page=6`)
     const posts = await catRes.json()
-    const cleanedRelated = posts.map((post) => {
-        return {
-            id:post.id,
-            title:post.title.rendered,
-            link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
+    let cleanedRelated = []
+    posts.forEach(post => {
+        if (post.id != currentPostId) {
+            cleanedRelated.push({
+                id:post.id,
+                title:post.title.rendered,
+                link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
+            })
         }
     })
     return cleanedRelated
@@ -207,7 +212,7 @@ const getPostInfo = async(link) => {
             post["author"] = author
             //Change to HTTPS. lol
             author.avatar_urls["96"] = author.avatar_urls["96"].slice(0,4) + "s" + author.avatar_urls["96"].slice(4)
-            const relatedPosts = await getRelated(post["country"],relation)
+            const relatedPosts = await getRelated(post.id,post["country"],relation)
             //lets get the related posts
             return {
                 post,
