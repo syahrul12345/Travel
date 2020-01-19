@@ -242,7 +242,7 @@ export default function Post(props) {
                             <Typography 
                             component={'span'} 
                             variant="subtitle2">
-                                YEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEA HOOYEAHOOYEAHOOYEAHOO YEAHOOYEAHOOYEAHOOYEAHO OYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOOYEAHOO
+                                {post.author.description}
                         </Typography>
                         </div>  
                     </div>
