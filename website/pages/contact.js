@@ -86,12 +86,10 @@ export default function Contact(props) {
                         label="Message"
                         style={{minWidth:'40vw' }}
                         placeholder="And Finally Your Grand Thoughts!"
-                        fullWidth
                         multiline
                         rows="6"
                         margin="normal"
                         onChange={handleTextFieldChange('message')}
-                        variant="outlined"
                         InputLabelProps={{
                             shrink: true,
                         }}/>

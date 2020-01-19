@@ -104,7 +104,6 @@ export default function Partner(props) {
                         rows="6"
                         margin="normal"
                         onChange={handleTextFieldChange('message')}
-                        variant="outlined"
                         InputLabelProps={{
                             shrink: true,
                         }}/>
