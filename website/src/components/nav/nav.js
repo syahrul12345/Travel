@@ -48,10 +48,13 @@ export default function Nav() {
             {links.map(({ key, href, label }) => (
               <li key={key}>
                 <a href={href}>
-                  <Typography
-                  variant="body2">
-                    {label}
-                  </Typography>
+                  <p style={{
+                    fontFamily:'Melon hunter',
+                    fontSize:'30px',
+                    marginBlockStart:'5px',
+                    marginBlockEnd:'5px'}}>
+                    <strong>{label}</strong>
+                  </p>
                 </a>
               </li>
             ))}

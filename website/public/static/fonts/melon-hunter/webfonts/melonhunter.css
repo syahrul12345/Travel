@@ -1,0 +1,8 @@
+@font-face
+{
+    font-family: 'Melon hunter';
+    src:  url('melonhunter.eot'),
+          url('melonhunter.eot?#') format('embedded-opentype'),
+          url('melonhunter.woff') format('woff'),
+          url('melonhunter.eot') format('truetype');
+}
