@@ -28,7 +28,15 @@ export default function CountryCard(props){
             }}
             variant="h4" 
             component="p">
-              <span style={{borderTop:'5px solid',borderBottom:'5px solid'}}><strong>{props.title}</strong></span>
+                <span style={{
+                  fontFamily:'Melon hunter',
+                  fontSize:'50px',
+                  lineHeight:'10px',
+                  borderTop:'3px solid',
+                  borderBottom:'3px solid',
+                  }}>
+                    <strong>{props.title}</strong>
+                </span>
             </Typography>
           </CardActionArea>
           </Link>

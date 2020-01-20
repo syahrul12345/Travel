@@ -3,6 +3,9 @@
         /* autoprefixer: off */
         -webkit-box-orient: vertical !important;
         /* autoprefixer: on */
+        font-family: 'Melon Hunter' !important;
+        font-size: 1.75rem !important;
+        font-weight: 400 !important;
         overflow:hidden;
         text-overflow: ellipsis;
         -moz-box-orient: vertical !important;

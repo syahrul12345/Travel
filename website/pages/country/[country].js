@@ -50,16 +50,29 @@ export default function CountryPage(props) {
                         }}
                         variant="h1" 
                         component="h2">
-                            <span style={{borderTop:'10px solid',borderBottom:'10px solid'}}><strong>{props.info[0].title.rendered}</strong></span>
+                            <span style={{
+                                borderTop:'10px solid',
+                                borderBottom:'10px solid',
+                                fontFamily:'Melon Hunter',
+                                fontSize:'8rem'}}><strong>{props.info[0].title.rendered}</strong></span>
                         </Typography>
                     </Grid>
                     <Grid item xs={12} style={{paddingTop:'3vh'}}>
-                        <Typography variant="body1" style={{textAlign:'left',paddingLeft:'20%',paddingRight:'20%',paddingBottom:'4vh'}}>
+                        <Typography 
+                            variant="body1" 
+                            style={{
+                                textAlign:'left',
+                                paddingLeft:'20%',
+                                paddingRight:'20%',
+                                paddingBottom:'4vh',
+                                fontFamily:'Melon Hunter',
+                                fontSize:'30px',
+                                fontWeight:'900'}}>
                             {props.info[0].acf.blurb}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} style={{paddingTop:'3vh',paddingBottom:'4vh'}} align="center">
-                        <Typography variant="h4">
+                        <Typography variant="h4" style={{fontFamily:'Melon Hunter',fontSize:'5rem'}}>
                             TRAVEL INFORMATION
                         </Typography>
                     </Grid>

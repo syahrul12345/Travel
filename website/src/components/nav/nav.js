@@ -25,7 +25,7 @@ export default function Nav() {
     setAnchorEl(null);
   };
   return(
-    <div style={{marginBlockEnd:'1vh'}}>
+    <div>
       <AppBar 
       position="relative"
       color="primary">

@@ -19,8 +19,8 @@ export default function TravelGuides(props) {
             justify="center"
             style={{paddingTop:'1vh',minHeight:'93vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Travel Guides</Typography>
-                    <Typography variant="h5"> Which area should I stay? Which attractions should I visit? We've got you covered with real travellers' guides!</Typography>
+                    <Typography variant="h3" style={{marginBottom:'2vh',fontFamily:'Melon hunter',fontSize:'5rem'}}> Travel Guides</Typography>
+                    <Typography variant="h5" style={{fontFamily:'Melon hunter',fontSize:'3rem'}}> Which area should I stay? Which attractions should I visit? We've got you covered with real travellers' guides!</Typography>
                 </Grid>
                 <Grid item md={12}>
                     <Grid 
@@ -37,8 +37,8 @@ export default function TravelGuides(props) {
                     </Grid>
                 </Grid>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Packing Guides</Typography>
-                    <Typography variant="h5"> The best packing tips & tricks from the most seasoned travellers!</Typography>
+                    <Typography variant="h3" style={{marginBottom:'2vh',fontFamily:'Melon hunter',fontSize:'5rem'}}> Packing Guides</Typography>
+                    <Typography variant="h5" style={{fontFamily:'Melon hunter',fontSize:'3rem'}}> The best packing tips & tricks from the most seasoned travellers!</Typography>
                 </Grid>
                 <Grid item md={12}>
                     <Grid container>
