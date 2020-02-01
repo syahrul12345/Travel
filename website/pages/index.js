@@ -60,8 +60,7 @@ const Index = (props) => {
                 </div>
                 <div 
                 className="mobileGridList">
-                  <GridList style={{
-                    width:'100%',
+                  <GridList spacing={4} style={{
                     flexWrap: 'nowrap',
                     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
                     transform: 'translateZ(0)',
@@ -73,7 +72,7 @@ const Index = (props) => {
                         </GridListTile>
                     ))}
                   </GridList>
-                  <Button 
+                  {/* <Button 
                   style={{position:'absolute',bottom:'20%',left:'25%',}}
                   className="mobileSeeMore" 
                   variant="contained" >
@@ -82,7 +81,7 @@ const Index = (props) => {
                         SEE MORE ARTICLES
                       </a>
                     </Typography>
-                  </Button>
+                  </Button> */}
                 </div>
                 <Grid 
                 container 
@@ -98,31 +97,28 @@ const Index = (props) => {
                 
                   
             </Grid> 
-            <Grid container>
-              
-            </Grid> 
-            <Grid className="continentGrid" item xs={12}>
-              <Grid container spacing={2}>
-                {props.continents.map(({slug,name,text,image}) => {
-                  return(
-                    <Grid item xs={12} sm={4} key={slug} >
-                      <ContinentCard handler={setDestination} slug={slug} title={text} image={image}/>
-                    </Grid>
-                  )
-                })}
-              </Grid>
-            </Grid>
-            <Grid item className="blogGrid" xs={12}>
-              <Grid container spacing= {2}>
-                <Grid item xs={12} sm={6}>
-                  <BlogCards slug={props.featured[0].slug} title={props.featured[0].excerpt} image={props.featured[0].image} link={props.featured[0].slug} height="30vh"/>
+              {/* <Grid className="continentGrid" item xs={12}>
+                <Grid container spacing={2}>
+                  {props.continents.map(({slug,name,text,image}) => {
+                    return(
+                      <Grid item xs={12} sm={4} key={slug} >
+                        <ContinentCard handler={setDestination} slug={slug} title={text} image={image}/>
+                      </Grid>
+                    )
+                  })}
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <BlogCards slug={props.featured[1].slug} title={props.featured[1].excerpt} image={props.featured[1].image} link={props.featured[1].slug} height="50vh"/>
+              </Grid> */}
+              {/* <Grid item className="blogGrid" xs={12}>
+                <Grid container spacing= {2}>
+                  <Grid item xs={12} sm={6}>
+                    <BlogCards slug={props.featured[0].slug} title={props.featured[0].excerpt} image={props.featured[0].image} link={props.featured[0].slug} height="30vh"/>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <BlogCards slug={props.featured[1].slug} title={props.featured[1].excerpt} image={props.featured[1].image} link={props.featured[1].slug} height="50vh"/>
+                  </Grid>
                 </Grid>
+              </Grid>  */}
             </Grid>
-          </Grid> 
-        </Grid>
         <Grid container direction="row" align="right" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%'}}>
             <Grid item xs={12}>
               <Divider variant="middle" style={{margin:'0px'}}/>

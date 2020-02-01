@@ -34,7 +34,7 @@
   nav{
       display: none;
   }
-  a {
+  .menuA {
       color: black;
       text-decoration: none;
       font-weight: 400;

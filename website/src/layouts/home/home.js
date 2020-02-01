@@ -6,7 +6,7 @@ export default function HomeLayout(props) {
     return(
         <div>
             <Head>
-                <title> The Layover Life</title>
+                <title> Smolidays</title>
                 <meta name="description" content="Travel blog - from the perspective of aircrew"/>
             </Head>
             <Nav></Nav>

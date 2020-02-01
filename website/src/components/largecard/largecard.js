@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link'
-import {Grid,CardContent,CardMedia, Button,Typography,Paper, CardActionArea} from '@material-ui/core'
+import {Grid,CardContent,CardMedia,Typography,Card, CardActionArea} from '@material-ui/core'
 import HtmlToReact from 'html-to-react'
 import './style.css'
   
@@ -10,12 +10,13 @@ export default function BlogCards(props) {
     return(
             <Grid item xs={12} sm={8}>
                 <Link href={`\\${props.link}`}>
-                <CardActionArea
-                >
+                <CardActionArea>
+                <Card>
                 <CardMedia 
                 className="media"
                 style={{height:props.height}}
                 image={props.image}/>
+                </Card>
                 <CardContent
                 className="contentCardDesktop" 
                 >
@@ -47,19 +48,28 @@ export default function BlogCards(props) {
                             component="p"
                             color="primary"
                             >
-                            <span style={{backgroundColor:'black'}}> {parser.parse(props.title)}</span>
+                            <span style={{
+                                backgroundColor:'black',
+                                fontFamily:'Melon hunter',
+                                fontSize:'50px',}}> {parser.parse(props.title)}</span>
                         </Typography>
                         <Typography
                             variant="h5"
                             component="p"
                             color="primary"
                             >
-                            <span style={{backgroundColor:'black'}} >{parser.parse(props.excerpt)}</span>
+                            <span style={{
+                                backgroundColor:'black',
+                                fontFamily:'Melon hunter',
+                                fontSize:'30px'}} >{parser.parse(props.excerpt)}</span>
                         </Typography>
                         <Typography 
                         variant="subtitle1"
                         color="primary">
-                            <span style={{backgroundColor:'black'}}>{props.country}</span>
+                            <span style={{
+                                backgroundColor:'black',
+                                fontFamily:'Melon hunter',
+                                fontSize:'20px'}}>In {props.country}</span>
                         </Typography>
                         </div>
                     </Link>

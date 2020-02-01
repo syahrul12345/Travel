@@ -105,7 +105,8 @@ export default function Post(props) {
                                 <CardActionArea>
                                     <CardMedia
                                     image={children[0].props.src}
-                                    style={{height:'50vh'}}/>
+                                    className="images"
+                                    />
                                 </CardActionArea>
                             </a>
                         </Card>
@@ -120,7 +121,8 @@ export default function Post(props) {
                                 marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
                                 <CardMedia
                                 image={node['attribs'].src}
-                                style={{height:'50vh'}}/>
+                                className="images"
+                                />
                             </Card>
                         </div>
                     )
@@ -169,7 +171,7 @@ export default function Post(props) {
                 <meta name="description" content={post.acf.excerpt}/>
             </Head>
             <Nav/>
-            <div style={{marginLeft:'21%',marginRight:'21%',marginTop:'5vh'}}>
+            <div className="titleGrid" >
                 <Typography component={'span'} variant="h1" component="h1" style={{fontSize:'40px'}}>
                     <strong>{parser.parse(post.title.rendered)}</strong>
                 </Typography>
@@ -208,7 +210,7 @@ export default function Post(props) {
                 style={{height:'60vh'}}/>
             </div> */}
                 {/* Content grid */}
-            <div style={{marginLeft:'21%',marginRight:'21%'}}>
+            <div className="contentGrid" >
                 <Card>
                     <CardMedia
                     image={post.acf.featured_image.sizes["2048x2048"]}
@@ -251,7 +253,7 @@ export default function Post(props) {
                 <Facebook/>
             </div>
             </div>
-            <div style={{marginLeft:'10%',marginRight:'10%'}}>
+            <div className="relatedGrid" >
                 <Related related={props.related}/>
             </div>
             <Footer/>

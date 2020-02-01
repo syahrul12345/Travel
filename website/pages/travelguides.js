@@ -41,7 +41,9 @@ export default function TravelGuides(props) {
                     <Typography variant="h5" style={{fontFamily:'Melon hunter',fontSize:'3rem'}}> The best packing tips & tricks from the most seasoned travellers!</Typography>
                 </Grid>
                 <Grid item md={12}>
-                    <Grid container>
+                    <Grid container
+                    spacing={2}
+                    style={{marginLeft:'6%',marginRight:'6%'}}>
                         {packingguides.map((post) => {
                             return(
                                 <Grid item xs={12} md={4}>

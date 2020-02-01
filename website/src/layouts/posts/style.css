@@ -1,3 +1,44 @@
+@media only screen and (min-width:786px){
+    .titleGrid {
+        margin-left: 21%;
+        margin-right: 21%;
+        margin-top: 5vh;
+    }
+    .contentGrid {
+        margin-left: 21%;
+        margin-right: 21%;
+    }
+    .relatedGrid {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .images {
+        height:50vh
+    }
+}
+@media only screen and (max-width:786px){
+    .titleGrid {
+        margin-left: 1%;
+        margin-right: 1%;
+        margin-top: 2vh;
+    }
+    .contentGrid {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .relatedGrid {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    figure {
+        margin: 0 0 0 0; 
+    }
+    .images {
+        height:30vh;
+        width:100% !important;
+    }
+}
+
 .bigAvatar {
     height: 120 !important;
     width: 120 !important;
