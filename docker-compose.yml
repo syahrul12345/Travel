@@ -33,6 +33,7 @@ services:
         build: ./website
         environment: 
             -   WORDPRESS_URL=${WORDPRESS_URL}
+            -   BASE_IMAGE_URL=${BASE_IMAGE_URL}
         expose:
             - '3000'
         ports:
