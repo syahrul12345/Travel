@@ -8,10 +8,16 @@ let imageBaseurl = ''
 
 if (process.env.NODE_ENV == 'production') {
     baseurl = 'http://wp-headless:8080/'
-    imageBaseurl = 'http://127.0.0.1:8080'
+    // Try to read from the environment. It would be ok if its in the docker image
+    if(process.env.WORDPRESS_URL) {
+        imageBaseurl = process.env.WORDPRESS_URL
+    }else{
+        imageBaseurl = 'http://127.0.0.1:8080/'
+    }
+    
 }else{
     baseurl = 'http://127.0.0.1:8080/'
-    imageBaseurl = 'http://127.0.0.1:8080'
+    imageBaseurl = 'http://127.0.0.1:8080/'
 }
 
 const populateCarousel = async() => {
@@ -55,7 +61,7 @@ const populatePosts = async(count) => {
                 slug:post.slug,
                 title:post.title.rendered,
                 excerpt:post.acf.excerpt,
-                image:`${post.acf.featured_image.sizes['2048x2048']}`,
+                image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                 category:post.categories,
                 country:destinationMap[post.acf.country].slug,
@@ -89,7 +95,7 @@ const getNextPosts =async(pageID) => {
                 slug:post.slug,
                 title:post.title.rendered,
                 excerpt:post.acf.excerpt,
-                image:`${post.acf.featured_image.sizes['2048x2048']}`,
+                image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                 country:destinationMap[post.acf.country]
             }))
@@ -113,7 +119,7 @@ const populateDestinations = async () => {
         const destinationData = data.map((post) => ({
             slug:post.slug,
             title:post.title.rendered,
-            image:`${post.acf.background_image.sizes["medium_large"]}`,
+            image:`${imageBaseurl}${post.acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             continent:post.acf.continent
         }))
         return{
@@ -134,7 +140,7 @@ const getDestinationBanner = async() => {
     try{
         const destinationBanner = data.map((banner) => ({
             text:banner.acf.overlay_text,
-            image:`${post.acf.featured_image.sizes['2048x2048']}`,
+            image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
         }))
         return{
             ok:true,
@@ -164,7 +170,7 @@ const getCountryInfo = async(destination) => {
             slug:post.slug,
             title:post.title.rendered,
             id:post.id,
-            image:`${post.acf.featured_image.sizes['2048x2048']}`,
+            image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
             category:post.categories
         }
@@ -179,7 +185,7 @@ const getCountryInfo = async(destination) => {
         }
     })
     //add the posts information to the data
-    data[0].acf.background_image.sizes['2048x2048'] = data[0].acf.background_image.sizes['2048x2048']
+    data[0].acf.background_image.sizes['2048x2048'] = imageBaseurl +data[0].acf.background_image.sizes['2048x2048']
     data[0].posts = posts
     data[0].categories = categories
     return data
@@ -201,7 +207,7 @@ const getRelated = async(currentPostId,destination,relation) => {
                 id:post.id,
                 title:post.title.rendered,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-                image:`${post.acf.featured_image.sizes['2048x2048']}`
+                image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
             })
         }
     })
@@ -218,7 +224,7 @@ const getPostInfo = async(link) => {
         .then(async (res) => {
             const author = await res[0].json()
             const country = await res[1].json()
-            post.acf.featured_image.sizes["2048x2048"] = post.acf.featured_image.sizes["2048x2048"]
+            post.acf.featured_image.sizes["2048x2048"] = imageBaseurl + post.acf.featured_image.sizes["2048x2048"]
             post["country"] = country[0].title.rendered
             post["author"] = author
             //Change to HTTPS. lol
@@ -293,7 +299,7 @@ const populateContinents = async() => {
             slug:continent.slug,
             name:continent.title.rendered,
             text:continent.acf.overlay_text,
-            image:`${continent.acf.image.sizes.large}`,
+            image:`${imageBaseurl}${continent.acf.image.sizes.large.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
         }
     })
     return {
@@ -308,7 +314,7 @@ const getPostsByCategory = async(category,amount) => {
         return {
             slug:post.slug,
             title:post.title.rendered,
-            image:`${post.acf.featured_image.sizes['2048x2048']}`,
+            image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
         }
     })
@@ -324,7 +330,7 @@ const getFeatured = async() => {
             slug:feat.slug,
             title:feat.title.rendered,
             excerpt:feat.acf.excerpt,
-            image:`${feat.acf.image.sizes['2048x2048']}`,
+            image:`${imageBaseurl}${feat.acf.image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
         }
     })
     return {
