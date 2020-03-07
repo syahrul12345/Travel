@@ -1,5 +1,5 @@
 import {useState,useEffect} from 'react'
-import {Grid,Typography,Button,Divider,IconButton,GridList,GridListTile,GridListTileBar} from '@material-ui/core'
+import {Grid,Typography,Button,Divider,IconButton,GridList,GridListTile,GridListTileBar,Link} from '@material-ui/core'
 import LeftArrow from '@material-ui/icons/ArrowBack'
 import RightArrow  from '@material-ui/icons/ArrowForward'
 import HomeLayout from '../src/layouts/home'
@@ -29,7 +29,6 @@ const Index = (props) => {
       setPost(currentPost+1)
     }
   }
-  
   return (
     <HomeLayout data={props.carouselData}>
         <Grid 
@@ -89,9 +88,9 @@ const Index = (props) => {
                 className="seeMoreContainer"
                 >
                   <Typography className="desktopSeeMore" variant="subtitle1" component="p">
-                    <a href={`\\articles`} style={{textDecoration:'none'}}>
+                    <Link href={`\\articles`} style={{textDecoration:'none',color:'black'}}>
                       SEE MORE ARTICLES
-                    </a>
+                    </Link>
                   </Typography>
                 </Grid>
                 

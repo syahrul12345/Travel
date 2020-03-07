@@ -113,7 +113,7 @@ const populateDestinations = async () => {
         const destinationData = data.map((post) => ({
             slug:post.slug,
             title:post.title.rendered,
-            image:`${post.acf.background_image.sizes['2048x2048']}`,
+            image:`${post.acf.background_image.sizes["medium_large"]}`,
             continent:post.acf.continent
         }))
         return{
