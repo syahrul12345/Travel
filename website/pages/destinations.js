@@ -20,13 +20,13 @@ export default function Destinations(props) {
             justify="center"
             style={{paddingTop:'1vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh',fontFamily:'Melon hunter',fontSize:'5rem'}}> Destinations </Typography>
-                    <Typography variant="h5" style={{fontFamily:'Melon hunter',fontSize:'3rem'}}> Where is your calling? </Typography>
+                    <Typography variant="h3" style={{marginBottom:'5vh'}}> Destinations </Typography>
+                    <Typography variant="h5"> Where is your calling? </Typography>
                 </Grid>
             </Grid>
             <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
             <Grid item align="center" md={12} style={{marginTop:'10vh',marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'5vh',fontFamily:'Melon hunter',fontSize:'5rem'}}> Latest Travel Itineraries </Typography>
+                    <Typography variant="h3" style={{marginBottom:'5vh'}}> Latest Travel Itineraries </Typography>
                    
                     
             </Grid>

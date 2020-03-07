@@ -18,8 +18,8 @@ export default function Food(props) {
             justify="center"
             style={{paddingTop:'1vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh',fontFamily:'Melon hunter',fontSize:'5rem'}}> Food Guides</Typography>
-                    <Typography variant="h5" style={{fontFamily:'Melon hunter',fontSize:'3rem'}}> The best restaurants, cafes, street food, and hidden spots uncovered by the most passionate foodies around the world!</Typography>
+                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Food Guides</Typography>
+                    <Typography variant="h5"> The best restaurants, cafes, street food, and hidden spots uncovered by the most passionate foodies around the world!</Typography>
                 </Grid>
                 <Grid item md={12}>
                     <Grid 

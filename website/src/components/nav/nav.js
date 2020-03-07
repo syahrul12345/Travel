@@ -47,7 +47,7 @@ export default function Nav() {
     prevOpen.current = open;
   }, [open]);
   return(
-    <div>
+    <div style={{marginBlockEnd:'1vh'}}>
       <AppBar 
       position="relative"
       color="primary">

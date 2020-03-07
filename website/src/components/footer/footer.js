@@ -13,18 +13,16 @@ const links = [
 export default function Footer(){
     return(
             <nav style={{marginRight:'20%',marginLeft:'20%',marginTop:'2vh'}}>
-                <Typography variant="subtitle1" style={{textAlign:"center",fontFamily:'Melon Hunter',fontSize:'2rem'}}>© Copyright 2020 - Smolidays. All Rights Reserved.</Typography>
+                <Typography variant="subtitle1" style={{textAlign:"center"}}>© Copyright 2020 - The Layover.Life</Typography>
+                <Typography variant="subtitle2" style={{textAlign:"center"}}>All Rights Reserved.</Typography>
             <ul>
                 {links.map(({ key, href, label }) => (
                 <li key={key}>
                     <a href={href}>
-                    <p style={{
-                    fontFamily:'Melon hunter',
-                    fontSize:'30px',
-                    marginBlockStart:'5px',
-                    marginBlockEnd:'5px'}}>
-                    <strong>{label}</strong>
-                  </p>
+                    <Typography
+                    variant="body2">
+                        {label}
+                    </Typography>
                     </a>
                 </li>
                 ))}
