@@ -1,7 +1,19 @@
 import fetch from 'isomorphic-unfetch';
 import axios from 'axios'
 //const baseurl = 'http://52.220.139.249:8080/'
-const baseurl = 'http://127.0.0.1:8080/'
+// const baseurl = 'http://127.0.0.1:8080/'
+
+let baseurl =  ''
+let imageBaseurl = ''
+
+if (process.env.NODE_ENV == 'production') {
+    baseurl = 'http://wp-headless:8080/'
+    imageBaseurl = 'http://127.0.0.1:8080'
+}else{
+    baseurl = 'http://127.0.0.1:8080/'
+    imageBaseurl = 'http://127.0.0.1:8080'
+}
+
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()
@@ -43,7 +55,7 @@ const populatePosts = async(count) => {
                 slug:post.slug,
                 title:post.title.rendered,
                 excerpt:post.acf.excerpt,
-                image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+                image:`${post.acf.featured_image.sizes['2048x2048']}`,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                 category:post.categories,
                 country:destinationMap[post.acf.country].slug,
@@ -77,7 +89,7 @@ const getNextPosts =async(pageID) => {
                 slug:post.slug,
                 title:post.title.rendered,
                 excerpt:post.acf.excerpt,
-                image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+                image:`${post.acf.featured_image.sizes['2048x2048']}`,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
                 country:destinationMap[post.acf.country]
             }))
@@ -101,7 +113,7 @@ const populateDestinations = async () => {
         const destinationData = data.map((post) => ({
             slug:post.slug,
             title:post.title.rendered,
-            image:`${baseurl}${post.acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${post.acf.background_image.sizes['2048x2048']}`,
             continent:post.acf.continent
         }))
         return{
@@ -122,7 +134,7 @@ const getDestinationBanner = async() => {
     try{
         const destinationBanner = data.map((banner) => ({
             text:banner.acf.overlay_text,
-            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${post.acf.featured_image.sizes['2048x2048']}`,
         }))
         return{
             ok:true,
@@ -152,7 +164,7 @@ const getCountryInfo = async(destination) => {
             slug:post.slug,
             title:post.title.rendered,
             id:post.id,
-            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${post.acf.featured_image.sizes['2048x2048']}`,
             link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
             category:post.categories
         }
@@ -189,7 +201,7 @@ const getRelated = async(currentPostId,destination,relation) => {
                 id:post.id,
                 title:post.title.rendered,
                 link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-                image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
+                image:`${post.acf.featured_image.sizes['2048x2048']}`
             })
         }
     })
@@ -206,7 +218,7 @@ const getPostInfo = async(link) => {
         .then(async (res) => {
             const author = await res[0].json()
             const country = await res[1].json()
-            post.acf.featured_image.sizes["2048x2048"] = baseurl + post.acf.featured_image.sizes["2048x2048"].replace(/^(?:\/\/|[^\/]+)*\//, "")
+            post.acf.featured_image.sizes["2048x2048"] = post.acf.featured_image.sizes["2048x2048"]
             post["country"] = country[0].title.rendered
             post["author"] = author
             //Change to HTTPS. lol
@@ -281,7 +293,7 @@ const populateContinents = async() => {
             slug:continent.slug,
             name:continent.title.rendered,
             text:continent.acf.overlay_text,
-            image:`${baseurl}${continent.acf.image.sizes.large.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${continent.acf.image.sizes.large}`,
         }
     })
     return {
@@ -296,7 +308,7 @@ const getPostsByCategory = async(category,amount) => {
         return {
             slug:post.slug,
             title:post.title.rendered,
-            image:`${baseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${post.acf.featured_image.sizes['2048x2048']}`,
             link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
         }
     })
@@ -312,7 +324,7 @@ const getFeatured = async() => {
             slug:feat.slug,
             title:feat.title.rendered,
             excerpt:feat.acf.excerpt,
-            image:`${baseurl}${feat.acf.image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            image:`${feat.acf.image.sizes['2048x2048']}`,
         }
     })
     return {

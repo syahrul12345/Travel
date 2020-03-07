@@ -8,6 +8,8 @@ services:
             - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
             - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
             - MYSQL_USER=${WORDPRESS_DB_USER}
+        volumes: 
+            - mysqlvolume:/var/lib/mysql
         image: mariadb
         ports:
             - '3307:3306'
@@ -28,16 +30,32 @@ services:
             - ./docker/airwaitress.wordpress.xml:/var/www/airwaitress.wordpress.xml
             - ./docker/plugins:/var/www/plugins
     website:
-        command: bash -c 'yarn && yarn start'
-        container_name: website
-        environment:
+        build: ./website
+        environment: 
             -   WORDPRESS_URL=${WORDPRESS_URL}
         expose:
             - '3000'
-        image: node
         ports:
             - '3000:3000'
-        user: node
-        volumes:
-            - ./website:/home/node/app
-        working_dir: /home/node/app
+        links:
+            - wp-headless
+        
+    # website:
+    #     command: bash -c 'yarn && yarn start'
+    #     container_name: website
+    #     environment:
+    #         -   WORDPRESS_URL=${WORDPRESS_URL}
+    #     expose:
+    #         - '3000'
+    #     image: node
+    #     ports:
+    #         - '3000:3000'
+    #     user: node
+    #     volumes:
+    #         - ./website:/home/node/app
+    #     working_dir: /home/node/app
+    #     links: 
+    #         - wp-headless
+volumes: 
+    mysqlvolume:
+    wordpressvolume:
