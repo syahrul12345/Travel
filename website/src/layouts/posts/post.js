@@ -96,6 +96,19 @@ export default function Post(props) {
             processNode: function(node,children){
                 //handle the captions
                 if (node && node.name == 'a'){
+                    // check if https if not ignore
+                    let url = children[0].props.src
+                    // check https. Only load https content from outside sites, so if its not https, it means its local
+                    let isHttps = url.substring(0,5) === 's' ? true : false
+                    if (!isHttps) {
+                        // check if its in production or not
+                        let imageBaseurl = ''
+                        if(process.env.BASE_IMAGE_URL) {
+                            // replace if it is
+                            url = process.env.BASE_IMAGE_URL + url.replace(/^(?:\/\/|[^\/]+)*\//, "")
+                        }
+                    }
+
                     return <div>
                         <Card
                         style={{
@@ -104,7 +117,7 @@ export default function Post(props) {
                             <a href={`//${node['attribs'].href}`} style={{color:'inherit'}}>
                                 <CardActionArea>
                                     <CardMedia
-                                    image={children[0].props.src}
+                                    image={url}
                                     className="images"
                                     />
                                 </CardActionArea>
@@ -113,6 +126,17 @@ export default function Post(props) {
                         
                     </div>
                 }else{
+                    let url = node['attribs'].src
+                    // check https. Only load https content from outside sites, so if its not https, it means its local
+                    let isHttps = url.substring(0,5) === 'https' ? true : false
+                    if (!isHttps) {
+                        // check if its in production or not
+                        let imageBaseurl = ''
+                        if(process.env.BASE_IMAGE_URL) {
+                            // replace if it is
+                            url = process.env.BASE_IMAGE_URL + url.replace(/^(?:\/\/|[^\/]+)*\//, "")
+                        }
+                    }
                     return(
                         <div>
                             <Card
@@ -120,7 +144,7 @@ export default function Post(props) {
                                 marginTop:'5vh',
                                 marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
                                 <CardMedia
-                                image={node['attribs'].src}
+                                image={url}
                                 className="images"
                                 />
                             </Card>
