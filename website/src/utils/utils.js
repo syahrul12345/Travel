@@ -179,9 +179,8 @@ const getCountryInfo = async(destination) => {
         }
     })
     //add the posts information to the data
-    data[0].acf.background_image.sizes['2048x2048'] = baseurl + data[0].acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")
+    data[0].acf.background_image.sizes['2048x2048'] = data[0].acf.background_image.sizes['2048x2048']
     data[0].posts = posts
-    console.log(data[0].acf.background_image)
     data[0].categories = categories
     return data
 }
