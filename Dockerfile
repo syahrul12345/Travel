@@ -2,6 +2,14 @@ FROM wordpress
 
 RUN sed -i 's/80/8080/' /etc/apache2/ports.conf /etc/apache2/sites-enabled/000-default.conf
 RUN mv "$PHP_INI_DIR"/php.ini-development "$PHP_INI_DIR"/php.ini
+
+# COPY THE FILES
+COPY ./wordpress /var/www/html
+COPY ./docker/install_wordpress.sh /usr/local/bin/install_wordpress
+COPY ./docker/migratedb_import.sh /usr/local/bin/migratedb_import
+COPY ./docker/airwaitress.wordpress.xml /var/www/airwaitress.wordpress.xml
+COPY ./docker/plugins /var/www/plugins
+
 COPY php.ini "$PHP_INI_DIR"/php.ini
 
 # install_wordpress.sh & misc. dependencies
