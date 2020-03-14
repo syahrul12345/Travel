@@ -41,6 +41,5 @@ RUN sudo -u www-data composer global require \
 RUN chown -R www-data:www-data /var/www/html
 # include composer-installed executables in $PATH
 #copy ini file
-
 ENV PATH="/var/www/.composer/vendor/bin:${PATH}"
 
