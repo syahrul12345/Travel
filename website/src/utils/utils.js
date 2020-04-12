@@ -1,7 +1,5 @@
 import fetch from 'isomorphic-unfetch';
 import axios from 'axios'
-//const baseurl = 'http://52.220.139.249:8080/'
-// const baseurl = 'http://127.0.0.1:8080/'
 
 let baseurl =  ''
 let imageBaseurl = ''
