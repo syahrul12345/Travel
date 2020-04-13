@@ -55,6 +55,11 @@ const populatePosts = async(count) => {
     })
     try{
         const postData = data.map((post) => {
+            // Safety for msising slugs
+            if(post.acf.country === false) {
+                // Set to country 453
+                post.acf.country = 453
+            }
             return {
                 slug:post.slug,
                 title:post.title.rendered,
