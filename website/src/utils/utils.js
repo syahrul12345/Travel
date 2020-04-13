@@ -21,22 +21,22 @@ if (process.env.NODE_ENV == 'production') {
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()
-    try{
-        const carouselData = data.map((carousel) => ({
-            text: carousel.title.rendered,
-            textBlurb:(carousel.acf.excerpt).replace(/<[^>]*>?/gm, ''),
-            image:carousel.acf.image.url,
-            url:carousel.acf.url,
-        }))
-        return {
-            ok:true,
-            data:carouselData
+    const carouselData = data.map((carousel) => {
+        let answer = {}
+        try {
+            answer = {
+                text: carousel.title.rendered,
+                textBlurb:(carousel.acf.excerpt).replace(/<[^>]*>?/gm, ''),
+                image:carousel.acf.image.url,
+                url:carousel.acf.url,
+            }
+            return answer
         }
-    }catch(err){
-        return {
-            ok:false,
-            data:{"error":"Failed to populate post cards"}
-        }
+        finally{}
+    })
+    return {
+        ok:true,
+        data:carouselData
     }
     
 }
@@ -53,14 +53,12 @@ const populatePosts = async(count) => {
             title:destination.title.rendered
         }
     })
-    try{
-        const postData = data.map((post) => {
-            // Safety for msising slugs
-            if(post.acf.country === false) {
-                // Set to country 453
-                post.acf.country = 453
-            }
-            return {
+    
+    const postData = data.map((post) => {
+        // Safety for msising slugs
+        let answer = {}
+        try {
+            answer = {
                 slug:post.slug,
                 title:post.title.rendered,
                 excerpt:post.acf.excerpt,
@@ -70,18 +68,17 @@ const populatePosts = async(count) => {
                 country:destinationMap[post.acf.country].slug,
                 country_normal:destinationMap[post.acf.country].title 
             }
-        })
-        return {
-            ok:true,
-            data:postData
+            return answer
         }
+        finally {}
+    })
+
+    return {
+        ok:true,
+        data:postData
     }
-    catch(err){
-        return {
-            ok:false,
-            data:{"error":err.toString()}
-        }
-    }
+   
+    
 }
 const getNextPosts =async(pageID) => {
     return new Promise(async (resolve,reject) => {
@@ -118,42 +115,45 @@ const getNextPosts =async(pageID) => {
 const populateDestinations = async () => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?per_page=100`)
     const data = await res.json()
-    try{
-        const destinationData = data.map((post) => ({
-            slug:post.slug,
-            title:post.title.rendered,
-            image:`${imageBaseurl}${post.acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
-            continent:post.acf.continent
-        }))
-        return{
-            ok:true,
-            data:destinationData
+    
+    const destinationData = data.map((post) => {
+        let answer = {}
+        try {
+            answer = {
+                slug:post.slug,
+                title:post.title.rendered,
+                image:`${imageBaseurl}${post.acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+                continent:post.acf.continent
+            }
+            return answer
         }
-    }
-    catch(err){
-        return{
-            ok:false,
-            data:{"error":err.toString()}
+        finally {
+            
         }
+    })
+
+    return{
+        ok:true,
+        data:destinationData
     }
 }
 const getDestinationBanner = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/banners?slug=destination`)
     const data = await res.json()
-    try{
-        const destinationBanner = data.map((banner) => ({
-            text:banner.acf.overlay_text,
-            image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
-        }))
-        return{
-            ok:true,
-            data:destinationBanner
+    const destinationBanner = data.map((banner) => {
+        let answer = {}
+        try{
+            answer = {
+                text:banner.acf.overlay_text,
+                image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            }
+            return answer
         }
-    }catch(err){
-        return{
-            ok:false,
-            data:{"error":err.toString()}
-        }
+        finally{}
+    })
+    return{
+        ok:true,
+        data:destinationBanner
     }
 }
 
@@ -278,7 +278,6 @@ const getContextPosts = async(context) => {
             return posts
         })
         .catch((err) => {
-            console.log(err.toString())
             return {}
         })
 }
