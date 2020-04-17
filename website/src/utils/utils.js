@@ -5,7 +5,7 @@ let baseurl =  ''
 let imageBaseurl = ''
 
 if (process.env.NODE_ENV == 'production') {
-    baseurl = 'http://wp-headless:8080/'
+    baseurl = process.env.WORDPRESS_URL
     // Try to read from the environment. It would be ok if its in the docker image
     if(process.env.BASE_IMAGE_URL) {
         imageBaseurl = process.env.BASE_IMAGE_URL
@@ -21,7 +21,8 @@ if (process.env.NODE_ENV == 'production') {
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()
-    const carouselData = data.map((carousel) => {
+    const carouselData = []
+    data.map((carousel) => {
         let answer = {}
         try {
             answer = {
@@ -30,7 +31,7 @@ const populateCarousel = async() => {
                 image:carousel.acf.image.url,
                 url:carousel.acf.url,
             }
-            return answer
+            carouselData.push(answer)
         }
         finally{}
     })
@@ -53,8 +54,8 @@ const populatePosts = async(count) => {
             title:destination.title.rendered
         }
     })
-    
-    const postData = data.map((post) => {
+    const postData = []
+    data.map((post) => {
         // Safety for msising slugsknee
         let answer = {}
         try {
@@ -68,11 +69,13 @@ const populatePosts = async(count) => {
                 country:destinationMap[post.acf.country].slug,
                 country_normal:destinationMap[post.acf.country].title 
             }
-            return answer
+            postData.push(answer)
+        }
+        catch{
+            console.log(`One or more missing parameters from ${post.title.rendered}`)
         }
         finally {}
     })
-
     return {
         ok:true,
         data:postData
@@ -116,7 +119,8 @@ const populateDestinations = async () => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?per_page=100`)
     const data = await res.json()
     
-    const destinationData = data.map((post) => {
+    const destinationData = []
+    data.map((post) => {
         let answer = {}
         try {
             answer = {
@@ -125,7 +129,7 @@ const populateDestinations = async () => {
                 image:`${imageBaseurl}${post.acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
                 continent:post.acf.continent
             }
-            return answer
+            destinationData.push(answer)
         }
         finally {
             
@@ -140,15 +144,17 @@ const populateDestinations = async () => {
 const getDestinationBanner = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/banners?slug=destination`)
     const data = await res.json()
-    const destinationBanner = data.map((banner) => {
-        let answer = {}
+    const destinationBanner = []
+    data.map((banner) => {
         try{
+            let answer = {}
             answer = {
                 text:banner.acf.overlay_text,
                 image:`${imageBaseurl}${banner.acf.image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             }
-            return answer
+            destinationBanner.push(answer)
         }
+        catch {}
         finally{}
     })
     return{
@@ -296,17 +302,23 @@ const getCategories = async() => {
 const populateContinents = async() => {
     const continentRes = await fetch(`${baseurl}wp-json/wp/v2/continent`)
     let continents = await continentRes.json()
-    continents = continents.map((continent) => {
-        return {
-            slug:continent.slug,
-            name:continent.title.rendered,
-            text:continent.acf.overlay_text,
-            image:`${imageBaseurl}${continent.acf.image.sizes.large.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+    const continentsList = []
+    continents.map((continent) => {
+        try {
+            const answer = {
+                slug:continent.slug,
+                name:continent.title.rendered,
+                text:continent.acf.overlay_text,
+                image:`${imageBaseurl}${continent.acf.image.sizes.large.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            }
+            continentsList.push(answer)
         }
+        catch {}
+        finally {}
     })
     return {
         ok:true,
-        data:continents,
+        data:continentsList,
     }
 }
 const getPostsByCategory = async(category,amount) => {
@@ -327,17 +339,23 @@ const getPostsByCategory = async(category,amount) => {
 const getFeatured = async() => {
     const featuredRes = await fetch(`${baseurl}wp-json/wp/v2/featured_categories`)
     let featured = await featuredRes.json()
-    featured = featured.map((feat) => {
-        return{
-            slug:feat.slug,
-            title:feat.title.rendered,
-            excerpt:feat.acf.excerpt,
-            image:`${imageBaseurl}${feat.acf.image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+    const featuredList = []
+    featured.map((feat) => {
+        try {
+            const answer = {
+                slug:feat.slug,
+                title:feat.title.rendered,
+                excerpt:feat.acf.excerpt,
+                image:`${imageBaseurl}${feat.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+            }
+            featuredList.push(answer)
         }
+        catch {}
+        finally {}
     })
     return {
         ok:true,
-        data:featured
+        data:featuredList
     }
 }
 
