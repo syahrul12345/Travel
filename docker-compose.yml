@@ -1,34 +1,6 @@
 version: '3'
 
 services:
-    db-headless:
-        container_name: db-headless
-        environment:
-            - MYSQL_RANDOM_ROOT_PASSWORD=yes
-            - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
-            - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
-            - MYSQL_USER=${WORDPRESS_DB_USER}
-        volumes: 
-            - mysqlvolume:/var/lib/mysql
-        image: mariadb
-        ports:
-            - '3307:3306'
-    wp-headless:
-        build: .
-        command: bash -c 'install_wordpress && apache2-foreground'
-        container_name: wp-headless
-        depends_on:
-            - db-headless
-        env_file: ./.env
-        ports:
-            - '8080:8080'
-        user: www-data
-        volumes:
-            - ./wordpress:/var/www/html
-            - ./docker/install_wordpress.sh:/usr/local/bin/install_wordpress
-            - ./docker/migratedb_import.sh:/usr/local/bin/migratedb_import
-            - ./docker/airwaitress.wordpress.xml:/var/www/airwaitress.wordpress.xml
-            - ./docker/plugins:/var/www/plugins
     website:
         build: ./website
         environment: 
@@ -37,26 +9,4 @@ services:
         expose:
             - '3000'
         ports:
-            - '3000:3000'
-        links:
-            - wp-headless
-        
-    # website:
-    #     command: bash -c 'yarn && yarn start'
-    #     container_name: website
-    #     environment:
-    #         -   WORDPRESS_URL=${WORDPRESS_URL}
-    #     expose:
-    #         - '3000'
-    #     image: node
-    #     ports:
-    #         - '3000:3000'
-    #     user: node
-    #     volumes:
-    #         - ./website:/home/node/app
-    #     working_dir: /home/node/app
-    #     links: 
-    #         - wp-headless
-volumes: 
-    mysqlvolume:
-    wordpressvolume:
+            - '3001:3000'
