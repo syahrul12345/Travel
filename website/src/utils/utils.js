@@ -55,7 +55,7 @@ const populatePosts = async(count) => {
     })
     
     const postData = data.map((post) => {
-        // Safety for msising slugs
+        // Safety for msising slugsknee
         let answer = {}
         try {
             answer = {
@@ -145,7 +145,7 @@ const getDestinationBanner = async() => {
         try{
             answer = {
                 text:banner.acf.overlay_text,
-                image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+                image:`${imageBaseurl}${banner.acf.image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
             }
             return answer
         }
