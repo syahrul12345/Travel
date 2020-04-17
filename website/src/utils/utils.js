@@ -5,7 +5,7 @@ let baseurl =  ''
 let imageBaseurl = ''
 
 if (process.env.NODE_ENV == 'production') {
-    baseurl = 'http://wp-headless:8080/'
+    baseurl = process.env.WORDPRESS_URL
     // Try to read from the environment. It would be ok if its in the docker image
     if(process.env.BASE_IMAGE_URL) {
         imageBaseurl = process.env.BASE_IMAGE_URL
