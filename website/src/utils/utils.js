@@ -324,13 +324,21 @@ const populateContinents = async() => {
 const getPostsByCategory = async(category,amount) => {
     const postCategorized = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${category}&page=1&per_page=${amount}`)
     const posts = await postCategorized.json()
-    const cleanedPosts = posts.map((post) => {
-        return {
-            slug:post.slug,
-            title:post.title.rendered,
-            image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
-            link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+    const cleanedPosts = []
+    posts.map((post) => {
+        try {
+            const answer = {
+                slug:post.slug,
+                title:post.title.rendered,
+                image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+                link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+            }
+            cleanedPosts.push(answer)
         }
+        catch {
+            console.log(`Error occured when trying to get post ${post.title.rendered} with category ${category} due to missing aprams`)
+        }
+        
     })
     return cleanedPosts
 }
