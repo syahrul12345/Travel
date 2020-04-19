@@ -201,23 +201,48 @@ const getCountryInfo = async(destination) => {
 }
 
 //Get the related posts for a particular country
-const getRelated = async(currentPostId,destination,relation) => {
+const getRelatedCountry = async(currentPostId,destination,relation) => {
     destination = destination.replace(/\s+/g, '-')
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
     //  Link below for future use when we want to use country + category
-    // const data = await res.json()
-    // const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=6`)
+    const data = await res.json()
+    const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=6`)
+    // const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&per_page=6`)
+    const posts = await catRes.json()
+    let cleanedRelated = []
+    posts.forEach(post => {
+        if (post.id != currentPostId) {
+            try {
+                cleanedRelated.push({
+                    id:post.id,
+                    title:post.title.rendered,
+                    link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                    image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
+                })
+            }catch{}
+            finally{}
+        }
+    })
+    return cleanedRelated
+}
+
+const getRelated = async(currentPostId,relation) => {
     const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&per_page=6`)
     const posts = await catRes.json()
     let cleanedRelated = []
     posts.forEach(post => {
         if (post.id != currentPostId) {
-            cleanedRelated.push({
-                id:post.id,
-                title:post.title.rendered,
-                link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
-                image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
-            })
+            try {
+                cleanedRelated.push({
+                    id:post.id,
+                    title:post.title.rendered,
+                    link:post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                    image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`
+                })
+            }catch (err){
+                console.log(`Trying to put ${post.title.rendered} as a related post for ${currentPostId} but failed as ${err.toString()}`)
+            }
+            finally{}
         }
     })
     return cleanedRelated
@@ -229,16 +254,28 @@ const getPostInfo = async(link) => {
     const relation = link.split('/')[1]
     const data = await res.json()
     const post = data[0]
+    let relatedPosts = []
     return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)])
         .then(async (res) => {
             const author = await res[0].json()
             const country = await res[1].json()
             post.acf.featured_image.sizes["2048x2048"] = imageBaseurl + post.acf.featured_image.sizes["2048x2048"].replace(/^(?:\/\/|[^\/]+)*\//, "")
-            post["country"] = country[0].title.rendered
-            post["author"] = author
-            //Change to HTTPS. lol
-            author.avatar_urls["96"] = author.avatar_urls["96"].slice(0,4) + "s" + author.avatar_urls["96"].slice(4)
-            const relatedPosts = await getRelated(post.id,post["country"],relation)
+            try {
+                post["country"] = country[0].title.rendered
+            } catch(err) {
+                console.log(`Error In page: ${post.title.rendered} during rendering when trying to get country`)
+                post["country"] = {}
+            }
+            try {
+                relatedPosts = await getRelated(post.id,relation)
+            } catch{
+                console.log(`Failed to get related posts ${post.title.rendered}`)
+            }
+            try {
+                post["author"] = author
+                author.avatar_urls["96"] = author.avatar_urls["96"].slice(0,4) + "s" + author.avatar_urls["96"].slice(4)
+            } catch {}
+            finally{}
             //lets get the related posts
             return {
                 post,
