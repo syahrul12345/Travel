@@ -18,7 +18,7 @@ export default function CrewLife(props) {
             justify="center"
             style={{paddingTop:'1vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Food Guides</Typography>
+                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Crew life</Typography>
                     <Typography variant="h5"> The best restaurants, cafes, street food, and hidden spots uncovered by the most passionate foodies around the world!</Typography>
                 </Grid>
                 <Grid item md={12}>
