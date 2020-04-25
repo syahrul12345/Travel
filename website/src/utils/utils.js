@@ -16,6 +16,8 @@ if (process.env.NODE_ENV == 'production') {
 }else{
     baseurl = 'http://127.0.0.1:8080/'
     imageBaseurl = 'http://127.0.0.1:8080/'
+    baseurl = 'https://api.smolidays.com/'
+    imageBaseurl = 'https://api.smolidays.com/'
 }
 
 const populateCarousel = async() => {

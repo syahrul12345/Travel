@@ -1,4 +1,4 @@
-import {Typography, BottomNavigation, BottomNavigationAction} from '@material-ui/core'
+import {Typography, Grid, Link} from '@material-ui/core'
 const links = [
     { href: '/about', label: 'ABOUT' },
     { href: '/partner', label: 'PARTNER' },
@@ -12,52 +12,29 @@ const links = [
 
 export default function Footer(){
     return(
-            <nav style={{marginRight:'20%',marginLeft:'20%',marginTop:'2vh'}}>
-                <Typography variant="subtitle1" style={{textAlign:"center"}}>© Copyright 2020 - The Layover.Life</Typography>
-                <Typography variant="subtitle2" style={{textAlign:"center"}}>All Rights Reserved.</Typography>
-            <ul>
-                {links.map(({ key, href, label }) => (
-                <li key={key}>
-                    <a href={href}>
-                    <Typography
-                    variant="body2">
-                        {label}
-                    </Typography>
-                    </a>
-                </li>
-                ))}
-            </ul>
-            <style jsx>{`
-                :global(body) {
-                margin: 0;
-                font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-                    Helvetica, sans-serif;
-                }
-                nav {
-                display:container !important
-                }
-                nav > ul {
-                    padding:0;
-                }
-                ul {
-                display: flex;
-                padding-inline-start:0px;
-                }
-                
-                li {
-                flex:1;
-                display: flex;
-                justify-content:space-evenly;
-                }
-                li > a {
-                color: black;
-                text-decoration: none;
-                font-weight: 400;
-                letter-spacing:2px;
-                }
-            `}</style>
-            
-            </nav>
+      <Grid container justify="space-between" style={{paddingLeft:'10%',paddingRight:'10%',marginTop:'2vh'}}>
+          <Grid item xs={6}>
+              <Grid container>
+                  <Grid item>
+                      <Typography variant="subtitle1" style={{textAlign:"center"}}>© Copyright 2020 - The Layover.Life <strong>All Rights Reserved</strong></Typography>
+                  </Grid>
+              </Grid>
+          </Grid>
+          <Grid item xs={6}>
+              <Grid container justify="space-between" alignItems="center">
+                  {links.map(({ key, href, label }) => (
+                  <Grid key={key}>
+                      <Link style={{color:'black'}} href={href}>
+                        <Typography
+                        variant="subtitle1">
+                            {label}
+                        </Typography>
+                      </Link>
+                  </Grid>
+                  ))}
+              </Grid>
+          </Grid>
+      </Grid>
     )
     
 }
