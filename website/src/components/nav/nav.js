@@ -4,9 +4,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import "./style.css"
 const links = [
   { href:'/travel',label:'TRAVEL'},
-  { href:'/travelguides',label:'LIFESTYLE'},
+  { href:'/lifestyle',label:'LIFESTYLE'},
   { href: '/food', label: 'FOOD' },
-  {href:'/crew-life',label:'CREWLIFE'},
+  {href:'/cabin-life',label:'CABIN LIFE'},
   
 ].map(link => {
   link.key = `nav-link-${link.href}-${link.label}`

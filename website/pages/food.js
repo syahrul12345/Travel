@@ -16,20 +16,19 @@ export default function Food(props) {
             <Grid
             container
             justify="center"
-            style={{paddingTop:'1vh'}}>
+            style={{paddingTop:'5vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
                     <Typography variant="h3" style={{marginBottom:'2vh'}}> Food Guides</Typography>
-                    <Typography variant="h5"> The best restaurants, cafes, street food, and hidden spots uncovered by the most passionate foodies around the world!</Typography>
                 </Grid>
                 <Grid item md={12}>
                     <Grid 
                     container
                     spacing={2}
-                    style={{marginLeft:'6%',marginRight:'6%'}}>
+                    style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
                         {foodguides.map((post) => {
                             return(
                                 <Grid item xs={12} md={4}>
-                                    <BlogCards title={post.title} image={post.image} link={post.link} height='20vh'/>
+                                    <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
                                 </Grid>
                             )
                         })}

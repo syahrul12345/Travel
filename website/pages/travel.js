@@ -18,25 +18,22 @@ export default function Travel(props) {
             <Grid
             container
             justify="center"
-            style={{paddingTop:'1vh'}}>
+            style={{paddingTop:'5vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
                     <Typography variant="h3" style={{marginBottom:'5vh'}}> Destinations </Typography>
-                    <Typography variant="h5"> Where is your calling? </Typography>
                 </Grid>
             </Grid>
             <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
             <Grid item align="center" md={12} style={{marginTop:'10vh',marginBottom:"5vh",position:'relative'}}>
                     <Typography variant="h3" style={{marginBottom:'5vh'}}> Latest Travel Itineraries </Typography>
-                   
-                    
             </Grid>
             <Grid item md={12}>
               <Grid container spacing={2} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
                 {/* Show only itinerary type posts */}
                   {props.itineraries.map((itinerary) => {
                     return (
-                      <Grid key={itinerary.title} item xs={4}>
-                        <BlogCards slug={itinerary.slug} title={itinerary.title} excerpt={itinerary.excerpt} image={itinerary.image} link={itinerary.link} height="20vh"/>
+                      <Grid key={itinerary.title} item xs={12} md={4}>
+                        <BlogCards slug={itinerary.slug} title={itinerary.title} excerpt={itinerary.excerpt} image={itinerary.image} link={itinerary.link} height="30vh"/>
                       </Grid>
                     )
                   })}

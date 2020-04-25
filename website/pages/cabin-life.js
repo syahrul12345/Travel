@@ -9,27 +9,26 @@ export default function CrewLife(props) {
     return(
         <div>
             <Head>
-                <title> Crew Life - The Layover Life</title>
+                <title> Cabin Life - The Layover Life</title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
             <Nav/>
             <Grid
             container
             justify="center"
-            style={{paddingTop:'1vh'}}>
+            style={{paddingTop:'5vh'}}>
                 <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
                     <Typography variant="h3" style={{marginBottom:'2vh'}}> Crew life</Typography>
-                    <Typography variant="h5"> The best restaurants, cafes, street food, and hidden spots uncovered by the most passionate foodies around the world!</Typography>
                 </Grid>
                 <Grid item md={12}>
                     <Grid 
                     container
                     spacing={2}
-                    style={{marginLeft:'6%',marginRight:'6%'}}>
+                    style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
                         {foodguides.map((post) => {
                             return(
                                 <Grid item xs={12} md={4}>
-                                    <BlogCards title={post.title} image={post.image} link={post.link} height='20vh'/>
+                                    <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
                                 </Grid>
                             )
                         })}
@@ -45,7 +44,7 @@ export default function CrewLife(props) {
 
 CrewLife.getInitialProps = async() => {
     //get the list of travel guides and packing guides
-    const res = await Promise.all([getPostsByCategory('crew-life',6)])
+    const res = await Promise.all([getPostsByCategory('cabin-life',6)])
     const foodguides = res[0]
     return {
         foodguides

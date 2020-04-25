@@ -17,37 +17,19 @@ export default function TravelGuides(props) {
             <Grid
             container
             justify="center"
-            style={{paddingTop:'1vh',minHeight:'93vh'}}>
-                <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
+            style={{paddingTop:'5vh',minHeight:'93vh'}}>
+                <Grid item align="center" md={12} style={{ marginBottom:"5vh",position:'relative'}}>
                     <Typography variant="h3" style={{marginBottom:'2vh'}}> Travel Guides</Typography>
-                    <Typography variant="h5"> Which area should I stay? Which attractions should I visit? We've got you covered with real travellers' guides!</Typography>
                 </Grid>
                 <Grid item md={12}>
                     <Grid 
                     container
                     spacing={2}
-                    style={{marginLeft:'6%',marginRight:'6%'}}>
+                    style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
                         {travelguides.map((post) => {
                             return(
                                 <Grid item xs={12} md={4}>
-                                 <BlogCards title={post.title} image={post.image} link={post.link} height='20vh'/>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </Grid>
-                <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Packing Guides</Typography>
-                    <Typography variant="h5"> The best packing tips & tricks from the most seasoned travellers!</Typography>
-                </Grid>
-                <Grid item md={12}>
-                    <Grid container
-                    spacing={2}
-                    style={{marginLeft:'6%',marginRight:'6%'}}>
-                        {packingguides.map((post) => {
-                            return(
-                                <Grid item xs={12} md={4}>
-                                 <BlogCards title={post.title} image={post.image} link={post.link} height='20vh'/>
+                                 <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
                                 </Grid>
                             )
                         })}

@@ -128,7 +128,7 @@ const populateDestinations = async () => {
             answer = {
                 slug:post.slug,
                 title:post.title.rendered,
-                image:`${imageBaseurl}${post.acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
+                image:`${imageBaseurl}${post.acf.background_image.sizes.medium.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
                 continent:post.acf.continent
             }
             destinationData.push(answer)
