@@ -3,7 +3,7 @@ import {AppBar, Typography, Appbar, Grid,Button,Paper,MenuList, MenuItem,Popper,
 import MenuIcon from '@material-ui/icons/Menu';
 import "./style.css"
 const links = [
-  { href:'/destinations',label:'TRAVEL'},
+  { href:'/travel',label:'TRAVEL'},
   { href:'/travelguides',label:'LIFESTYLE'},
   { href: '/food', label: 'FOOD' },
   {href:'/crew-life',label:'CREWLIFE'},

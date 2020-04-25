@@ -6,7 +6,7 @@ import {populateDestinations,getDestinationBanner,getPostsByCategory} from '../s
 import DestinationTab from '../src/components/destinations'
 import Footer from '../src/components/footer'
 import BlogCards from '../src/components/blogcards'
-export default function Destinations(props) {
+export default function Travel(props) {
     const [destination,setDestination] = useState(0)
     return(
         <div>
@@ -46,7 +46,7 @@ export default function Destinations(props) {
         </div>
     )
 }
-Destinations.getInitialProps = async() => {
+Travel.getInitialProps = async() => {
   const res = await populateDestinations()
   const banner = await getDestinationBanner()
   const iteneraries = await getPostsByCategory('itineraries',6)

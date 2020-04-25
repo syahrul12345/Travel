@@ -6,15 +6,19 @@ import HomeLayout from '../src/layouts/home'
 import BlogCards from '../src/components/blogcards'
 import DestinationTab from '../src/components/destinations'
 import LargeCard from '../src/components/largecard'
-import {populateCarousel,populatePosts,populateDestinations,populateContinents,getFeatured} from '../src/utils/utils'
+import {populateCarousel,populatePosts,populateDestinations,populateContinents,getFeatured, getLatestPosts} from '../src/utils/utils'
 import ContinentCard from '../src/components/continentcard'
 import './style.css'
 import MobileDestinations from '../src/components/mobiledestinations/mobiledestinations'
 
 const Index = (props) => {
+  const { latestPosts } = props
+  
   const [currentPost,setPost] = useState(0)
   const [destination,setDestination] = useState(0)
-  const [dummyVal,setDummy] = useState(0)
+  const [page, setPage] = useState(1)
+  const [latestPostsState, setLatestPostsState] = useState(latestPosts)
+  
   const moveBack = () => {
     if(currentPost == 0){
       setPost(props.postData.length-1)
@@ -29,7 +33,16 @@ const Index = (props) => {
       setPost(currentPost+1)
     }
   }
-
+  const loadMoreLatest = () => {
+    getLatestPosts(page +1).then((res) => {
+      const newLatestPosts = latestPostsState.concat(res.data)
+      setLatestPostsState(newLatestPosts)
+    }).catch((err) => {
+      console.log(err)
+    })
+    setPage(page+1)
+  }
+  
   return (
     <HomeLayout data={props.carouselData}>
         <Grid 
@@ -94,38 +107,36 @@ const Index = (props) => {
                     </Link>
                   </Typography>
                 </Grid>
-                
-                  
             </Grid> 
-              {/* <Grid className="continentGrid" item xs={12}>
-                <Grid container spacing={2}>
-                  {props.continents.map(({slug,name,text,image}) => {
-                    return(
-                      <Grid item xs={12} sm={4} key={slug} >
-                        <ContinentCard handler={setDestination} slug={slug} title={text} image={image}/>
-                      </Grid>
-                    )
-                  })}
-                </Grid>
-              </Grid> */}
-              {/* <Grid item className="blogGrid" xs={12}>
-                <Grid container spacing= {2}>
-                  <Grid item xs={12} sm={6}>
-                    <BlogCards slug={props.featured[0].slug} title={props.featured[0].excerpt} image={props.featured[0].image} link={props.featured[0].slug} height="30vh"/>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <BlogCards slug={props.featured[1].slug} title={props.featured[1].excerpt} image={props.featured[1].image} link={props.featured[1].slug} height="50vh"/>
-                  </Grid>
-                </Grid>
-              </Grid>  */}
             </Grid>
         <Grid container direction="row" align="right" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%'}}>
             <Grid item xs={12}>
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>
         </Grid>
+        <Grid container spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%',paddingBottom:'3%'}}>
+            <Grid item xs={12}>
+              <Typography variant="h5"> LATEST POSTS</Typography>
+            </Grid>
+            
+            <Grid 
+              container
+              spacing={2}
+              style={{marginLeft:'6%',marginRight:'6%'}}>
+                  {latestPostsState && latestPostsState.map((post) => {
+                    return(
+                        <Grid item xs={12} md={4}>
+                          <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
+                        </Grid>
+                    )
+                  })}
+              </Grid>
+              <Grid item xs={2}>
+                <Button onClick={() => loadMoreLatest()}> <Typography variant="body1">Read More </Typography></Button>
+              </Grid>
+        </Grid>
         <div className="destinations" id="destinations">
-          <Typography variant="h5" style={{marginTop:'2vh',textAlign:"center"}}>DESTINATIONS</Typography>
+          <Typography variant="h5" style={{marginTop:'2vh',marginBottom:'3vh',textAlign:"center"}}>DESTINATIONS</Typography>
           <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
         </div>
         <div className="mobileDestinations">
@@ -143,7 +154,8 @@ Index.getInitialProps = async() => {
   const destinations = populateDestinations()
   const continents = populateContinents()
   const featured = getFeatured()
-  const res = await Promise.all([carouselData,postData,destinations,continents,featured])
+  const latestPosts = getLatestPosts("1")
+  const res = await Promise.all([carouselData,postData,destinations,continents,featured,latestPosts])
   const returnedJson = {}
   //clean the data
   const locations = res[2].data
@@ -161,10 +173,13 @@ Index.getInitialProps = async() => {
     africa,
     america
   }
+  
   returnedJson['carouselData'] = res[0].data
   returnedJson['postData'] = res[1].data
   returnedJson['continents'] = res[3].data
   returnedJson['featured'] = res[4].data
+  returnedJson['latestPosts'] = res[5].data
+
   return returnedJson
 }
 

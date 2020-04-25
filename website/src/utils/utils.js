@@ -262,8 +262,6 @@ const getPostInfo = async(link) => {
         slug = linkArray[3]
         relation = linkArray[2]
     }
-    console.log("here")
-    console.log(slug)
     const res = await fetch(`${baseurl}/wp-json/wp/v2/posts?slug=${slug}`)
     const data = await res.json()
     const post = data[0]
@@ -336,6 +334,29 @@ const getContextPosts = async(context) => {
         .catch((err) => {
             return {}
         })
+}
+
+const getLatestPosts = async(page) => {
+    const res = await fetch(`${baseurl}wp-json/wp/v2/posts?page=${page}&per_page=6`)
+    const posts = await res.json()
+    let cleanedPosts = []
+    posts.map((post) => {
+        try {
+            const answer = {
+                title: post.title.rendered,
+                image: post.acf.featured_image.sizes.large,
+                link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+            }
+            cleanedPosts.push(answer)
+        }
+        catch (err) {
+            console.log(`Failed to show ${post.title.rendered} in latest posts as it is ${err.toString()}`)
+        }
+    })
+
+    return {
+        data:cleanedPosts
+    }
 }
 
 const getCategories = async() => {
@@ -435,5 +456,6 @@ module.exports = {
     populateContinents,
     getFeatured,
     getPostsByCategory,
-    getFooterInfo
+    getFooterInfo,
+    getLatestPosts,
 }
