@@ -14,8 +14,8 @@ if (process.env.NODE_ENV == 'production') {
     }
     
 }else{
-    baseurl = 'http://127.0.0.1:8080/'
-    imageBaseurl = 'http://127.0.0.1:8080/'
+    // baseurl = 'http://127.0.0.1:8080/'
+    // imageBaseurl = 'http://127.0.0.1:8080/'
     baseurl = 'https://api.smolidays.com/'
     imageBaseurl = 'https://api.smolidays.com/'
 }
@@ -337,6 +337,7 @@ const getContextPosts = async(context) => {
 }
 
 const getLatestPosts = async(page) => {
+    console.log(`${baseurl}wp-json/wp/v2/posts?page=${page}&per_page=6`)
     const res = await fetch(`${baseurl}wp-json/wp/v2/posts?page=${page}&per_page=6`)
     const posts = await res.json()
     let cleanedPosts = []
