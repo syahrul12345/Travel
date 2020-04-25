@@ -337,7 +337,10 @@ const getContextPosts = async(context) => {
 }
 
 const getLatestPosts = async(page) => {
-    console.log(`${baseurl}wp-json/wp/v2/posts?page=${page}&per_page=6`)
+    if (baseurl == undefined) {
+        baseurl = "https://api.smolidays.com/"
+    }
+    
     const res = await fetch(`${baseurl}wp-json/wp/v2/posts?page=${page}&per_page=6`)
     const posts = await res.json()
     let cleanedPosts = []
