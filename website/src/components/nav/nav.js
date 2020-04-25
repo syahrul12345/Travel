@@ -1,10 +1,10 @@
 import React from 'react';
-import {AppBar, Typography,Tabs,Tab, Grid,Button,Paper,MenuList, MenuItem,Popper,Grow,ClickAwayListener} from '@material-ui/core'
+import {AppBar, Typography, Appbar, Grid,Button,Paper,MenuList, MenuItem,Popper,Grow,ClickAwayListener, Link} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import "./style.css"
 const links = [
-  { href:'/destinations',label:'DESTINATIONS'},
-  { href:'/travelguides',label:'TRAVELGUIDES'},
+  { href:'/destinations',label:'TRAVEL'},
+  { href:'/travelguides',label:'LIFESTYLE'},
   { href: '/food', label: 'FOOD' },
   {href:'/crew-life',label:'CREWLIFE'},
   
@@ -16,6 +16,7 @@ const links = [
 
 
 export default function Nav() {
+
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const handleToggle = () => {
@@ -36,7 +37,7 @@ export default function Nav() {
       setOpen(false);
     }
   }
-
+  
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -48,40 +49,40 @@ export default function Nav() {
   }, [open]);
   return(
     <div style={{marginBlockEnd:'1vh'}}>
-      <AppBar 
-      position="relative"
-      color="primary">
-      
-        <nav id="desktopNav">
-          <div style={{
-            position:"relative",
-            display:'flex',
-            justifyContent:'center'}}>
-            <a href="/">
-              <img 
-                style={{
-                  maxHeight:'20vh',
-                  maxWidth:'20vw',
-                  paddingTop:'2vh',
-                  marginBottom:'1.5vh'}}
-                src="/static/images/smolidays-logo-1.png" 
-                alt="smolidays-logo"/>
-            </a>
-          </div>
-          <ul>
+      <AppBar position="sticky">
+      <div style={{
+        position:"relative",
+        display:'flex',
+        justifyContent:'center'}}>
+        <a href="/">
+          <img 
+            style={{
+              maxHeight:'20vh',
+              maxWidth:'20vw',
+              paddingTop:'2vh',
+              marginBottom:'1.5vh'}}
+            src="/static/images/smolidays-logo-1.png" 
+            alt="smolidays-logo"/>
+        </a>
+      </div>
+      <div id="navbar" style={{zIndex:'100'}} >
+        <nav className="desktopMenu">
+          <ul container justify="center" alignItems="center">
             {links.map(({ key, href, label }) => (
-              <li key={key}>
-                <a href={href}>
+              <li item key={key}>
+                <Link style={{color:'black',textAlign:'center'}} href={href}>
                   <Typography style={{
-                    marginBlockStart:'5px',
                     marginBlockEnd:'5px'}}>
                     {label}
                   </Typography>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
+        
+      </div>
+      </AppBar>
       <div className="mobileMenu">
         <Grid 
         direction="row"
@@ -151,7 +152,6 @@ export default function Nav() {
             
         </Tabs> */}
       </div>
-      </AppBar>
     </div>
     
   )

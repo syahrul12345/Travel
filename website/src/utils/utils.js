@@ -251,9 +251,20 @@ const getRelated = async(currentPostId,relation) => {
 }
 
 const getPostInfo = async(link) => {
-    const slug = link.split('/')[2]
+    // The slug might be a subcategory
+    const linkArray = link.split('/')
+    let slug = ''
+    let relation = ''
+    if (linkArray.length == 4) {
+        slug = linkArray[2]
+        relation = linkArray[1]
+    } else if (linkArray.length == 5){
+        slug = linkArray[3]
+        relation = linkArray[2]
+    }
+    console.log("here")
+    console.log(slug)
     const res = await fetch(`${baseurl}/wp-json/wp/v2/posts?slug=${slug}`)
-    const relation = link.split('/')[1]
     const data = await res.json()
     const post = data[0]
     let relatedPosts = []

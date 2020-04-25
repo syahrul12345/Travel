@@ -28,7 +28,11 @@
   .mobileMenu{
       display:none
   }
-  
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
 }
 @media only screen and (max-width:786px){
   nav{
