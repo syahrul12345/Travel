@@ -1,5 +1,20 @@
 import React from 'react';
-import {AppBar, Typography, Appbar, Grid,Button,Paper,MenuList, MenuItem,Popper,Grow,ClickAwayListener, Link} from '@material-ui/core'
+import {AppBar, 
+  Typography, 
+  Grid,
+  Button,
+  Paper,
+  MenuList, 
+  MenuItem,
+  Popper,
+  Grow,
+  ClickAwayListener, 
+  Link,
+  Fade,
+  Card,
+  CardContent,
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu';
 import "./style.css"
 const links = [
@@ -13,12 +28,33 @@ const links = [
   return link
 })
 
-
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 export default function Nav() {
 
+  const classes = useStyles()
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? event.currentTarget : event.currentTarget);
+    setOpenPopper(true)
+  };
+
+  const [openPopper,setOpenPopper] = React.useState(Boolean(anchorEl));
+  const id = openPopper ? 'transitions-popper' : undefined;
+
   const anchorRef = React.useRef(null);
+  
+
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
@@ -31,6 +67,13 @@ export default function Nav() {
     setOpen(false);
   };
 
+  const handleCloseDesktopPopper = event => {
+    if (anchorEl && anchorEl.contains(event.currentTarget)) {
+      return;
+    }
+    setOpenPopper(false)
+  }
+
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -38,6 +81,7 @@ export default function Nav() {
     }
   }
   
+
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = React.useRef(open);
   React.useEffect(() => {
@@ -68,16 +112,48 @@ export default function Nav() {
       <div id="navbar" style={{zIndex:'100'}} >
         <nav className="desktopMenu">
           <ul container justify="center" alignItems="center">
-            {links.map(({ key, href, label }) => (
-              <li item key={key}>
-                <Link style={{color:'black',textAlign:'center'}} href={href}>
-                  <Typography style={{
-                    marginBlockEnd:'5px'}}>
-                    {label}
-                  </Typography>
-                </Link>
+            {links.map(({ key, href, label }) => {
+              if (label === 'TRAVEL') {
+                // Return a select
+                return (
+                  <li item key={key}>
+                    <Typography onClick={handleClick} style={{
+                      marginBlockEnd:'5px'}}>
+                      {label}
+                    </Typography>
+                    <Popper open={openPopper} anchorEl={anchorEl} placement="bottom" role={undefined} transition disablePortal>
+                      {({ TransitionProps }) => (
+                        <Fade {...TransitionProps} timeout={350}>
+                          <ClickAwayListener onClickAway={handleCloseDesktopPopper}>
+                          <Card>
+                            <CardContent>
+                            <Link style={{color:'black',textAlign:'center'}} href={"/travel-guides"}>
+                                <Typography className={classes.typography}> Travel Guides</Typography>
+                            </Link>
+                            <Link style={{color:'black',textAlign:'center'}} href={"/itineraries"}>
+                                <Typography className={classes.typography}>Itineraries</Typography>
+                            </Link>
+                            </CardContent>
+                          </Card>
+                          </ClickAwayListener>
+                        </Fade>
+                      )}
+                    </Popper>
+                  </li>
+                )
+              }
+
+              return (
+                <li item key={key}>
+                  <Link style={{color:'black',textAlign:'center'}} href={href}>
+                    <Typography style={{
+                      marginBlockEnd:'5px'}}>
+                      {label}
+                    </Typography>
+                  </Link>
               </li>
-            ))}
+              )
+            })}
           </ul>
         </nav>
         

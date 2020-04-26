@@ -196,13 +196,16 @@ export default function Post(props) {
             </Head>
             <Nav/>
             <div className="titleGrid" >
-                <Typography component={'span'} variant="h1" component="h1" style={{fontSize:'40px'}}>
+                <Typography component={'span'} variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'1vh'}}>
+                    <strong>GUIDES</strong>
+                </Typography>
+                <Typography component={'span'} variant="h1" component="h1" style={{fontSize:'40px', fontWeight:'900', textAlign:'center'}}>
                     <strong>{parser.parse(post.title.rendered)}</strong>
                 </Typography>
                 {/* Social buton grid */}
-                <div style={{display:'flex',justifyContent:'space-between',alignContent:'center',alignItems:'center'}}>
-                    <Typography component={'span'} variant="subtitle1">
-                        {post.date}
+                <div style={{display:'flex',justifyContent:'space-evenly', alignContent:'center',alignItems:'center'}}>
+                    <Typography component={'span'} variant="subtitle1" style={{textAlign:'center'}}>
+                    <strong>{post.author.name} | {post.date}</strong>
                     </Typography>
                     <div style={{display:'flex', justifyContent:'space-between',align:'center'}} >
                         <FacebookProvider appId="1028885374122493">
@@ -224,6 +227,12 @@ export default function Post(props) {
                             <img src="/static/images/icons8-telegram-app-24.png" alt="telegram-share"/>
                         </IconButton>
                         </a>
+                        <a href={"tg://msg_url?url=https://valid.url&amp;text=text"}>
+                        <IconButton aria-label="Pinterest" className="bigAvatar">
+                            <img src="/static/images/icons8-pinterest-26.png" alt="telegram-share"/>
+                        </IconButton>
+                        </a>
+                        
                     </div>
                 </div>
             </div>
