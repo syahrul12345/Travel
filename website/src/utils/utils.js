@@ -266,10 +266,19 @@ const getPostInfo = async(link) => {
     const data = await res.json()
     const post = data[0]
     let relatedPosts = []
-    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`)])
+    
+    return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/users/${post.author}`),fetch(`${baseurl}wp-json/wp/v2/destinations?include=${post.acf.country}`),fetch(`${baseurl}wp-json/wp/v2/categories`)])
         .then(async (res) => {
             const author = await res[0].json()
             const country = await res[1].json()
+            let categories = await res[2].json()
+            categories = categories.map((category) => {
+                return{
+                    id:category.id,
+                    name:category.name,
+                }
+            })
+
             post.acf.featured_image.sizes["2048x2048"] = imageBaseurl + post.acf.featured_image.sizes["2048x2048"].replace(/^(?:\/\/|[^\/]+)*\//, "")
             try {
                 post["country"] = country[0].title.rendered
@@ -291,6 +300,7 @@ const getPostInfo = async(link) => {
             return {
                 post,
                 relatedPosts,
+                categories
             }
         }).catch((err) => {
             console.log(`Error when loading post page for post ${link}`)

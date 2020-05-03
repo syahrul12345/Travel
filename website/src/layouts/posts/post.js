@@ -6,7 +6,7 @@ import Footer from '../../components/footer'
 import Related from '../../components/related'
 import Facebook from '../../components/facebook'
 import {FacebookProvider,Share} from 'react-facebook'
-import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper } from '@material-ui/core'
+import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper,Link } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import './style.css'
 const useStyles = makeStyles(theme => ({
@@ -23,7 +23,37 @@ const useStyles = makeStyles(theme => ({
 
 export default function Post(props) {
     const classes = useStyles()
-    const post = props.post
+    const { data } = props 
+    const { post , relatedPosts, categories} = data
+    
+    let categoryString = ''
+    let categoryLink = "/"
+    categories.map((category) => {
+        // Ignore travel
+        if (category.name != "Travel" && post.categories.includes(category.id)) {
+            categoryString = category.name
+            switch (categoryString) {
+                case 'Cabin Life':
+                    categoryLink = "/cabin-life";
+                    break;
+                case 'Food':
+                    categoryLink = "/food";
+                    break;
+                case 'Guides &amp; Tips':
+                    categoryString = "Guides & Tips"
+                    categoryLink = "/travel";
+                    break;
+                case 'Itineraries':
+                    categoryLink = "/travel";
+                    break;
+                default:
+                    categoryLink = "/"
+                    break;
+            }
+
+        }
+    })
+    
     //we need to parse the data
     const HtmlToReactParser = HtmlToReact.Parser
     const parser = new HtmlToReactParser()
@@ -196,14 +226,16 @@ export default function Post(props) {
             </Head>
             <Nav/>
             <div className="titleGrid" >
-                <Typography component={'span'} variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'1vh'}}>
-                    <strong>GUIDES</strong>
-                </Typography>
+                <Link href={categoryLink} style={{color:'black'}}>
+                    <Typography  component={'span'} variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'2vh',paddingTop:'2vh'}}>
+                        <strong> {categoryString}</strong>
+                    </Typography>
+                </Link>
                 <Typography component={'span'} variant="h1" component="h1" style={{fontSize:'40px', fontWeight:'900', textAlign:'center'}}>
                     <strong>{parser.parse(post.title.rendered)}</strong>
                 </Typography>
                 {/* Social buton grid */}
-                <div style={{display:'flex',justifyContent:'space-evenly', alignContent:'center',alignItems:'center'}}>
+                <div style={{display:'flex',justifyContent:'space-between', alignContent:'center',alignItems:'center'}}>
                     <Typography component={'span'} variant="subtitle1" style={{textAlign:'center'}}>
                     <strong>{post.author.name} | {post.date}</strong>
                     </Typography>
@@ -287,7 +319,7 @@ export default function Post(props) {
             </div>
             </div>
             <div className="relatedGrid" >
-                <Related related={props.related}/>
+                <Related related={relatedPosts}/>
             </div>
             <Footer/>
         </div>

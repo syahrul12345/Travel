@@ -3,7 +3,7 @@ import {getPostInfo} from '../../src/utils/utils'
 import PostLayout from '../../src/layouts/posts'
 export default function Post(props) {
     return(
-        <PostLayout post={props.post} related={props.relatedPost}></PostLayout>
+        <PostLayout data={props}></PostLayout>
     )
 }
 
@@ -24,8 +24,5 @@ Post.getInitialProps = async(context) => {
     const post = data.post
     const relatedPost = data.relatedPosts
     post.date = formatDate(post.date)
-    return {
-        post,
-        relatedPost
-    }
+    return data
 }

@@ -19,7 +19,6 @@ export default function CountryPage(props) {
     const router = useRouter()
     const countryData = props.info[0].acf
     const posts = props.info[0].posts
-    console.log(posts)
     const categorized = props.categorized
     return(
         <div>
@@ -186,6 +185,7 @@ CountryPage.getInitialProps = async(context) => {
         posts
         }
   })
+
   return {
       info,
       categorized,

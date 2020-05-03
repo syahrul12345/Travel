@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Post(props) {
     return(
-        <PostLayout post={props.post}></PostLayout>
+        <PostLayout data={props}></PostLayout>
     )
 }
 
@@ -34,7 +34,5 @@ Post.getInitialProps = async(context) => {
     const data = await getPostInfo(path)
     const post = data.post
     post.date = formatDate(post.date)
-    return {
-        post
-    }
+    return data
 }
