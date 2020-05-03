@@ -100,11 +100,11 @@ const Index = (props) => {
                 direction="row" 
                 className="seeMoreContainer"
                 >
-                  <Typography className="desktopSeeMore" variant="subtitle1" component="p">
+                  {/* <Typography className="desktopSeeMore" variant="subtitle1" component="p">
                     <Link href={`\\articles`} style={{textDecoration:'none',color:'black'}}>
                       SEE MORE ARTICLES
                     </Link>
-                  </Typography>
+                  </Typography> */}
                 </Grid>
             </Grid> 
           </Grid>
@@ -131,8 +131,8 @@ const Index = (props) => {
                       )
                     })}
                 </Grid>
-                <Grid item xs={2}>
-                  <Button onClick={() => loadMoreLatest()}> <Typography variant="body1">Read More </Typography></Button>
+                <Grid item xs={2} style={{paddingTop:'5vh'}}>
+                  <Button onClick={() => loadMoreLatest()} variant="outlined"> <Typography variant="body1">Read More </Typography></Button>
                 </Grid>
             </Grid>
             
