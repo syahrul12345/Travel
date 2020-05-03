@@ -45,8 +45,8 @@ const Index = (props) => {
   
   return (
     <HomeLayout data={props.carouselData}>
+      <div>
         <Grid 
-        container 
         direction="row"
         spacing={2}
         justify="center"
@@ -97,7 +97,6 @@ const Index = (props) => {
                   </Button> */}
                 </div>
                 <Grid 
-                container 
                 direction="row" 
                 className="seeMoreContainer"
                 >
@@ -108,41 +107,44 @@ const Index = (props) => {
                   </Typography>
                 </Grid>
             </Grid> 
-            </Grid>
-        <Grid container direction="row" align="right" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%'}}>
+          </Grid>
+        <Grid align="right" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%'}}>
             <Grid item xs={12}>
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>
         </Grid>
-        <Grid container spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%',paddingBottom:'3%'}}>
+        <Grid spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%',paddingBottom:'3%',paddingTop:'1vh'}}>
             <Grid item xs={12}>
-              <Typography variant="h5"> LATEST POSTS</Typography>
+              <Typography variant="h6"> LATEST POSTS</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid 
+              container
+              style={{paddingTop:'3%'}}
+                spacing={2}
+                >
+                    {latestPostsState && latestPostsState.map((post) => {
+                      return(
+                          <Grid item xs={12} md={4}>
+                            <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
+                          </Grid>
+                      )
+                    })}
+                </Grid>
+                <Grid item xs={2}>
+                  <Button onClick={() => loadMoreLatest()}> <Typography variant="body1">Read More </Typography></Button>
+                </Grid>
             </Grid>
             
-            <Grid 
-              container
-              spacing={2}
-              style={{marginLeft:'6%',marginRight:'6%'}}>
-                  {latestPostsState && latestPostsState.map((post) => {
-                    return(
-                        <Grid item xs={12} md={4}>
-                          <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
-                        </Grid>
-                    )
-                  })}
-              </Grid>
-              <Grid item xs={2}>
-                <Button onClick={() => loadMoreLatest()}> <Typography variant="body1">Read More </Typography></Button>
-              </Grid>
         </Grid>
         <div className="destinations" id="destinations">
-          <Typography variant="h5" style={{marginTop:'2vh',marginBottom:'3vh',textAlign:"center"}}>DESTINATIONS</Typography>
+          <Typography variant="h6" style={{marginTop:'2vh',marginBottom:'3vh',textAlign:"center"}}>DESTINATIONS</Typography>
           <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
         </div>
         <div className="mobileDestinations">
           <MobileDestinations destinations={props.destinations}/>
         </div>
-        
+        </div>
     </HomeLayout>
   )
 }
