@@ -18,6 +18,8 @@ import './style.css'
 export default function CountryPage(props) {
     const router = useRouter()
     const countryData = props.info[0].acf
+    const posts = props.info[0].posts
+    console.log(posts)
     const categorized = props.categorized
     return(
         <div>
@@ -96,7 +98,28 @@ export default function CountryPage(props) {
                             
                         </Grid>
                       </Grid>
-                      {categorized.map(({id,name,posts}) => {
+                        <Grid item xs={12} align="center">
+                            <Typography
+                            variant="h4"
+                            style={{marginTop:"2vh"}}>
+                                All articles
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+                            <Grid 
+                            container 
+                            spacing={2}
+                            justify="center">
+                                {posts.map((post,index) => {
+                                    return(
+                                    <Grid key={post.title.rendered} item xs={4}>
+                                        <BlogCards slug={post.slug} title={post.title} excerpt={post.excerpt} image={post.image} link={post.link} country={props.info[0].title.rendered} height="20vh"/>
+                                    </Grid>
+                                    )
+                                })}
+                            </Grid>
+                        </Grid>
+                      {/* {categorized.map(({id,name,posts}) => {
                           if(posts.length > 0) {
                               //Posts of this category exists
                               return(
@@ -141,7 +164,7 @@ export default function CountryPage(props) {
                                 </>
                               )
                           }
-                      })}
+                      })} */}
                 </Grid>
             </CountryLayout>
         </div>
