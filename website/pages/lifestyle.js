@@ -10,31 +10,24 @@ export default function TravelGuides(props) {
     return(
         <div>
             <Head>
-                <title> Travel Guides - The Layover Life</title>
+                <title> Lifestyle </title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
             <Nav/>
-            <Grid
-            container
-            justify="center"
-            style={{paddingTop:'5vh',minHeight:'93vh'}}>
-                <Grid item align="center" md={12} style={{ marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Travel Guides</Typography>
-                </Grid>
-                <Grid item md={12}>
-                    <Grid 
-                    container
-                    spacing={2}
-                    style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
-                        {travelguides.map((post) => {
-                            return(
-                                <Grid item xs={12} md={4}>
-                                 <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </Grid>
+            <Grid item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
+                    <Typography variant="h6" style={{marginBottom:'5vh'}}> Lifestyle </Typography>
+            </Grid>
+            <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+              <Grid container spacing={2} >
+                {/* Show only itinerary type posts */}
+                  {travelguides.map((guide) => {
+                    return (
+                      <Grid key={guide.title} item xs={12} md={4}>
+                        <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                      </Grid>
+                    )
+                  })}
+              </Grid>
             </Grid>
             <Footer/>
         </div>

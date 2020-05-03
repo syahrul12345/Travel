@@ -15,45 +15,38 @@ export default function Travel(props) {
                 <meta name="description" content="All the countries that we cover"/>
             </Head>
             <Nav/>
-            <Grid item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
-                    <Typography variant="h5" style={{marginBottom:'5vh'}}> Latest Travel Guides </Typography>
-            </Grid>
-            <Grid item md={12}>
-              <Grid container spacing={2} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
-                {/* Show only itinerary type posts */}
-                  {props.guides.map((guide) => {
-                    return (
-                      <Grid key={guide.title} item xs={12} md={4}>
-                        <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
-                      </Grid>
-                    )
-                  })}
+            <Grid direction="row">
+              <Grid item align="center" xs={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
+                      <Typography variant="h6"> Latest Travel Guides </Typography>
               </Grid>
-            </Grid>
-            <Grid item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
-                    <Typography variant="h5" style={{marginBottom:'5vh'}}> Travel Itineraries </Typography>
-            </Grid>
-            <Grid item md={12}>
-              <Grid container spacing={2} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
-                {/* Show only itinerary type posts */}
-                  {props.itineraries.map((itinerary) => {
-                    return (
-                      <Grid key={itinerary.title} item xs={12} md={4}>
-                        <BlogCards slug={itinerary.slug} title={itinerary.title} excerpt={itinerary.excerpt} image={itinerary.image} link={itinerary.link} height="30vh"/>
-                      </Grid>
-                    )
-                  })}
-              </Grid>
-            </Grid>
-            <Grid
-            container
-            justify="center"
-            style={{paddingTop:'5vh'}}>
-                <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'5vh'}}> Destinations </Typography>
+              <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"2vh"}}>
+                <Grid container spacing={2} >
+                  {/* Show only itinerary type posts */}
+                    {props.guides.map((guide) => {
+                      return (
+                        <Grid key={guide.title} item xs={12} md={4}>
+                          <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                        </Grid>
+                      )
+                    })}
                 </Grid>
+              </Grid>
+              <Grid item align="center" xs={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
+                      <Typography variant="h6"> Itineraries </Typography>
+              </Grid>
+              <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"2vh"}}>
+                <Grid container spacing={2} >
+                  {/* Show only itinerary type posts */}
+                    {props.itineraries.map((guide) => {
+                      return (
+                        <Grid key={guide.title} item xs={12} md={4}>
+                          <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                        </Grid>
+                      )
+                    })}
+                </Grid>
+              </Grid>
             </Grid>
-            <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
             <Footer/>
         </div>
     )

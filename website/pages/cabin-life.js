@@ -5,7 +5,7 @@ import {getPostsByCategory} from '../src/utils/utils'
 import BlogCards from '../src/components/blogcards'
 import Footer from '../src/components/footer'
 export default function CrewLife(props) {
-    const foodguides = props.foodguides
+    const cabinlife = props.cabinlife
     return(
         <div>
             <Head>
@@ -13,29 +13,22 @@ export default function CrewLife(props) {
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
             <Nav/>
-            <Grid
-            container
-            justify="center"
-            style={{paddingTop:'5vh'}}>
-                <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Crew life</Typography>
-                </Grid>
-                <Grid item md={12}>
-                    <Grid 
-                    container
-                    spacing={2}
-                    style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
-                        {foodguides.map((post) => {
-                            return(
-                                <Grid item xs={12} md={4}>
-                                    <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
-                </Grid>
+            <Grid item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
+            <Typography variant="h6"> Cabin </Typography>
             </Grid>
-            <div style={{paddingTop:'15vh'}}>
+            <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+              <Grid container spacing={2} >
+                {/* Show only itinerary type posts */}
+                  {cabinlife.map((guide) => {
+                    return (
+                      <Grid key={guide.title} item xs={12} md={4}>
+                        <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                      </Grid>
+                    )
+                  })}
+              </Grid>
+            </Grid>
+            <div style={{paddingTop:'20vh'}}>
                 <Footer/>
             </div>
         </div>
@@ -45,8 +38,8 @@ export default function CrewLife(props) {
 CrewLife.getInitialProps = async() => {
     //get the list of travel guides and packing guides
     const res = await Promise.all([getPostsByCategory('cabin-life',6)])
-    const foodguides = res[0]
+    const cabinlife = res[0]
     return {
-        foodguides
+        cabinlife
     }
 }

@@ -9,33 +9,28 @@ export default function Food(props) {
     return(
         <div>
             <Head>
-                <title> Travel Guides - The Layover Life</title>
+                <title> Food </title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
             <Nav/>
-            <Grid
-            container
-            justify="center"
-            style={{paddingTop:'5vh'}}>
-                <Grid item align="center" md={12} style={{marginBottom:"5vh",position:'relative'}}>
-                    <Typography variant="h3" style={{marginBottom:'2vh'}}> Food Guides</Typography>
+            <Grid direction="row">
+                <Grid item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
+                <Typography variant="h6"> Food Guides </Typography>
                 </Grid>
-                <Grid item md={12}>
-                    <Grid 
-                    container
-                    spacing={2}
-                    style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
-                        {foodguides.map((post) => {
-                            return(
-                                <Grid item xs={12} md={4}>
-                                    <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
-                                </Grid>
-                            )
-                        })}
-                    </Grid>
+                <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+                <Grid container spacing={2} >
+                    {/* Show only itinerary type posts */}
+                    {foodguides.map((guide) => {
+                        return (
+                        <Grid key={guide.title} item xs={12} md={4}>
+                            <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                        </Grid>
+                        )
+                    })}
+                </Grid>
                 </Grid>
             </Grid>
-            <div style={{paddingTop:'15vh'}}>
+            <div style={{paddingTop:'20vh'}}>
                 <Footer/>
             </div>
         </div>
