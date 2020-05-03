@@ -113,44 +113,44 @@ export default function Nav() {
         <nav className="desktopMenu">
           <ul container justify="center" alignItems="center">
             {links.map(({ key, href, label }) => {
-              if (label === 'TRAVEL') {
-                // Return a select
-                return (
-                  <li item key={key}>
-                    <Typography onClick={handleClick} style={{
-                      marginBlockEnd:'5px'}}>
-                      {label}
-                    </Typography>
-                    <Popper open={openPopper} anchorEl={anchorEl} placement="bottom" role={undefined} transition disablePortal>
-                      {({ TransitionProps }) => (
-                        <Fade {...TransitionProps} timeout={350}>
-                          <ClickAwayListener onClickAway={handleCloseDesktopPopper}>
-                          <Card>
-                            <CardContent>
-                            <Link style={{color:'black',textAlign:'center'}} href={"/travel-guides"}>
-                                <Typography className={classes.typography}> Travel Guides</Typography>
-                            </Link>
-                            <Link style={{color:'black',textAlign:'center'}} href={"/itineraries"}>
-                                <Typography className={classes.typography}>Itineraries</Typography>
-                            </Link>
-                            </CardContent>
-                          </Card>
-                          </ClickAwayListener>
-                        </Fade>
-                      )}
-                    </Popper>
-                  </li>
-                )
-              }
+              // if (label === 'TRAVEL') {
+              //   // Return a select
+              //   return (
+              //     <li item key={key}>
+              //       <Typography onClick={handleClick} style={{
+              //         marginBlockEnd:'5px'}}>
+              //         {label}
+              //       </Typography>
+              //       <Popper open={openPopper} anchorEl={anchorEl} placement="bottom" role={undefined} transition disablePortal>
+              //         {({ TransitionProps }) => (
+              //           <Fade {...TransitionProps} timeout={350}>
+              //             <ClickAwayListener onClickAway={handleCloseDesktopPopper}>
+              //             <Card>
+              //               <CardContent>
+              //               <Link style={{color:'black',textAlign:'center'}} href={"/travel-guides"}>
+              //                   <Typography className={classes.typography}> Travel Guides</Typography>
+              //               </Link>
+              //               <Link style={{color:'black',textAlign:'center'}} href={"/itineraries"}>
+              //                   <Typography className={classes.typography}>Itineraries</Typography>
+              //               </Link>
+              //               </CardContent>
+              //             </Card>
+              //             </ClickAwayListener>
+              //           </Fade>
+              //         )}
+              //       </Popper>
+              //     </li>
+              //   )
+              // }
 
               return (
                 <li item key={key}>
-                  <Link style={{color:'black',textAlign:'center'}} href={href}>
+                  <Button style={{color:'black',textAlign:'center'}} href={href}>
                     <Typography style={{
                       marginBlockEnd:'5px'}}>
                       {label}
                     </Typography>
-                  </Link>
+                  </Button>
               </li>
               )
             })}
