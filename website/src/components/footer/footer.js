@@ -12,11 +12,11 @@ const links = [
 
 export default function Footer(){
     return(
-      <Grid container justify="space-between" style={{paddingLeft:'10%',paddingRight:'10%',marginTop:'4vh',marginBottom:'3vh'}}>
+      <Grid container justify="space-between" style={{marginTop:'5vh', backgroundColor:'rgba(0, 0, 0, 0.10)', paddingLeft:'10%',paddingRight:'10%',paddingTop:'4vh',paddingBottom:'3vh'}}>
           <Grid item xs={6}>
               <Grid container>
                   <Grid item>
-                      <Typography variant="subtitle1" style={{textAlign:"center"}}>© Copyright 2020 - The Layover.Life <strong>All Rights Reserved</strong></Typography>
+                      <Typography variant="subtitle2" style={{textAlign:"center"}}>© Copyright 2020 - Smolidays. All Rights Reserved </Typography>
                   </Grid>
               </Grid>
           </Grid>
@@ -26,7 +26,7 @@ export default function Footer(){
                   <Grid key={key}>
                       <Link style={{color:'black'}} href={href}>
                         <Typography
-                        variant="subtitle1">
+                        variant="subtitle2">
                             {label}
                         </Typography>
                       </Link>
