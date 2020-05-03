@@ -17,7 +17,7 @@ export default function Travel(props) {
             <Nav/>
             <Grid direction="row">
               <Grid item align="center" xs={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
-                      <Typography variant="h6"> Latest Travel Guides </Typography>
+                      <Typography variant="h6"> LATEST TRAVEL GUIDES </Typography>
               </Grid>
               <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"2vh"}}>
                 <Grid container spacing={2} >
@@ -31,8 +31,13 @@ export default function Travel(props) {
                     })}
                 </Grid>
               </Grid>
+              <Grid item xs={12}>
+                <Typography variant="h6" style={{marginTop:'2vh',marginBottom:'3vh',textAlign:"center"}}>DESTINATIONS</Typography>
+                <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
+              </Grid>
+            </Grid>
               <Grid item align="center" xs={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
-                      <Typography variant="h6"> Itineraries </Typography>
+                      <Typography variant="h6"> ITINERARIES </Typography>
               </Grid>
               <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"2vh"}}>
                 <Grid container spacing={2} >
@@ -46,7 +51,7 @@ export default function Travel(props) {
                     })}
                 </Grid>
               </Grid>
-            </Grid>
+              
             <Footer/>
         </div>
     )
