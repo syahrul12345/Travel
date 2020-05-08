@@ -7,6 +7,8 @@ import Related from '../../components/related'
 import Facebook from '../../components/facebook'
 import {FacebookProvider,Share} from 'react-facebook'
 import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper,Link } from '@material-ui/core'
+import Slideshow from '../../components/slideshow';
+
 import { makeStyles } from '@material-ui/core/styles';
 import './style.css'
 const useStyles = makeStyles(theme => ({
@@ -114,7 +116,10 @@ export default function Post(props) {
             //Process the <img> tag
             shouldProcessNode: function(node){
                 if(node.parent && node.parent.name && node.parent.name == "figure"){
-                    if(node.name && node.name == "img"){
+                    if (node.name && node.name == "ul") {
+                        return node
+                    }
+                    else if(node.name && node.name == "img"){
                         return node
                     }else if(node.name && node.name == "a"){
                         //image is child of the node
@@ -155,7 +160,21 @@ export default function Post(props) {
                         </Card>
                         
                     </div>
-                }else{
+                }if (node && node.name == 'ul') {
+                    // If its in a gallery
+                    const images = []
+                    node.children.map((childNode) => {
+                        // Image node can contain the figure and potentially a figure caption
+                        const imageNode = childNode.children[0].children[0]
+                        const caption = imageNode.next.children[0].data
+                        const src = imageNode.attribs.src
+                        images.push({caption, src})
+                        
+                    })
+                    return (
+                        <Slideshow images={images} />
+                    )
+                } else {
                     let url = node['attribs'].src
                     // check https. Only load https content from outside sites, so if its not https, it means its local
                     let isHttps = url.substring(0,5) === 'https' ? true : false
