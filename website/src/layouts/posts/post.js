@@ -166,7 +166,11 @@ export default function Post(props) {
                     node.children.map((childNode) => {
                         // Image node can contain the figure and potentially a figure caption
                         const imageNode = childNode.children[0].children[0]
-                        const src = imageNode.attribs.src
+                        let src = imageNode.attribs.src
+                        // Replace the src with https.
+                        if(process.env.BASE_IMAGE_URL) {
+                            src = process.env.BASE_IMAGE_URL + src.replace(/^(?:\/\/|[^\/]+)*\//, "")
+                        }
                         if (imageNode.next) {
                             const caption = imageNode.next.children[0].data
                             images.push({caption, src})
