@@ -1,5 +1,5 @@
 import React from 'react'
-import App, { Container } from 'next/app'
+import App from 'next/app'
 import Head from 'next/head'
 import withRedux from 'next-redux-wrapper'
 import { Provider } from 'react-redux'
@@ -33,17 +33,15 @@ const _App = withRedux(store)(
       } = this.props
 
       return (
-        <Container>
-          <Head>
-            <title>Smolidays</title>
-          </Head>
           <MuiThemeProvider theme={theme}>
+            <Head>
+              <title>Smolidays</title>
+            </Head>
             <CssBaseline />
             <Provider store={store}>
               <Component {...pageProps} />
             </Provider>
           </MuiThemeProvider>
-        </Container>
       )
     }
   }
