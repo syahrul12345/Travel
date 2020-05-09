@@ -252,8 +252,25 @@ export default function Post(props) {
                 <title>{parser.parse(post.title.rendered)}</title>
                 <meta name="description" content={post.acf.excerpt}/>
             </Head>
+            {/* <AppBar id="appbar" position="sticky"> */}
+            <div style={{
+            backgroundColor: 'white',
+            position:"relative",
+            display:'flex',
+            justifyContent:'center'}}>
+            <a href="/">
+                <img 
+                style={{
+                    maxHeight:'20vh',
+                    maxWidth:'20vw',
+                    paddingTop:'2vh',
+                    marginBottom:'1.5vh'}}
+                src="/static/images/smolidays-logo-1.png" 
+                alt="smolidays-logo"/>
+            </a>
+            </div>
             <Nav/>
-            <div className="titleGrid" >
+            <div className="titleGrid">
                 <Link href={categoryLink} style={{color:'black'}}>
                     <Typography  component={'span'} variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'2vh',paddingTop:'2vh'}}>
                         <strong> {categoryString}</strong>
