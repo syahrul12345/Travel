@@ -9,8 +9,8 @@ export default function Related(props) {
                 direction="row"
                 spacing={2}>
                     <Grid item xs={12}>
-                        <Typography variant="h4" style={{textAlign:'center'}}>
-                            Related Posts
+                        <Typography variant="h6" style={{textAlign:'center'}}>
+                            You may also enjoy...
                         </Typography>
                     </Grid>
                     {props.related.map((post) => {

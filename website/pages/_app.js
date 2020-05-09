@@ -35,7 +35,7 @@ const _App = withRedux(store)(
       return (
         <Container>
           <Head>
-            <title>Airwaitress</title>
+            <title>Smolidays</title>
           </Head>
           <MuiThemeProvider theme={theme}>
             <CssBaseline />

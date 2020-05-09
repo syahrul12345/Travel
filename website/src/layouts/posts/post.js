@@ -6,8 +6,8 @@ import Footer from '../../components/footer'
 import Related from '../../components/related'
 import Facebook from '../../components/facebook'
 import {FacebookProvider,Share} from 'react-facebook'
-import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper,Link } from '@material-ui/core'
-import Slideshow from '../../components/slideshow';
+import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper,Link,Button,Badge } from '@material-ui/core'
+import Gallery from '../../components/gallery';
 
 import { makeStyles } from '@material-ui/core/styles';
 import './style.css'
@@ -166,13 +166,18 @@ export default function Post(props) {
                     node.children.map((childNode) => {
                         // Image node can contain the figure and potentially a figure caption
                         const imageNode = childNode.children[0].children[0]
-                        const caption = imageNode.next.children[0].data
                         const src = imageNode.attribs.src
-                        images.push({caption, src})
+                        if (imageNode.next) {
+                            const caption = imageNode.next.children[0].data
+                            images.push({caption, src})
+                        }else{
+                            images.push({src})
+                        }
+                        
                         
                     })
                     return (
-                        <Slideshow images={images} />
+                        <Gallery images={images} />
                     )
                 } else {
                     let url = node['attribs'].src
@@ -304,35 +309,48 @@ export default function Post(props) {
                     {parser.parseWithInstructions(post.content.rendered,isValidNode,processingInstructions)}
                 </Typography>
                 {/* Profile gird */}
-                <Paper style={{
-                    display:'flex',
-                    justifyContent:'flex-start',
-                    paddingLeft:'5vh',
-                    paddingTop:'3vh',
-                    paddingBottom:'3vh',
-                    marginBottom:'10vh',
-                    }}>
-                    <div style={{
-                        display:'flex',
-                        justifyContent:'space-between',
-                        alignContent:'center',
-                        alignItems:'center'}}>
-                        <Avatar
-                        alt={post.author.name} 
-                        src={post.author.avatar_urls[96]}
-                        className={classes.bigAvatar}/>
-                        <div style={{display:'flex',paddingLeft:'4vh',flexDirection:'column'}}>
-                            <Typography component={'span'} variant="subtitle1">
-                                <b>{post.author.name}</b>
-                            </Typography>
-                            <Typography 
-                            component={'span'} 
-                            variant="subtitle2">
-                                {post.author.description}
-                        </Typography>
-                        </div>  
-                    </div>
-                </Paper>
+                <Grid container spacing ={2}>
+                    <Grid item xs={6}>
+                        <Paper style={{
+                            display:'flex',
+                            justifyContent:'flex-start',
+                            minHeight:'15vh',
+                            marginBottom:'5vh',
+                            }}>
+                            <div style={{
+                                display:'flex',
+                                justifyContent:'space-between',
+                                alignContent:'center',
+                                alignItems:'center'}}>
+                                <Avatar
+                                alt={post.author.name} 
+                                src={post.author.avatar_urls[96]}
+                                className={classes.bigAvatar}/>
+                                <div style={{display:'flex',paddingLeft:'4vh',flexDirection:'column'}}>
+                                    <Typography component={'span'} variant="subtitle1">
+                                        {post.author.name}
+                                    </Typography>
+                                    <Typography 
+                                    component={'span'} 
+                                    variant="subtitle2">
+                                        {post.author.description}
+                                </Typography>
+                                </div>  
+                            </div>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Button variant="outlined" style={{width:'100%'}}> SHARE ON FACEBOOK</Button>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button variant="outlined" style={{width:'100%'}}> SHARE ON TWITTER</Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                
             <div style={{display:'flex',justifyContent:'flex-start',justifyItems:'flex-start'}}>
                 <Facebook/>
             </div>

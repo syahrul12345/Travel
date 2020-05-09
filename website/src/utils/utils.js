@@ -284,12 +284,18 @@ const getPostInfo = async(link) => {
                 post["country"] = country[0].title.rendered
             } catch(err) {
                 console.log(`Error In page: ${post.title.rendered} during rendering when trying to get country`)
-                post["country"] = {}
+                post["country"] = null
             }
             try {
-                relatedPosts = await getRelated(post.id,relation)
-            } catch{
-                console.log(`Failed to get related posts ${post.title.rendered}`)
+                // Some types need to get relation by country
+                if (post["country"] && (relation === 'guides' || relation === 'itineraries' || relation === 'food' || relation === 'cabin-life' || relation === 'lifestyle')) {
+                    console.log(`Getting related posts for ${post.title.rendered} with country :${post['country']} and relation: ${relation}`)
+                    relatedPosts = await getRelatedCountry(post.id, country[0].title.rendered, relation)
+                }else { 
+                    relatedPosts = await getRelated(post.id,relation)
+                }
+            } catch (err){
+                console.log(`Failed to get related posts ${post.title.rendered} due to ${err.toString()}`)
             }
             try {
                 post["author"] = author
