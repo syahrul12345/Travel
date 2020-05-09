@@ -12,8 +12,24 @@ export default function Food(props) {
                 <title> Food </title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
+            <div style={{
+            backgroundColor: 'white',
+            position:"relative",
+            display:'flex',
+            justifyContent:'center'}}>
+            <a href="/">
+                <img 
+                style={{
+                    maxHeight:'20vh',
+                    maxWidth:'20vw',
+                    paddingTop:'2vh',
+                    marginBottom:'1.5vh'}}
+                src="/static/images/smolidays-logo-1.png" 
+                alt="smolidays-logo"/>
+            </a>
+            </div>
             <Nav/>
-            <Grid direction="row">
+            <Grid direction="row" className="foodGrid">
                 <Grid item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
                 <Typography variant="h6"> Food Guides </Typography>
                 </Grid>

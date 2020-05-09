@@ -13,8 +13,24 @@ export default function TravelGuides(props) {
                 <title> Lifestyle </title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
+            <div style={{
+            backgroundColor: 'white',
+            position:"relative",
+            display:'flex',
+            justifyContent:'center'}}>
+            <a href="/">
+                <img 
+                style={{
+                    maxHeight:'20vh',
+                    maxWidth:'20vw',
+                    paddingTop:'2vh',
+                    marginBottom:'1.5vh'}}
+                src="/static/images/smolidays-logo-1.png" 
+                alt="smolidays-logo"/>
+            </a>
+            </div>
             <Nav/>
-            <Grid item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
+            <Grid className="afterNavBarGrid" item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
                     <Typography variant="h6" style={{marginBottom:'5vh'}}> Lifestyle </Typography>
             </Grid>
             <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>

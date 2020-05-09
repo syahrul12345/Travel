@@ -60,7 +60,12 @@
     width: 100%;
   }
 
+  /* Handle sticky navbar issues */
   .sticky + .titleGrid {
+    padding-top: 65px;
+  }
+
+  .sticky + .afterNavBarGrid {
     padding-top: 65px;
   }
 }

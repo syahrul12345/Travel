@@ -14,8 +14,24 @@ export default function Travel(props) {
                 <title> Destinations </title>
                 <meta name="description" content="All the countries that we cover"/>
             </Head>
+            <div style={{
+            backgroundColor: 'white',
+            position:"relative",
+            display:'flex',
+            justifyContent:'center'}}>
+            <a href="/">
+                <img 
+                style={{
+                    maxHeight:'20vh',
+                    maxWidth:'20vw',
+                    paddingTop:'2vh',
+                    marginBottom:'1.5vh'}}
+                src="/static/images/smolidays-logo-1.png" 
+                alt="smolidays-logo"/>
+            </a>
+            </div>
             <Nav/>
-            <Grid direction="row">
+            <Grid direction="row" className="afterNavBarGrid">
               <Grid item align="center" xs={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
                       <Typography variant="h6"> LATEST TRAVEL GUIDES </Typography>
               </Grid>
