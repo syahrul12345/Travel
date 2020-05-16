@@ -1,16 +1,17 @@
 import React from 'react'
 import HtmlToReact from 'html-to-react'
 import Head from 'next/head'
+import {FacebookProvider,Share} from 'react-facebook'
+import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper,Link,Button } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
 import Nav from '../../components/nav' 
 import Footer from '../../components/footer'
 import Related from '../../components/related'
 import Facebook from '../../components/facebook'
-import {FacebookProvider,Share} from 'react-facebook'
-import { Typography, Card,CardMedia,Avatar, IconButton, CardActionArea,Grid,Paper,Link,Button,Badge } from '@material-ui/core'
 import Gallery from '../../components/gallery';
 
-import { makeStyles } from '@material-ui/core/styles';
 import './style.css'
+
 const useStyles = makeStyles(theme => ({
     root: {
       ...theme.typography,
@@ -32,7 +33,7 @@ export default function Post(props) {
     let categoryLink = "/"
     categories.map((category) => {
         // Ignore travel
-        if (category.name != "Travel" && post.categories.includes(category.id)) {
+        if (category.name !== "Travel" && post.categories.includes(category.id)) {
             categoryString = category.name
             switch (categoryString) {
                 case 'Cabin Life':
@@ -56,56 +57,56 @@ export default function Post(props) {
         }
     })
     
-    //we need to parse the data
+    // we need to parse the data
     const HtmlToReactParser = HtmlToReact.Parser
     const parser = new HtmlToReactParser()
-    //Custom instructions to parse the escaped html
+    // Custom instructions to parse the escaped html
     const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
     const processingInstructions = [
         {
           // Custom <header> processing
-          shouldProcessNode: function (node) {
+          shouldProcessNode (node) {
             if(node.parent && node.parent.name && (node.parent.name === 'h2' || node.parent.name === 'h3' || node.parent.name === 'h4' || node.parent.name === 'h5')){
                 if(node.type != 'tag'){
                     return node
                 }
             }
           },
-          processNode: function (node, children) {
+          processNode (node, children) {
             switch(node.parent.name){
                 case('h2'):
                     return (
-                        <Typography component={'span'} variant="h2" style={{fontSize:'38px'}}>
+                        <Typography component="span" variant="h2" style={{fontSize:'38px'}}>
                             {node.data}
                         </Typography>
                     )
                 case('h3'):
                     return (
-                        <Typography component={'span'} variant="h3">
+                        <Typography component="span" variant="h3">
                             {node.data}
                         </Typography>
                     )
                 case('h4'):
                     return (
-                        <Typography component={'span'} variant="h4">
+                        <Typography component="span" variant="h4">
                             {node.data}
                         </Typography>
                     )
                 case('h5'):
                     return (
-                        <Typography component={'span'} variant="h5">
+                        <Typography component="span" variant="h5">
                             {node.data}
                         </Typography>
                     )
                 case('h6'):
                     return (
-                        <Typography component={'span'} variant="h6">
+                        <Typography component="span" variant="h6">
                             {node.data}
                         </Typography>
                     )
                 default:
                     return(
-                        <Typography component={'span'} variant="body">
+                        <Typography component="span" variant="body">
                             {node.data}
                         </Typography>
                     )
@@ -113,31 +114,31 @@ export default function Post(props) {
           }
         },
         {
-            //Process the <img> tag
-            shouldProcessNode: function(node){
+            // Process the <img> tag
+            shouldProcessNode(node){
                 if(node.parent && node.parent.name && node.parent.name == "figure"){
                     if (node.name && node.name == "ul") {
                         return node
                     }
-                    else if(node.name && node.name == "img"){
+                    if(node.name && node.name == "img"){
                         return node
-                    }else if(node.name && node.name == "a"){
-                        //image is child of the node
+                    }if(node.name && node.name == "a"){
+                        // image is child of the node
                         const imgNode = node.children[0]
                         return imgNode
                     }
                 }
             },
-            processNode: function(node,children){
-                //handle the captions
+            processNode(node,children){
+                // handle the captions
                 if (node && node.name == 'a'){
                     // check if https if not ignore
                     let url = children[0].props.src
                     // check https. Only load https content from outside sites, so if its not https, it means its local
-                    let isHttps = url.substring(0,5) === 's' ? true : false
+                    const isHttps = url.substring(0,5) === 's'
                     if (!isHttps) {
                         // check if its in production or not
-                        let imageBaseurl = ''
+                        const imageBaseurl = ''
                         if(process.env.BASE_IMAGE_URL) {
                             // replace if it is
                             url = process.env.BASE_IMAGE_URL + url.replace(/^(?:\/\/|[^\/]+)*\//, "")
@@ -149,7 +150,7 @@ export default function Post(props) {
                         style={{
                             marginTop:'5vh',
                             marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
-                            <a href={`//${node['attribs'].href}`} style={{color:'inherit'}}>
+                            <a href={`//${node.attribs.href}`} style={{color:'inherit'}}>
                                 <CardActionArea>
                                     <CardMedia
                                     image={url}
@@ -166,7 +167,7 @@ export default function Post(props) {
                     node.children.map((childNode) => {
                         // Image node can contain the figure and potentially a figure caption
                         const imageNode = childNode.children[0].children[0]
-                        let src = imageNode.attribs.src
+                        let {src} = imageNode.attribs
                         // Replace the src with https.
                         if(process.env.BASE_IMAGE_URL) {
                             src = process.env.BASE_IMAGE_URL + src.replace(/^(?:\/\/|[^\/]+)*\//, "")
@@ -183,13 +184,13 @@ export default function Post(props) {
                     return (
                         <Gallery images={images} />
                     )
-                } else {
-                    let url = node['attribs'].src
+                } 
+                    let url = node.attribs.src
                     // check https. Only load https content from outside sites, so if its not https, it means its local
-                    let isHttps = url.substring(0,5) === 'https' ? true : false
+                    const isHttps = url.substring(0,5) === 'https'
                     if (!isHttps) {
                         // check if its in production or not
-                        let imageBaseurl = ''
+                        const imageBaseurl = ''
                         if(process.env.BASE_IMAGE_URL) {
                             // replace if it is
                             url = process.env.BASE_IMAGE_URL + url.replace(/^(?:\/\/|[^\/]+)*\//, "")
@@ -208,16 +209,16 @@ export default function Post(props) {
                             </Card>
                         </div>
                     )
-                }
+                
                 
             }
         },
         {
-            //Handle image captions
-            shouldProcessNode: function(node){
+            // Handle image captions
+            shouldProcessNode(node){
                 return node.parent && node.parent.name && node.parent.name == "figcaption"
             },
-            processNode: function(node,children){
+            processNode(node,children){
                 return(
                     <Grid
                     container
@@ -226,7 +227,7 @@ export default function Post(props) {
                     justify="center"
                     style={{marginBottom:'3vh'}}>
                         <Typography 
-                        component={'span'} 
+                        component="span" 
                         variant="caption" 
                         align="center"
                         style={{textAlign:"center",fontSize:'0.85rem'}}><i>{node.data}</i></Typography>
@@ -236,13 +237,13 @@ export default function Post(props) {
         },
         {
           // Anything else
-          shouldProcessNode: function (node) {
+          shouldProcessNode (node) {
             return true;
           },
           processNode: processNodeDefinitions.processDefaultNode
         }
     ];
-    //callback function to check validaity of node
+    // callback function to check validaity of node
     const isValidNode = () => {
         return true
     }
@@ -271,17 +272,17 @@ export default function Post(props) {
             </div>
             <Nav/>
             <div className="titleGrid">
-                <Link href={categoryLink} style={{color:'black'}}>
-                    <Typography  component={'span'} variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'2vh',paddingTop:'2vh'}}>
+                <Link href={categoryLink} style={{color:'#EFCDBB'}}>
+                    <Typography  component="span" variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'2vh',paddingTop:'2vh'}}>
                         <strong> {categoryString}</strong>
                     </Typography>
                 </Link>
-                <Typography component={'span'} variant="h1" component="h1" style={{fontSize:'40px', fontWeight:'900', textAlign:'center'}}>
+                <Typography component="span" variant="h1" component="h1" style={{fontSize:'40px', fontWeight:'900', textAlign:'center',paddingBottom: '5vh'}}>
                     <strong>{parser.parse(post.title.rendered)}</strong>
                 </Typography>
                 {/* Social buton grid */}
                 <div style={{display:'flex',justifyContent:'space-between', alignContent:'center',alignItems:'center'}}>
-                    <Typography component={'span'} variant="subtitle1" style={{textAlign:'center'}}>
+                    <Typography component="span" variant="subtitle1" style={{textAlign:'center'}}>
                     <strong>{post.author.name} | {post.date}</strong>
                     </Typography>
                     <div style={{display:'flex', justifyContent:'space-between',align:'center'}} >
@@ -326,7 +327,7 @@ export default function Post(props) {
                     image={post.acf.featured_image.sizes["2048x2048"]}
                     style={{height:"60vh",zIndex:'100'}}/>
                 </Card>
-                <Typography component={'span'} variant="body1">
+                <Typography component="span" variant="body1">
                     {parser.parseWithInstructions(post.content.rendered,isValidNode,processingInstructions)}
                 </Typography>
                 {/* Profile gird */}
@@ -337,6 +338,7 @@ export default function Post(props) {
                             justifyContent:'flex-start',
                             minHeight:'15vh',
                             marginBottom:'5vh',
+                            background:'#F7ECE4',
                             }}>
                             <div style={{
                                 display:'flex',
@@ -346,13 +348,14 @@ export default function Post(props) {
                                 <Avatar
                                 alt={post.author.name} 
                                 src={post.author.avatar_urls[96]}
+                                style={{paddingLeft:'1vw'}}
                                 className={classes.bigAvatar}/>
                                 <div style={{display:'flex',paddingLeft:'4vh',flexDirection:'column'}}>
-                                    <Typography component={'span'} variant="subtitle1">
+                                    <Typography component="span" variant="subtitle1">
                                         {post.author.name}
                                     </Typography>
                                     <Typography 
-                                    component={'span'} 
+                                    component="span" 
                                     variant="subtitle2">
                                         {post.author.description}
                                 </Typography>

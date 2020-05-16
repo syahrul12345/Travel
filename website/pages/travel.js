@@ -32,36 +32,36 @@ export default function Travel(props) {
             </div>
             <Nav/>
             <Grid direction="row" className="afterNavBarGrid">
-              <Grid item align="center" xs={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
-                      <Typography variant="h6"> LATEST TRAVEL GUIDES </Typography>
+              <Grid item align="center" xs={12} style={{marginTop:'10vh',marginBottom:"1vh",position:'relative'}}>
+                      <Typography variant="h4" style={{fontWeight:'900'}}> LATEST TRAVEL GUIDES </Typography>
               </Grid>
-              <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"2vh"}}>
+              <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"10vh"}}>
                 <Grid container spacing={2} >
                   {/* Show only itinerary type posts */}
                     {props.guides.map((guide) => {
                       return (
                         <Grid key={guide.title} item xs={12} md={4}>
-                          <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                          <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} date={guide.date} height="30vh"/>
                         </Grid>
                       )
                     })}
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="h6" style={{marginTop:'2vh',marginBottom:'3vh',textAlign:"center"}}>DESTINATIONS</Typography>
+                <Typography variant="h4" style={{marginTop:'10vh',marginBottom:'10vh',textAlign:"center", fontWeight:'900'}}>DESTINATIONS</Typography>
                 <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
               </Grid>
             </Grid>
-              <Grid item align="center" xs={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
-                      <Typography variant="h6"> ITINERARIES </Typography>
+              <Grid item align="center" xs={12} style={{marginTop:'10vh',marginBottom:"5vh",position:'relative'}}>
+                      <Typography variant="h4" style={{fontWeight:'900'}}> ITINERARIES </Typography>
               </Grid>
-              <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"2vh"}}>
+              <Grid item xs={12} style={{marginLeft:"5%",marginRight:"5%",marginTop:"10vh"}}>
                 <Grid container spacing={2} >
                   {/* Show only itinerary type posts */}
                     {props.itineraries.map((guide) => {
                       return (
                         <Grid key={guide.title} item xs={12} md={4}>
-                          <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                          <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} date={guide.date} height="30vh"/>
                         </Grid>
                       )
                     })}

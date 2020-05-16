@@ -1,34 +1,45 @@
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import Link from 'next/link'
-import {Card,CardContent,CardMedia, CardActionArea,Typography} from '@material-ui/core'
+import {Card, CardMedia, CardActionArea,Typography} from '@material-ui/core'
 import HtmlToReact from 'html-to-react'
 
+import './overlay.css';
   
 export default function BlogCards(props) {
     const HtmlToReactParser = HtmlToReact.Parser
     const parser = new HtmlToReactParser()
+    const { link, image, height, title, date} = props;
     return(
-          <Link href={`\\${props.link}`}>
+        <Card style={{position:"relative"}}>
+          <Link href={`\\${link}`}>
             <CardActionArea>
-              <CardMedia 
-              style={{height:props.height}}
-              image={props.image}/>
-              <CardContent >
-                <Typography
-                variant="h6" 
-                component="p"
-                style={{textAlign:'left'}}>
-                  {parser.parse(props.title)}
+              <div className="overlay">
+                <CardMedia 
+                  style={{height}}
+                  image={image}/>
+                </div>
+              <div 
+              style={{
+                position:"absolute",
+                top:'75%',
+                width:'100%',
+                height:'100%',
+                textAlign:"left",
+                zIndex:"100",
+                color:"white",
+                paddingLeft:"10px",
+              }}
+              >
+                <Typography variant="h6" component="p">
+                  <strong>{parser.parse(title)}</strong>
                 </Typography>
-                <Typography
-                variant="body1"
-                component="p">
-                  {parser.parse(props.excerpt)}
+                <Typography>
+                  <span>{date}</span>
                 </Typography>
-                <span>{props.country}</span>
-                </CardContent>
+                
+              </div>
             </CardActionArea>
-            
           </Link>
+        </Card>
     )
 }

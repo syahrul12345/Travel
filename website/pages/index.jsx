@@ -1,5 +1,5 @@
-import {useState,useEffect} from 'react'
-import {Grid,Typography,Button,Divider,IconButton,GridList,GridListTile,GridListTileBar,Link} from '@material-ui/core'
+import React, {useState } from 'react'
+import {Grid,Typography,Button,Divider,IconButton,GridList,GridListTile} from '@material-ui/core'
 import LeftArrow from '@material-ui/icons/ArrowBack'
 import RightArrow  from '@material-ui/icons/ArrowForward'
 import HomeLayout from '../src/layouts/home'
@@ -42,7 +42,7 @@ const Index = (props) => {
     })
     setPage(page+1)
   }
-  
+    
   return (
     <HomeLayout data={props.carouselData}>
       <div className="afterNavBarGrid">
@@ -113,9 +113,9 @@ const Index = (props) => {
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>
         </Grid>
-        <Grid spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'1%',paddingBottom:'3%',paddingTop:'1vh'}}>
+        <Grid spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'3%',paddingBottom:'3%',paddingTop:'1vh'}}>
             <Grid item xs={12}>
-              <Typography variant="h6"> LATEST POSTS</Typography>
+              <Typography variant="h4" style={{fontWeight: 900}}> Whats trending?</Typography>
             </Grid>
             <Grid item xs={12}>
               <Grid 
@@ -126,19 +126,19 @@ const Index = (props) => {
                     {latestPostsState && latestPostsState.map((post) => {
                       return(
                           <Grid item xs={12} md={4}>
-                            <BlogCards title={post.title} image={post.image} link={post.link} height='30vh'/>
+                            <BlogCards title={post.title} image={post.image} link={post.link} date={post.date} height='30vh'/>
                           </Grid>
                       )
                     })}
                 </Grid>
                 <Grid item xs={2} style={{paddingTop:'5vh'}}>
-                  <Button onClick={() => loadMoreLatest()} variant="outlined"> <Typography variant="body1">Read More </Typography></Button>
+                  <Button className="button" color="highlight1" onClick={() => loadMoreLatest()} variant="outlined"> <Typography variant="body1" style={{color:'black'}}>Read More </Typography></Button>
                 </Grid>
             </Grid>
             
         </Grid>
         <div className="destinations" id="destinations">
-          <Typography variant="h6" style={{marginTop:'2vh',marginBottom:'3vh',textAlign:"center"}}>DESTINATIONS</Typography>
+          <Typography variant="h4" style={{marginTop:'10vh',marginBottom:'3vh',textAlign:"center",fontWeight: 900}}>DESTINATIONS</Typography>
           <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
         </div>
         <div className="mobileDestinations">
@@ -181,7 +181,6 @@ Index.getInitialProps = async() => {
   returnedJson['continents'] = res[3].data
   returnedJson['featured'] = res[4].data
   returnedJson['latestPosts'] = res[5].data
-
   return returnedJson
 }
 

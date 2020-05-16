@@ -30,8 +30,8 @@ export default function TravelGuides(props) {
             </a>
             </div>
             <Nav/>
-            <Grid className="afterNavBarGrid" item align="center" md={12} style={{marginTop:'5vh',marginBottom:"2vh",position:'relative'}}>
-                    <Typography variant="h6" style={{marginBottom:'5vh'}}> Lifestyle </Typography>
+            <Grid className="afterNavBarGrid" item align="center" md={12} style={{marginTop:'10vh',marginBottom:"10vh",position:'relative'}}>
+                    <Typography variant="h4" style={{fontWeight:'900'}}> Lifestyle </Typography>
             </Grid>
             <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
               <Grid container spacing={2} >
@@ -39,7 +39,7 @@ export default function TravelGuides(props) {
                   {travelguides.map((guide) => {
                     return (
                       <Grid key={guide.title} item xs={12} md={4}>
-                        <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} height="30vh"/>
+                        <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} date={guide.date} height="30vh"/>
                       </Grid>
                     )
                   })}

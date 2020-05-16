@@ -60,6 +60,7 @@
     width: 100%;
   }
 
+  
   /* Handle sticky navbar issues */
   .sticky + .titleGrid {
     padding-top: 65px;
@@ -67,6 +68,10 @@
 
   .sticky + .afterNavBarGrid {
     padding-top: 65px;
+  }
+  .button:hover {
+    background-color: #E2E2D7 !important;
+    color: #FFF;
   }
 }
 @media only screen and (max-width:786px){

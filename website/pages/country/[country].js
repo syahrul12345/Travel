@@ -12,6 +12,7 @@ import TrainIcon from '@material-ui/icons/Train'
 
 import Head from 'next/head'
 import CountryLayout from '../../src/layouts/country'
+import Nav from '../../src/components/nav';
 import BlogCards from '../../src/components/blogcards';
 import './style.css'
 
@@ -26,7 +27,7 @@ export default function CountryPage(props) {
                 <Head>
                     <title>{router.query.country} - Airwaitress</title>
                 </Head>
-                <Grid container direction="row">
+                <Grid container direction="row" className="afterNavBarGrid">
                     <Grid style={{position:'relative'}} id="topGrid" item align="center" xs={12}>
                         <CardMedia
                         image={props.info[0].acf.background_image.sizes['2048x2048']}
@@ -101,7 +102,7 @@ export default function CountryPage(props) {
                             <Typography
                             variant="h4"
                             style={{marginTop:"2vh"}}>
-                                All articles
+                                {/* All articles */}
                             </Typography>
                         </Grid>
                         <Grid item xs={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>

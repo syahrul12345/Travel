@@ -42,6 +42,10 @@
     .mobileGridList{
         display:none;
     }
+    .button:hover {
+        background-color: #E2E2D7 !important;
+        color: #FFF;
+      }
 }
 @media only screen and (max-width:786px){
     .firstGrid{

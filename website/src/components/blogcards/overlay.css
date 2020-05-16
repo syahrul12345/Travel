@@ -1,0 +1,9 @@
+.overlay {
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  top: 0px;
+  left: 0px;
+  background:black; /*can be anything, of course*/
+}

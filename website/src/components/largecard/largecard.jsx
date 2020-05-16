@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import Link from 'next/link'
 import {Grid,CardContent,CardMedia,Typography,Card, CardActionArea} from '@material-ui/core'
 import HtmlToReact from 'html-to-react'
@@ -21,16 +21,18 @@ export default function BlogCards(props) {
                 className="contentCardDesktop" 
                 >
                         <Typography
-                            variant="h4" 
-                            component="p">
+                            variant="h6" 
+                            >
                             {parser.parse(props.title)}
                         </Typography>
                         <Typography
-                            variant="h5"
-                            component="p">
+                            variant="body1"
+                            >
                             {parser.parse(props.excerpt)}
                         </Typography>
-                        <span>{props.country}</span>
+                        <Typography variant="subtitle2">
+                             {props.country}
+                        </Typography>
                     {/* <Grid container justify="flex-end" style={{marginTop:'1vh'}}>
                         <Grid item>
                             <Link href={`\\${props.link}`}>

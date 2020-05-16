@@ -1,22 +1,10 @@
 import React from 'react';
-import {AppBar, 
+import { 
   Typography, 
-  Grid,
   Button,
-  Paper,
-  MenuList, 
-  MenuItem,
-  Popper,
-  Grow,
-  ClickAwayListener, 
-  Link,
-  Fade,
-  Card,
-  CardContent,
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu';
 import "./style.css"
+
 const links = [
   { href:'/travel',label:'TRAVEL'},
   { href:'/lifestyle',label:'LIFESTYLE'},
@@ -39,15 +27,7 @@ export default class Nav extends React.Component {
     }
   }
   
-  handleScroll = () => {
-    const { offsetTop, navbar, titleGrid } = this.state;
-    if (window.pageYOffset > offsetTop) {
-      navbar.classList.add("sticky")
-      
-    }else{
-      navbar.classList.remove("sticky")
-    }
-  }
+  
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     const navbar = document.getElementById("navbar");
@@ -59,6 +39,17 @@ export default class Nav extends React.Component {
       titleGrid,
     })
   }
+
+  handleScroll = () => {
+    const { offsetTop, navbar, titleGrid } = this.state;
+    if (window.pageYOffset > offsetTop) {
+      navbar.classList.add("sticky")
+      
+    }else{
+      navbar.classList.remove("sticky")
+    }
+  }
+
   render() {
     return(
       
@@ -68,8 +59,9 @@ export default class Nav extends React.Component {
               {links.map(({ key, href, label }) => {
                 return (
                   <li key={key}>
-                    <Button style={{color:'black',textAlign:'center'}} href={href}>
+                    <Button className="button" href={href}>
                       <Typography style={{
+                        color:'black',
                         marginBlockEnd:'5px'}}>
                         {label}
                       </Typography>

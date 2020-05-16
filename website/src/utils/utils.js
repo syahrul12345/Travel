@@ -20,6 +20,17 @@ if (process.env.NODE_ENV == 'production') {
     imageBaseurl = 'https://api.smolidays.com/'
 }
 
+const formatDate = (input) => {
+    const d = new Date(input)
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+    ];
+    const month = d.getMonth()
+    const day = d.getDate()
+    const year = d.getFullYear().toString().substr(2)
+    return day + ' ' + monthNames[month] + ' 20' + year
+}
+
 const populateCarousel = async() => {
     const res = await fetch(`${baseurl}wp-json/wp/v2/carousel`)
     const data = await res.json()
@@ -366,6 +377,7 @@ const getLatestPosts = async(page) => {
                 title: post.title.rendered,
                 image: post.acf.featured_image.sizes.large,
                 link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                date: formatDate(post.date),
             }
             cleanedPosts.push(answer)
         }
@@ -423,6 +435,7 @@ const getPostsByCategory = async(category,amount) => {
                 title:post.title.rendered,
                 image:`${imageBaseurl}${post.acf.featured_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")}`,
                 link: post.link.replace(/^(?:\/\/|[^\/]+)*\//, ""),
+                date: formatDate(post.date),
             }
             cleanedPosts.push(answer)
         }
@@ -463,6 +476,9 @@ const getFooterInfo = async(slug) => {
     const data = await res.json()
     return data[0]
 }
+
+
+
 module.exports = {
     populateCarousel,
     populatePosts,

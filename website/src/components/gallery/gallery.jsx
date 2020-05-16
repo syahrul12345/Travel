@@ -1,7 +1,5 @@
+import React from 'react';
 import { Grid, Card, CardContent, CardMedia, Typography } from '@material-ui/core';
-
-
-
 
 const gallery = (props) => {
   const { images } = props
