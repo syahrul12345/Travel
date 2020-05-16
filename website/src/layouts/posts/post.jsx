@@ -18,10 +18,6 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.paper,
       padding: theme.spacing(1),
     },
-    bigAvatar: {
-        width: 80,
-        height: 80,
-    }
   }));
 
 export default function Post(props) {
@@ -340,16 +336,44 @@ export default function Post(props) {
                             marginBottom:'5vh',
                             background:'#F7ECE4',
                             }}>
-                            <div style={{
+                            <Grid container justifyContent="spaceBetween">
+                                <Grid item xs={3} style={{marginLeft:'2vh',marginTop:'2vh'}}>
+                                    <Avatar
+                                    alt={post.author.name} 
+                                    src="https://secure.gravatar.com/avatar/2c22ecc7422ed1c357c6f42b9e594fcf?s=96&d=mm&r=g"
+                                    style={{width:'96px',height:'96px'}}
+                                    />
+                                </Grid>
+                                <Grid item xs={2}>
+                                    <Grid container spacing={0}
+                                        direction="column"
+                                        alignItems="center"
+                                        justify="center"
+                                        style={{minHeight:"10vh"}}>
+                                        <Grid item xs={12}>
+                                            <Typography component="span" variant="subtitle1">
+                                                {post.author.name}
+                                            </Typography>
+                                            <Typography 
+                                            component="span" 
+                                            variant="subtitle2">
+                                                {post.author.description}
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                        
+                                </Grid>
+                            </Grid>
+                            {/* <div style={{
                                 display:'flex',
                                 justifyContent:'space-between',
                                 alignContent:'center',
                                 alignItems:'center'}}>
                                 <Avatar
                                 alt={post.author.name} 
-                                src={post.author.avatar_urls[96]}
-                                style={{paddingLeft:'1vw'}}
-                                className={classes.bigAvatar}/>
+                                src="https://secure.gravatar.com/avatar/2c22ecc7422ed1c357c6f42b9e594fcf?s=96&d=mm&r=g"
+                                style={{paddingLeft:'5px',width:'96px',height:'96px'}}
+                                />
                                 <div style={{display:'flex',paddingLeft:'4vh',flexDirection:'column'}}>
                                     <Typography component="span" variant="subtitle1">
                                         {post.author.name}
@@ -360,7 +384,7 @@ export default function Post(props) {
                                         {post.author.description}
                                 </Typography>
                                 </div>  
-                            </div>
+                            </div> */}
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
