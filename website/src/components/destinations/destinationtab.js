@@ -86,7 +86,7 @@ export default function Destinations(props) {
                           <Tab label="Southeast Asia" {...a11yProps(1)} />
                           <Tab label="Oceania" {...a11yProps(2)} />
                           <Tab label="Europe" {...a11yProps(3)} />
-                          {/* <Tab label="America" {...a11yProps(4)} /> */}
+                          <Tab label="America" {...a11yProps(4)} />
                           {/* <Tab label="Middle East & Africa" {...a11yProps(5)} /> */}
                         </Tabs>
                       </Grid>
@@ -98,7 +98,7 @@ export default function Destinations(props) {
                           <TabPanel value={value} index={1} destination={props.destinations.se}/>
                           <TabPanel value={value} index={2} destination={props.destinations.oceania}/>
                           <TabPanel value={value} index={3} destination={props.destinations.europe}/>
-                          {/* <TabPanel value={value} index={4} destination={props.destinations.america}/> */}
+                          <TabPanel value={value} index={4} destination={props.destinations.america}/>
                           {/* <TabPanel value={value} index={5} destination={props.destinations.africa}/> */}
                       </Grid>
                     </Grid>
