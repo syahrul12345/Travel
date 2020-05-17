@@ -28,9 +28,10 @@ export default function BlogCards(props) {
                 zIndex:"100",
                 color:"white",
                 paddingLeft:"10px",
+                paddingRight: "10px",
               }}
               >
-                <Typography variant="h6" component="p">
+                <Typography variant="h6" component="p" style={{minHeight:'40px',lineHeight:'20px'}}>
                   <strong>{parser.parse(title)}</strong>
                 </Typography>
                 <Typography>
