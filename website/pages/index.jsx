@@ -115,7 +115,7 @@ const Index = (props) => {
         </Grid>
         <Grid spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'3%',paddingBottom:'1%',paddingTop:'1vh'}}>
             <Grid item xs={12}>
-              <Typography variant="h4" style={{fontWeight: 900,marginBottom: '5vh'}}> Whats trending?</Typography>
+              <Typography variant="h4" style={{fontWeight: 900,marginBottom: '5vh'}}> WHATS TRENDING?</Typography>
             </Grid>
             <Grid item xs={12}>
               <Grid 

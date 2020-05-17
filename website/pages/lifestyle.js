@@ -31,7 +31,7 @@ export default function TravelGuides(props) {
             </div>
             <Nav/>
             <Grid className="afterNavBarGrid" item align="center" md={12} style={{marginTop:'10vh',marginBottom:"10vh",position:'relative'}}>
-                    <Typography variant="h4" style={{fontWeight:'900'}}> Lifestyle </Typography>
+                    <Typography variant="h4" style={{fontWeight:'900'}}> LIFESTYLE </Typography>
             </Grid>
             <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
               <Grid container spacing={2} >

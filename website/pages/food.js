@@ -31,7 +31,7 @@ export default function Food(props) {
             <Nav/>
             <Grid direction="row" className="foodGrid">
                 <Grid item align="center" md={12} style={{marginTop:'10vh',marginBottom:"10vh",position:'relative'}}>
-                <Typography variant="h4" style={{fontWeight:'900'}}> Food Guides </Typography>
+                <Typography variant="h4" style={{fontWeight:'900'}}> FOOD GUIDES </Typography>
                 </Grid>
                 <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
                 <Grid container spacing={2} >
