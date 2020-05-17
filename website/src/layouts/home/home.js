@@ -9,7 +9,7 @@ export default function HomeLayout(props) {
                 <title> Smolidays</title>
                 <meta name="description" content="Travel blog - from the perspective of aircrew"/>
             </Head>
-            <div style={{
+            {/* <div style={{
             backgroundColor: 'white',
             position:"relative",
             display:'flex',
@@ -24,7 +24,7 @@ export default function HomeLayout(props) {
                 src="/static/images/smolidays-logo-1.png" 
                 alt="smolidays-logo"/>
             </a>
-            </div>
+            </div> */}
             <Nav></Nav>
             {props.children}
             <Footer></Footer>

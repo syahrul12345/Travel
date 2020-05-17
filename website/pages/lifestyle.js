@@ -13,7 +13,7 @@ export default function TravelGuides(props) {
                 <title> Lifestyle </title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
-            <div style={{
+            {/* <div style={{
             backgroundColor: 'white',
             position:"relative",
             display:'flex',
@@ -28,7 +28,7 @@ export default function TravelGuides(props) {
                 src="/static/images/smolidays-logo-1.png" 
                 alt="smolidays-logo"/>
             </a>
-            </div>
+            </div> */}
             <Nav/>
             <Grid className="afterNavBarGrid" item align="center" md={12} style={{marginTop:'10vh',marginBottom:"10vh",position:'relative'}}>
                     <Typography variant="h4" style={{fontWeight:'900'}}> LIFESTYLE </Typography>

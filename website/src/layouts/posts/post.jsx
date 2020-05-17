@@ -243,7 +243,7 @@ export default function Post(props) {
                 <meta name="description" content={post.acf.excerpt}/>
             </Head>
             {/* <AppBar id="appbar" position="sticky"> */}
-            <div style={{
+            {/* <div style={{
             backgroundColor: 'white',
             position:"relative",
             display:'flex',
@@ -258,10 +258,10 @@ export default function Post(props) {
                 src="/static/images/smolidays-logo-1.png" 
                 alt="smolidays-logo"/>
             </a>
-            </div>
+            </div> */}
             <Nav/>
             <div className="titleGrid">
-                <Link href={categoryLink} style={{color:'#EFCDBB'}}>
+                <Link href={categoryLink} style={{color:'#C7ACA1'}}>
                     <Typography  component="span" variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'2vh',paddingTop:'2vh'}}>
                         <strong> {categoryString}</strong>
                     </Typography>
@@ -327,7 +327,7 @@ export default function Post(props) {
                             justifyContent:'flex-start',
                             minHeight:'15vh',
                             marginBottom:'5vh',
-                            background:'#F7ECE4',
+                            background:'#E7E4E0',
                             }}>
                             <Grid container justifyContent="spaceBetween">
                                 <Grid item xs={3} style={{marginLeft:'2vh',marginTop:'2vh'}}>

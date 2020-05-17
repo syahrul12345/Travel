@@ -10,7 +10,7 @@ if (process.env.NODE_ENV == 'production') {
     if(process.env.BASE_IMAGE_URL) {
         imageBaseurl = process.env.BASE_IMAGE_URL
     }else{
-        imageBaseurl = 'http://127.0.0.1:8080/'
+        imageBaseurl = 'https://api.smolidays.com/'
     }
     
 }else{

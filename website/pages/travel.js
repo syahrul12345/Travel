@@ -14,7 +14,7 @@ export default function Travel(props) {
                 <title> Destinations </title>
                 <meta name="description" content="All the countries that we cover"/>
             </Head>
-            <div style={{
+            {/* <div style={{
             backgroundColor: 'white',
             position:"relative",
             display:'flex',
@@ -29,7 +29,7 @@ export default function Travel(props) {
                 src="/static/images/smolidays-logo-1.png" 
                 alt="smolidays-logo"/>
             </a>
-            </div>
+            </div> */}
             <Nav/>
             <Grid direction="row" className="afterNavBarGrid">
               <Grid item align="center" xs={12} style={{marginTop:'10vh',marginBottom:"1vh",position:'relative'}}>

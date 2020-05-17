@@ -12,7 +12,7 @@ export default function CrewLife(props) {
                 <title> Cabin Life - The Layover Life</title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
-            <div style={{
+            {/* <div style={{
             backgroundColor: 'white',
             position:"relative",
             display:'flex',
@@ -26,8 +26,8 @@ export default function CrewLife(props) {
                     marginBottom:'1.5vh'}}
                 src="/static/images/smolidays-logo-1.png" 
                 alt="smolidays-logo"/>
-            </a>
-            </div>
+            </a> */}
+            {/* </div> */}
             <Nav/>
             <Grid className="afterNavBarGrid" item align="center" md={12} style={{marginTop:'10vh',marginBottom:"10vh",position:'relative'}}>
             <Typography variant="h4" style={{fontWeight:'900'}}> CABIN LIFE </Typography>

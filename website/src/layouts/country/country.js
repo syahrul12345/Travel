@@ -5,7 +5,7 @@ import Nav from '../../components/nav'
 export default function CountryLayout(props) {
     return(
         <div>
-            <div style={{
+            {/* <div style={{
             backgroundColor: 'white',
             position:"relative",
             display:'flex',
@@ -20,7 +20,7 @@ export default function CountryLayout(props) {
                 src="/static/images/smolidays-logo-1.png" 
                 alt="smolidays-logo"/>
             </a>
-            </div>
+            </div> */}
             <Nav/>
             {props.children}
         </div>

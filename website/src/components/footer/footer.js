@@ -12,7 +12,7 @@ const links = [
 
 export default function Footer(){
     return(
-      <Grid container justify="space-between" style={{marginTop:'5vh', backgroundColor:'rgba(0, 0, 0, 0.10)', paddingLeft:'10%',paddingRight:'10%',paddingTop:'2vh',paddingBottom:'2vh'}}>
+      <Grid container justify="space-between" style={{marginTop:'5vh', backgroundColor:'#EEDDD1', paddingLeft:'10%',paddingRight:'10%',paddingTop:'2vh',paddingBottom:'2vh'}}>
           <Grid item xs={6}>
               <Grid container>
                   <Grid item>

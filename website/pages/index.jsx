@@ -45,7 +45,7 @@ const Index = (props) => {
     
   return (
     <HomeLayout data={props.carouselData}>
-      <div className="afterNavBarGrid">
+      <div className="afterNavBarGrid" style={{marginTop:'5vh',marginBottom:"10vh",position:'relative'}}>
         <Grid 
         direction="row"
         spacing={2}

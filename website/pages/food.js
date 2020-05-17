@@ -12,7 +12,7 @@ export default function Food(props) {
                 <title> Food </title>
                 <meta name="description" content="All the travel guides that you need"/>
             </Head>
-            <div style={{
+            {/* <div style={{
             backgroundColor: 'white',
             position:"relative",
             display:'flex',
@@ -27,24 +27,22 @@ export default function Food(props) {
                 src="/static/images/smolidays-logo-1.png" 
                 alt="smolidays-logo"/>
             </a>
-            </div>
+            </div> */}
             <Nav/>
-            <Grid direction="row" className="foodGrid">
-                <Grid item align="center" md={12} style={{marginTop:'10vh',marginBottom:"10vh",position:'relative'}}>
-                <Typography variant="h4" style={{fontWeight:'900'}}> FOOD GUIDES </Typography>
-                </Grid>
-                <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
-                <Grid container spacing={2} >
-                    {/* Show only itinerary type posts */}
-                    {foodguides.map((guide) => {
-                        return (
-                        <Grid key={guide.title} item xs={12} md={4}>
-                            <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} date={guide.date} height="30vh"/>
-                        </Grid>
-                        )
-                    })}
-                </Grid>
-                </Grid>
+            <Grid className="afterNavBarGrid" item align="center" md={12} style={{marginTop:'10vh',marginBottom:"10vh",position:'relative'}}>
+            <Typography variant="h4" style={{fontWeight:'900'}}> FOOD </Typography>
+            </Grid>
+            <Grid item md={12} style={{paddingLeft:"5%",paddingRight:"5%",marginTop:"2vh"}}>
+              <Grid container spacing={2} >
+                {/* Show only itinerary type posts */}
+                  {foodguides.map((guide) => {
+                    return (
+                      <Grid key={guide.title} item xs={12} md={4}>
+                        <BlogCards slug={guide.slug} title={guide.title} excerpt={guide.excerpt} image={guide.image} link={guide.link} date={guide.date} height="30vh"/>
+                      </Grid>
+                    )
+                  })}
+              </Grid>
             </Grid>
             <div style={{paddingTop:'20vh'}}>
                 <Footer/>
