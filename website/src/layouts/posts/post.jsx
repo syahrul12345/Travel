@@ -143,6 +143,7 @@ export default function Post(props) {
 
                     return <div>
                         <Card
+                        className="images"
                         style={{
                             marginTop:'5vh',
                             marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
@@ -195,6 +196,7 @@ export default function Post(props) {
                     return(
                         <div>
                             <Card
+                            className="images"
                             style={{
                                 marginTop:'5vh',
                                 marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>

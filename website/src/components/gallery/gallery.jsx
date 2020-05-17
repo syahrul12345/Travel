@@ -25,7 +25,7 @@ const gallery = (props) => {
               marginBottom:'5vh'}}>
                   <CardMedia
                   image={image.src}
-                  style={{height:'675px'}}
+                  style={{height:'600px'}}
                   />
                   {image.caption ? 
                     (<CardContent>
