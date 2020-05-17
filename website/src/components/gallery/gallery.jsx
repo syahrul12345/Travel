@@ -3,6 +3,11 @@ import { Grid, Card, CardContent, CardMedia, Typography } from '@material-ui/cor
 
 const gallery = (props) => {
   const { images } = props
+  // Size is the number of images to show
+  let size = 4
+  if (images.length === 2) {
+    size = 6
+  }
   return (
     <Grid
     container
@@ -13,14 +18,14 @@ const gallery = (props) => {
     >
       {images.map(image => {
         return(
-          <Grid item xs={4} key={image.src}>
+          <Grid item xs={size} key={image.src}>
             <Card
               style={{
               marginTop:'5vh',
               marginBottom:'5vh'}}>
                   <CardMedia
                   image={image.src}
-                  style={{height:'40vh'}}
+                  style={{height:'675px'}}
                   />
                   {image.caption ? 
                     (<CardContent>
