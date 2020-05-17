@@ -113,9 +113,9 @@ const Index = (props) => {
               <Divider variant="middle" style={{margin:'0px'}}/>
             </Grid>
         </Grid>
-        <Grid spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'3%',paddingBottom:'3%',paddingTop:'1vh'}}>
+        <Grid spacing ={5} direction="row" align="center" justify="center" style={{paddingRight:'9%',paddingLeft:'9%',marginTop:'3%',paddingBottom:'1%',paddingTop:'1vh'}}>
             <Grid item xs={12}>
-              <Typography variant="h4" style={{fontWeight: 900}}> Whats trending?</Typography>
+              <Typography variant="h4" style={{fontWeight: 900,marginBottom: '5vh'}}> Whats trending?</Typography>
             </Grid>
             <Grid item xs={12}>
               <Grid 
@@ -138,7 +138,7 @@ const Index = (props) => {
             
         </Grid>
         <div className="destinations" id="destinations">
-          <Typography variant="h4" style={{marginTop:'10vh',marginBottom:'3vh',textAlign:"center",fontWeight: 900}}>DESTINATIONS</Typography>
+          <Typography variant="h4" style={{marginTop:'10vh',marginBottom:'5vh',textAlign:"center",fontWeight: 900}}>DESTINATIONS</Typography>
           <DestinationTab currentDestination = {destination} destinations={props.destinations}/>
         </div>
         <div className="mobileDestinations">

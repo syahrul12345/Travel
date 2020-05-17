@@ -388,12 +388,12 @@ export default function Post(props) {
                         </Paper>
                     </Grid>
                     <Grid item xs={6}>
-                        <Grid container spacing={2}>
+                        <Grid container spacing={2} style={{minHeight: '15vh'}}>
                             <Grid item xs={12}>
-                                <Button variant="outlined" style={{width:'100%'}}> SHARE ON FACEBOOK</Button>
+                                <Button variant="outlined" style={{width:'100%',height:'6.5vh',backgroundColor:'#325A97'}}><img src="/static/images/fb-icon.svg" alt="facebok-vector" style={{maxHeight:'25px'}}/></Button>
                             </Grid>
                             <Grid item xs={12}>
-                                <Button variant="outlined" style={{width:'100%'}}> SHARE ON TWITTER</Button>
+                                <Button variant="outlined" style={{width:'100%',height:'6.5vh',backgroundColor:'#00ACED'}}> <img src="/static/images/tw-icon.svg" alt="facebok-vector" style={{maxHeight:'20px'}}/></Button>
                             </Grid>
                         </Grid>
                     </Grid>
