@@ -70,8 +70,7 @@
     padding-top: 65px;
   }
   .button:hover {
-    background-color: #E2E2D7 !important;
-    color: #FFF;
+    background-color: rgba(226, 226, 215, 1) !important;
   }
 }
 @media only screen and (max-width:786px){

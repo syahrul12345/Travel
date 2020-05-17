@@ -1,8 +1,6 @@
 import React from 'react';
-import { 
-  Typography, 
-  Button,
-} from '@material-ui/core'
+
+import CustomButton from './button';
 import "./style.css"
 
 const links = [
@@ -22,26 +20,22 @@ export default class Nav extends React.Component {
     super(props)
     this.state = {
       offsetTop:0,
-      appbar: undefined,
-      titleGrid: undefined,
     }
   }
-  
   
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     const navbar = document.getElementById("navbar");
-    const titleGrid = document.getElementsByClassName("titleGrid")
+    // const titleGrid = document.getElementsByClassName("titleGrid")
     const sticky = navbar.offsetTop;
     this.setState({
       offsetTop: sticky,
       navbar,
-      titleGrid,
     })
   }
 
   handleScroll = () => {
-    const { offsetTop, navbar, titleGrid } = this.state;
+    const { offsetTop, navbar } = this.state;
     if (window.pageYOffset > offsetTop) {
       navbar.classList.add("sticky")
       
@@ -49,6 +43,9 @@ export default class Nav extends React.Component {
       navbar.classList.remove("sticky")
     }
   }
+
+
+  
 
   render() {
     return(
@@ -59,14 +56,8 @@ export default class Nav extends React.Component {
               {links.map(({ key, href, label }) => {
                 return (
                   <li key={key}>
-                    <Button className="button" href={href}>
-                      <Typography style={{
-                        color:'black',
-                        marginBlockEnd:'5px'}}>
-                        {label}
-                      </Typography>
-                    </Button>
-                </li>
+                    <CustomButton href={href} label={label}/>
+                  </li>
                 )
               })}
             </ul>

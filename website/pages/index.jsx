@@ -132,7 +132,7 @@ const Index = (props) => {
                     })}
                 </Grid>
                 <Grid item xs={2} style={{paddingTop:'5vh'}}>
-                  <Button className="button" color="highlight1" onClick={() => loadMoreLatest()} variant="outlined"> <Typography variant="body1" style={{color:'black'}}>Read More </Typography></Button>
+                  <Button color="secondary" onClick={() => loadMoreLatest()} > <Typography variant="body1" style={{color:'black'}}>Read More </Typography></Button>
                 </Grid>
             </Grid>
             
