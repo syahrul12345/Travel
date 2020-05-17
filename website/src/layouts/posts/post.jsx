@@ -12,16 +12,7 @@ import Gallery from '../../components/gallery';
 
 import './style.css'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-      ...theme.typography,
-      backgroundColor: theme.palette.background.paper,
-      padding: theme.spacing(1),
-    },
-  }));
-
 export default function Post(props) {
-    const classes = useStyles()
     const { data } = props 
     const { post , relatedPosts, categories} = data
     
