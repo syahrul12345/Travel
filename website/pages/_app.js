@@ -1,14 +1,14 @@
 import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
-import withRedux from 'next-redux-wrapper'
-import { Provider } from 'react-redux'
+// import withRedux from 'next-redux-wrapper'
+// import { Provider } from 'react-redux'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import store from '../src/store'
 import theme from '../src/utils/theme'
 
-const _App = withRedux(store)(
+const _App = (
   class _App extends App {
     static async getInitialProps ({ Component, ctx }) {
       return {
@@ -38,9 +38,9 @@ const _App = withRedux(store)(
               <title>Smolidays</title>
             </Head>
             <CssBaseline />
-            <Provider store={store}>
+            {/* <Provider store={store}> */}
               <Component {...pageProps} />
-            </Provider>
+            {/* </Provider> */}
           </MuiThemeProvider>
       )
     }
