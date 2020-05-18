@@ -5,7 +5,6 @@ import Head from 'next/head'
 // import { Provider } from 'react-redux'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import store from '../src/store'
 import theme from '../src/utils/theme'
 
 const _App = (
