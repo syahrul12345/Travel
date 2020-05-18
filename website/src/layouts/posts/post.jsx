@@ -134,7 +134,7 @@ export default function Post(props) {
 
                     return <div>
                         <Card
-                        className="images"
+                        // className="images"
                         style={{
                             marginTop:'5vh',
                             marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
@@ -142,7 +142,8 @@ export default function Post(props) {
                                 <CardActionArea>
                                     <CardMedia
                                     image={url}
-                                    className="images"
+                                    style={{width:'600px',height:'900px'}}
+                                    // className="images"
                                     />
                                 </CardActionArea>
                             </a>
@@ -187,13 +188,13 @@ export default function Post(props) {
                     return(
                         <div>
                             <Card
-                            className="images"
                             style={{
                                 marginTop:'5vh',
+                                width:'900px',
                                 marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
                                 <CardMedia
                                 image={url}
-                                className="images"
+                                style={{height:'600px'}}
                                 />
                             </Card>
                         </div>
