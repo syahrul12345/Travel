@@ -142,7 +142,7 @@ export default function Post(props) {
                                 <CardActionArea>
                                     <CardMedia
                                     image={url}
-                                    style={{width:'600px',height:'900px'}}
+                                    style={{width:'600px'}}
                                     // className="images"
                                     />
                                 </CardActionArea>
@@ -190,7 +190,6 @@ export default function Post(props) {
                             <Card
                             style={{
                                 marginTop:'5vh',
-                                width:'900px',
                                 marginBottom: node.next && node.next.name && node.next.name == "figcaption" ? '2vh':'5vh'}}>
                                 <CardMedia
                                 image={url}
