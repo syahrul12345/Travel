@@ -143,9 +143,11 @@ const populateDestinations = async () => {
             }
             destinationData.push(answer)
         }
-        finally {
-            
+        catch (e){
+            console.log(`Failed to poplate destiantion for ${post.title.rendered} as : ${e.toString()}`)
         }
+        finally {}
+        
     })
 
     return{
