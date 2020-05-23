@@ -13,7 +13,6 @@ import MobileDestinations from '../src/components/mobiledestinations/mobiledesti
 
 const Index = (props) => {
   const { latestPosts } = props
-  
   const [currentPost,setPost] = useState(0)
   const [destination,setDestination] = useState(0)
   const [page, setPage] = useState(1)
@@ -42,7 +41,6 @@ const Index = (props) => {
     })
     setPage(page+1)
   }
-    
   return (
     <HomeLayout data={props.carouselData}>
       <div className="afterNavBarGrid" style={{marginTop:'5vh',marginBottom:"10vh",position:'relative'}}>
@@ -69,7 +67,9 @@ const Index = (props) => {
                     </IconButton>
                 </Grid>
                 <div className="desktopLargeCard">
-                  <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="70vh"/>
+                  {props.postData[currentPost] ? 
+                    <LargeCard slug={props.postData[currentPost].slug} title={props.postData[currentPost].title} excerpt={props.postData[currentPost].excerpt} image={props.postData[currentPost].image} link={props.postData[currentPost].link} country={props.postData[currentPost].country_normal} height="70vh"/>: <></>
+                  }
                 </div>
                 <div 
                 className="mobileGridList">
@@ -152,7 +152,8 @@ const Index = (props) => {
 
 Index.getInitialProps = async() => {
   const carouselData = populateCarousel()
-  const postData = populatePosts(4)
+  // Take the first 50 posts, but only take the most recent 6
+  const postData = populatePosts(50)
   const destinations = populateDestinations()
   const continents = populateContinents()
   const featured = getFeatured()
@@ -161,12 +162,12 @@ Index.getInitialProps = async() => {
   const returnedJson = {}
   //clean the data
   const locations = res[2].data
-  const asia = locations.filter(location => location.continent == 'Asia')
-  const oceania = locations.filter(location => location.continent == 'Oceania')
-  const se = locations.filter(location => location.continent == 'Southeast Asia')
-  const europe = locations.filter(location => location.continent == 'Europe')
-  const africa = locations.filter(location => location.continent == 'Africa & Middle East')
-  const america = locations.filter(location => location.continent == 'America')
+  const asia = locations.filter(location => location.continent === 'Asia')
+  const oceania = locations.filter(location => location.continent === 'Oceania')
+  const se = locations.filter(location => location.continent === 'Southeast Asia')
+  const europe = locations.filter(location => location.continent === 'Europe')
+  const africa = locations.filter(location => location.continent === 'Africa & Middle East')
+  const america = locations.filter(location => location.continent === 'America')
   returnedJson['destinations'] = {
     asia,
     oceania,
@@ -177,11 +178,16 @@ Index.getInitialProps = async() => {
   }
   
   returnedJson['carouselData'] = res[0].data
-  returnedJson['postData'] = res[1].data
   returnedJson['continents'] = res[3].data
   returnedJson['featured'] = res[4].data
+  
+  // postData shows the large screen
+  // latestPost shows latest post area
+  returnedJson['postData'] = res[1].data
   returnedJson['latestPosts'] = res[5].data
+
   return returnedJson
+  
 }
 
 export default Index

@@ -36,6 +36,9 @@ export default function Post(props) {
                 case 'Itineraries':
                     categoryLink = "/travel";
                     break;
+                case 'Lifestyle':
+                    categoryLink = "/lifestyle";
+                    break;
                 default:
                     categoryLink = "/"
                     break;
@@ -262,7 +265,7 @@ export default function Post(props) {
             <Nav/>
             <div className="titleGrid">
                 <Link href={categoryLink} style={{color:'#C7ACA1'}}>
-                    <Typography  component="span" variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'2vh',paddingTop:'2vh'}}>
+                    <Typography  component="span" variant="subtitle1" component="h1" style={{fontWeight:'900', textAlign:'center',paddingBottom:'2vh',paddingTop:'5vh'}}>
                         <strong> {categoryString}</strong>
                     </Typography>
                 </Link>

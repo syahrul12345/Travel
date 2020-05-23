@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-unfetch';
-import axios from 'axios'
 
 let baseurl =  ''
 let imageBaseurl = ''
@@ -91,7 +90,7 @@ const populatePosts = async(count) => {
     })
     return {
         ok:true,
-        data:postData
+        data: postData.length > 6 ? postData.slice(0,6) : postData
     }
    
     
