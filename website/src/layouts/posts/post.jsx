@@ -332,7 +332,7 @@ export default function Post(props) {
                             marginBottom:'5vh',
                             background:'#E7E4E0',
                             }}>
-                            <Grid container justifyContent="spaceBetween">
+                            <Grid container>
                                 <Grid item xs={3} style={{marginLeft:'2vh',marginTop:'2vh'}}>
                                     <Avatar
                                     alt={post.author.name} 

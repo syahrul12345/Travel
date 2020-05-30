@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
-
+import { Grid, } from '@material-ui/core';
+import SearchButton from './searchbutton';
 import CustomButton from './button';
 import "./style.css"
 
@@ -48,7 +48,6 @@ export default class Nav extends React.Component {
     // }
   }
 
-
   render() {
     return(
         <div id="navbar" style={{backgroundColor:'#EEDDD1'}}>
@@ -81,6 +80,9 @@ export default class Nav extends React.Component {
                       </Grid>
                     )
                   })}
+                  <Grid item xs={2} key="searchButton">
+                    <SearchButton/>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
