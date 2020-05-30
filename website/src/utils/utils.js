@@ -262,8 +262,11 @@ const getRelated = async(currentPostId,relation) => {
     return cleanedRelated
 }
 
-const getPostInfo = async(link) => {
+const getPostInfo = async(link,newBaseUrl) => {
     // The slug might be a subcategory
+    if (baseurl === undefined) {
+        baseurl = newBaseUrl
+    }
     const linkArray = link.split('/')
     let slug = ''
     let relation = ''
@@ -483,7 +486,7 @@ const searchPosts = async(query) => {
     const data = await res.json()
     const promiseArray = []
     data.forEach(({url}) => {
-        promiseArray.push(getPostInfo(`${url.replace(/^(?:\/\/|[^\/]+)*\//, "")}`))
+        promiseArray.push(getPostInfo(`${url.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,"https://api.smolidays.com"))
     })
     const promiseArrayRes = await Promise.all(promiseArray)
     return { posts: promiseArrayRes }
