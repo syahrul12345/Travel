@@ -8,12 +8,15 @@ import Footer from '../src/components/footer'
 import MediumCard from '../src/components/mediumcard'
 
 export default function Search(props) {
-  const { query, posts } = props
+  const { query } = props
   
   const [searchTerm, setSearch] = React.useState(query);
-  const [searchedPosts,setSearchedPosts] = React.useState(posts)
-  const [loading, setLoading] = React.useState(false);
-
+  const [searchedPosts,setSearchedPosts] = React.useState([])
+  const [loading, setLoading] = React.useState(true);
+  searchPosts(query).then((data) => {
+    setSearchedPosts(data.posts)
+    setLoading(false)
+  })
   const setSearchValue = (event) => { 
     setSearch(event.target.value)
   }
@@ -68,7 +71,7 @@ export default function Search(props) {
                 {/* Show only itinerary type posts */}
                   {searchedPosts.map(({post}) => {
                     return (
-                      <Grid key={post.title} item xs={12} md={6}>
+                      <Grid key={post.title.rendered} item xs={12} md={6}>
                         <MediumCard slug={post.slug} title={post.title.rendered} excerpt={post.excerpt.rendered} image={post.acf.featured_image.sizes.large} link={post.link.replace(/^(?:\/\/|[^\/]+)*\//, "")} country={post.country} height="15vh"/>
                       </Grid>
                     )
@@ -83,9 +86,9 @@ Search.getInitialProps = async(context) => {
     // get the list of travel guides and packing guides
     // eslint-disable-next-line prefer-destructuring
     const query = context.query.query
-    const data = await searchPosts(query)
+    // const data = await searchPosts(query)
     return {
       query,
-      posts: data.posts,
+      // posts: data.posts,
     }
 }

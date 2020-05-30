@@ -479,7 +479,7 @@ const getFooterInfo = async(slug) => {
 }
 
 const searchPosts = async(query) => {
-    const res = await fetch(`${baseurl}wp-json/wp/v2/search?per_page=6&page=1&subtype=post&search=${query}`)
+    const res = await fetch(`https://api.smolidays.com/wp-json/wp/v2/search?per_page=6&page=1&subtype=post&search=${query}`)
     const data = await res.json()
     const promiseArray = []
     data.forEach(({url}) => {
