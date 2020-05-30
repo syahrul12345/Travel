@@ -485,10 +485,13 @@ const searchPosts = async(query) => {
     const res = await fetch(`https://api.smolidays.com/wp-json/wp/v2/search?per_page=6&page=1&subtype=post&search=${query}`)
     const data = await res.json()
     const promiseArray = []
-    data.forEach(({url}) => {
+    data.forEach(({title,url}) => {
+        console.log(`Pushing search for ${title}`)
         promiseArray.push(getPostInfo(`${url.replace(/^(?:\/\/|[^\/]+)*\//, "")}`,"https://api.smolidays.com"))
     })
+    console.log("Waiting for all searches to be resolved")
     const promiseArrayRes = await Promise.all(promiseArray)
+    console.log("ALl searches resolved")
     return { posts: promiseArrayRes }
 }
 
