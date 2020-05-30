@@ -1,11 +1,14 @@
 import React from 'react';
 import Popover from '@material-ui/core/Popover';
 import { IconButton, TextField, Grid, FormControl } from '@material-ui/core';
+import { useRouter } from 'next/router'
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 export default function SearchButton() {
+  const router = useRouter()
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [searchTerm, setSearch] = React.useState('');
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -14,7 +17,13 @@ export default function SearchButton() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const setSearchValue = (event) => {
+    setSearch(event.target.value)
+  }
+  const search = () => {
+    const query = encodeURI(searchTerm)
+    router.push(`/search?query=${query}`)
+  }
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
@@ -44,10 +53,10 @@ export default function SearchButton() {
           spacing={4}
           >
             <Grid item xs={8}>
-              <TextField id="standard-basic" label="Search..." />
+              <TextField id="standard-basic" label="Search..." onChange={setSearchValue}/>
             </Grid>
             <Grid item xs={4} style={{paddingTop:'25px'}}>
-              <IconButton>
+              <IconButton onClick={search}>
                 <ArrowForwardIosIcon/>
               </IconButton>
             </Grid>

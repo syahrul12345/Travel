@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import fetch from 'isomorphic-unfetch';
 
 let baseurl =  ''
@@ -27,7 +28,7 @@ const formatDate = (input) => {
     const month = d.getMonth()
     const day = d.getDate()
     const year = d.getFullYear().toString().substr(2)
-    return day + ' ' + monthNames[month] + ' 20' + year
+    return `${day  } ${  monthNames[month]  } 20${  year}`
 }
 
 const populateCarousel = async() => {
@@ -97,7 +98,7 @@ const populatePosts = async(count) => {
 }
 const getNextPosts =async(pageID) => {
     return new Promise(async (resolve,reject) => {
-        pageID = pageID + 1
+        pageID += 1
         const res = await Promise.all([ fetch(`${baseurl}wp-json/wp/v2/posts?page=${pageID}&per_page=6`),fetch(`${baseurl}wp-json/wp/v2/destinations`)])
         const data = await res[0].json()
         const destinationData = await res[1].json()
@@ -169,7 +170,6 @@ const getDestinationBanner = async() => {
             destinationBanner.push(answer)
         }
         catch {}
-        finally{}
     })
     return{
         ok:true,
@@ -177,14 +177,14 @@ const getDestinationBanner = async() => {
     }
 }
 
-//@function Get the data of the requested page
+// @function Get the data of the requested page
 const getCountryInfo = async(destination) => {
     destination = destination.replace(/\s+/g, '-')
-    //get info about the country
+    // get info about the country
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
     const data = await res.json()
 
-    //get all posts that are linked to this country
+    // get all posts that are linked to this country
     const postsRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=30`)
     let posts = await postsRes.json()
     
@@ -198,7 +198,7 @@ const getCountryInfo = async(destination) => {
             category:post.categories
         }
     })
-    //Log the categories
+    // Log the categories
     const categoryRes = await fetch(`${baseurl}wp-json/wp/v2/categories`)
     let categories = await categoryRes.json()
     categories = categories.map((category) => {
@@ -207,14 +207,14 @@ const getCountryInfo = async(destination) => {
             name:category.name,
         }
     })
-    //add the posts information to the data
+    // add the posts information to the data
     data[0].acf.background_image.sizes['2048x2048'] = imageBaseurl + data[0].acf.background_image.sizes['2048x2048'].replace(/^(?:\/\/|[^\/]+)*\//, "")
     data[0].posts = posts
     data[0].categories = categories
     return data
 }
 
-//Get the related posts for a particular country
+// Get the related posts for a particular country
 const getRelatedCountry = async(currentPostId,destination,relation) => {
     destination = destination.replace(/\s+/g, '-')
     const res = await fetch(`${baseurl}wp-json/wp/v2/destinations?slug=${destination}`)
@@ -223,7 +223,7 @@ const getRelatedCountry = async(currentPostId,destination,relation) => {
     const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&filter[meta_key]=country&filter[meta_compare]=LIKE&filter[meta_value]=${data[0].id}&per_page=6`)
     // const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&per_page=6`)
     const posts = await catRes.json()
-    let cleanedRelated = []
+    const cleanedRelated = []
     posts.forEach(post => {
         if (post.id != currentPostId) {
             try {
@@ -243,7 +243,7 @@ const getRelatedCountry = async(currentPostId,destination,relation) => {
 const getRelated = async(currentPostId,relation) => {
     const catRes = await fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${relation}&per_page=6`)
     const posts = await catRes.json()
-    let cleanedRelated = []
+    const cleanedRelated = []
     posts.forEach(post => {
         if (post.id != currentPostId) {
             try {
@@ -293,15 +293,15 @@ const getPostInfo = async(link) => {
 
             post.acf.featured_image.sizes["2048x2048"] = imageBaseurl + post.acf.featured_image.sizes["2048x2048"].replace(/^(?:\/\/|[^\/]+)*\//, "")
             try {
-                post["country"] = country[0].title.rendered
+                post.country = country[0].title.rendered
             } catch(err) {
                 console.log(`Error In page: ${post.title.rendered} during rendering when trying to get country`)
-                post["country"] = null
+                post.country = null
             }
             try {
                 // Some types need to get relation by country
-                if (post["country"] && (relation === 'guides' || relation === 'itineraries' || relation === 'food' || relation === 'cabin-life' || relation === 'lifestyle')) {
-                    console.log(`Getting related posts for ${post.title.rendered} with country :${post['country']} and relation: ${relation}`)
+                if (post.country && (relation === 'guides' || relation === 'itineraries' || relation === 'food' || relation === 'cabin-life' || relation === 'lifestyle')) {
+                    console.log(`Getting related posts for ${post.title.rendered} with country :${post.country} and relation: ${relation}`)
                     relatedPosts = await getRelatedCountry(post.id, country[0].title.rendered, relation)
                 }else { 
                     relatedPosts = await getRelated(post.id,relation)
@@ -310,11 +310,11 @@ const getPostInfo = async(link) => {
                 console.log(`Failed to get related posts ${post.title.rendered} due to ${err.toString()}`)
             }
             try {
-                post["author"] = author
-                author.avatar_urls["96"] = author.avatar_urls["96"].slice(0,4) + "s" + author.avatar_urls["96"].slice(4)
+                post.author = author
+                author.avatar_urls["96"] = `${author.avatar_urls["96"].slice(0,4)  }s${  author.avatar_urls["96"].slice(4)}`
             } catch {}
             finally{}
-            //lets get the related posts
+            // lets get the related posts
             return {
                 post,
                 relatedPosts,
@@ -330,7 +330,7 @@ const getPostInfo = async(link) => {
 }
 
 const getContextPosts = async(context) => {
-    let query = context.replace(/^\/|\/$/g, '');
+    const query = context.replace(/^\/|\/$/g, '');
     return await Promise.all([fetch(`${baseurl}wp-json/wp/v2/posts?filter[category_name]=${query}`),fetch(`${baseurl}wp-json/wp/v2/destinations?page=1&per_page=100`)])
         .then(async(res) => {
             let posts = await res[0].json()
@@ -365,13 +365,13 @@ const getContextPosts = async(context) => {
 }
 
 const getLatestPosts = async(page) => {
-    if (baseurl == undefined) {
+    if (baseurl === undefined) {
         baseurl = "https://api.smolidays.com/"
     }
     
     const res = await fetch(`${baseurl}wp-json/wp/v2/posts?page=${page}&per_page=6`)
     const posts = await res.json()
-    let cleanedPosts = []
+    const cleanedPosts = []
     posts.map((post) => {
         try {
             const answer = {
@@ -405,7 +405,7 @@ const getCategories = async() => {
 }
 const populateContinents = async() => {
     const continentRes = await fetch(`${baseurl}wp-json/wp/v2/continent`)
-    let continents = await continentRes.json()
+    const continents = await continentRes.json()
     const continentsList = []
     continents.map((continent) => {
         try {
@@ -451,7 +451,7 @@ const getPostsByCategory = async(category,amount) => {
 
 const getFeatured = async() => {
     const featuredRes = await fetch(`${baseurl}wp-json/wp/v2/featured_categories`)
-    let featured = await featuredRes.json()
+    const featured = await featuredRes.json()
     const featuredList = []
     featured.map((feat) => {
         try {
@@ -478,7 +478,16 @@ const getFooterInfo = async(slug) => {
     return data[0]
 }
 
-
+const searchPosts = async(query) => {
+    const res = await fetch(`${baseurl}wp-json/wp/v2/search?per_page=6&page=1&subtype=post&search=${query}`)
+    const data = await res.json()
+    const promiseArray = []
+    data.forEach(({url}) => {
+        promiseArray.push(getPostInfo(`${url.replace(/^(?:\/\/|[^\/]+)*\//, "")}`))
+    })
+    const promiseArrayRes = await Promise.all(promiseArray)
+    return { posts: promiseArrayRes }
+}
 
 module.exports = {
     populateCarousel,
@@ -495,4 +504,5 @@ module.exports = {
     getPostsByCategory,
     getFooterInfo,
     getLatestPosts,
+    searchPosts,
 }
