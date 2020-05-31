@@ -60,7 +60,7 @@ export default class Nav extends React.Component {
                       maxWidth:'10vw',
                       paddingTop:'2vh',
                       marginBottom:'1.5vh'}}
-                  src="/static/images/smolidays-logo-1.png" 
+                  src="/static/images/smolidays-logo-3.png" 
                   alt="smolidays-logo"/>
                 </a>
               </Grid>
@@ -72,7 +72,7 @@ export default class Nav extends React.Component {
                 justify="center"
                 alignContent="center"
                 alignItems="center"
-                style={{minHeight:'13vh'}}>
+                style={{minHeight:'13vh',marginTop:'1vh'}}>
                   {links.map(({ key, href, label }) => {
                     return (
                       <Grid item xs={2} key={key}>

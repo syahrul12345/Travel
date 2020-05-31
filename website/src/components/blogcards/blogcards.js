@@ -9,7 +9,6 @@ export default function BlogCards(props) {
     const HtmlToReactParser = HtmlToReact.Parser
     const parser = new HtmlToReactParser()
     const { link, image, height, title, date} = props;
-    console.log(height)
     return(
         <Card style={{position:"relative"}}>
           <Link href={`\\${link}`}>
