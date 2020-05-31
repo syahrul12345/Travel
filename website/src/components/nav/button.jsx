@@ -19,7 +19,7 @@ const linkButton = (props) => {
           marginBlockEnd:'5px'}}
           href={href}
           >
-          <strong>{label}</strong>
+            <strong className="navigationLink">{label}</strong>
         </Typography>
       </Button>
   )
