@@ -9,6 +9,7 @@ export default function BlogCards(props) {
     const HtmlToReactParser = HtmlToReact.Parser
     const parser = new HtmlToReactParser()
     const { link, image, height, title, date} = props;
+    console.log(height)
     return(
         <Card style={{position:"relative"}}>
           <Link href={`\\${link}`}>
@@ -21,7 +22,7 @@ export default function BlogCards(props) {
               <div 
               style={{
                 position:"absolute",
-                top:'75%',
+                top:'70%',
                 width:'100%',
                 height:'100%',
                 textAlign:"left",
@@ -31,10 +32,10 @@ export default function BlogCards(props) {
                 paddingRight: "10px",
               }}
               >
-                <Typography variant="h6" component="p" style={{minHeight:'40px',lineHeight:'20px'}}>
+                <Typography variant="h6" component="p" style={{minHeight:'4.5vh',lineHeight:'2.5vh'}}>
                   <strong>{parser.parse(title)}</strong>
                 </Typography>
-                <Typography>
+                <Typography style={{marginBottom:"2vh"}}>
                   <span>{date}</span>
                 </Typography>
                 
